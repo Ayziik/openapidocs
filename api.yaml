@@ -1,7 +1,15 @@
 openapi: 3.0.0
 info:
   title: keyCRM OpenAPI documentation
-  description: Опис REST маршрутів для роботи з keyCRM OpenAPI.<br><br> <b>Зверніть увагу:</b> <br> 1. Для авторизації потрібно передавати заголовок у форматі Bearer + <a href="https://help.keycrm.app/uk/process-automation-api-and-more/where-to-get-an-api-key" target="_blank">APIkey</a> (authorization:[Bearer `ваш-API-ключ`]); <br> 2. Є обмеження до 60 запитів на хвилину з однієї IP-адреси по API-ключу; <br> 3. Час у всіх сутностях використовується UTC (GMT+0) - при зчитуванні (GET-запити), при виборі (фільтрації) по часу створення сутності, а також при створенні сутностей (POST).
+  description: |
+    **Зверніть увагу:**
+
+    1. **Авторизація:** потрібно передавати заголовок у форматі `Bearer + ваш-API-ключ` 
+       (наприклад: `authorization: Bearer ВашКлюч`). Детальніше: [як отримати API-ключ](https://help.keycrm.app/uk/process-automation-api-and-more/where-to-get-an-api-key).
+
+    2. **Обмеження:** встановлено ліміт до **20 запитів на хвилину** по одному API-ключу.
+
+    3. **Формат часу:** у всіх сутностях використовується **UTC (GMT+0)**. Це стосується зчитування (GET), фільтрації за часом та створення нових записів (POST).
   version: 1.2.0
 servers:
   - url: https://openapi.keycrm.app/v1

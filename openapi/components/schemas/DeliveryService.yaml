@@ -7,10 +7,10 @@ DeliveryService:
   properties:
     id:
       type: integer
-      description: 'Ідентифікатор служби доставки'
+      description: "Ідентифікатор служби доставки"
     name:
       type: string
-      description: 'Назва служби доставки'
+      description: "Назва служби доставки"
       example: UPS
     source_name:
       type: string
@@ -18,5 +18,5 @@ DeliveryService:
       example: novaposhta
     alias:
       type: string
-      description: 'Системна назва'
+      description: "Системна назва"
       example: np_vlad

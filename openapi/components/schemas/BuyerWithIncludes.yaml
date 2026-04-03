@@ -5,17 +5,17 @@ BuyerWithIncludes:
   properties:
     id:
       type: integer
-      description: 'Ідентифікатор покупця'
+      description: "Ідентифікатор покупця"
       example: 22
     full_name:
       type: string
       nullable: false
-      example: 'John Doe'
+      example: "John Doe"
     birthday:
       type: string
-      description: 'Дата народження'
+      description: "Дата народження"
       nullable: true
-      example: '2020-05-16'
+      example: "2020-05-16"
     email:
       type: array
       nullable: true
@@ -30,38 +30,38 @@ BuyerWithIncludes:
       items:
         type: string
       example:
-        - '+1 555-234-1234'
-        - '+1 555-234-7777'
+        - "+1 555-234-1234"
+        - "+1 555-234-7777"
     note:
       type: string
       nullable: true
       example: Примітка
     company:
       type: object
-      description: 'Інформація про компанію покупця. Повертається тільки, якщо вказати `include=company`'
+      description: "Інформація про компанію покупця. Повертається тільки, якщо вказати `include=company`"
       properties:
         id:
-          description: 'ID компанії'
+          description: "ID компанії"
           type: integer
           nullable: false
           example: 1
         name:
-          description: 'Назва компанії'
+          description: "Назва компанії"
           type: string
           nullable: false
           example: Keycrm
         full_name:
-          description: 'Пона назва компанії'
+          description: "Пона назва компанії"
           type: string
           nullable: true
-          example: 'ТОВ Кейцрм'
+          example: "ТОВ Кейцрм"
         address:
-          description: 'Адресса компанії'
+          description: "Адресса компанії"
           type: string
           nullable: true
-          example: 'ТОВ Кейцрм'
+          example: "ТОВ Кейцрм"
         banking_detailse:
-          description: 'Банківскі деталі'
+          description: "Банківскі деталі"
           type: string
           nullable: true
           example: UA123456789101112
@@ -71,18 +71,18 @@ BuyerWithIncludes:
           example: Примітка
         created_at:
           type: string
-          description: 'Дата створення покупця в UTC форматі'
-          example: '2020-05-16 17:00:07'
+          description: "Дата створення покупця в UTC форматі"
+          example: "2020-05-16 17:00:07"
         updated_at:
           type: string
-          description: 'Дата останньої зміни покупця в UTC форматі'
-          example: '2020-05-16 17:00:07'
+          description: "Дата останньої зміни покупця в UTC форматі"
+          example: "2020-05-16 17:00:07"
     manager:
       type: object
-      description: 'Інформація про менеджера покупця. Повертається тільки, якщо вказати `include=manager`'
+      description: "Інформація про менеджера покупця. Повертається тільки, якщо вказати `include=manager`"
       properties:
         id:
-          description: 'ID менеджера'
+          description: "ID менеджера"
           type: integer
           nullable: false
           example: 1
@@ -92,7 +92,7 @@ BuyerWithIncludes:
           nullable: false
           example: John
         last_name:
-          description: 'Прізвище менеджера'
+          description: "Прізвище менеджера"
           type: string
           nullable: true
           example: Doe
@@ -100,76 +100,76 @@ BuyerWithIncludes:
           description: "Повне ім'я менеджера"
           type: string
           nullable: true
-          example: 'John Doe'
+          example: "John Doe"
         username:
-          description: 'Логін менеджера'
+          description: "Логін менеджера"
           type: string
           nullable: true
           example: johndoe
         email:
-          description: 'E-mail менеджера'
+          description: "E-mail менеджера"
           type: string
           nullable: true
           example: john.doe@mail.app
         phone:
-          description: 'Телефон менеджера'
+          description: "Телефон менеджера"
           type: string
           nullable: true
-          example: '+1 555-234-1234'
+          example: "+1 555-234-1234"
         role_id:
-          description: 'ID ролі менеджера'
+          description: "ID ролі менеджера"
           type: integer
           nullable: true
           example: 2
         status:
-          description: 'Статус менеджера. Можливі варіанти: active або blocked'
+          description: "Статус менеджера. Можливі варіанти: active або blocked"
           type: string
           nullable: false
           example: active
         created_at:
           type: string
-          description: 'Дата створення в UTC форматі'
-          example: '2020-05-16 17:00:07'
+          description: "Дата створення в UTC форматі"
+          example: "2020-05-16 17:00:07"
         updated_at:
           type: string
-          description: 'Дата останньої зміни в UTC форматі'
-          example: '2020-05-16 17:00:07'
+          description: "Дата останньої зміни в UTC форматі"
+          example: "2020-05-16 17:00:07"
         last_logged_at:
           type: string
-          description: 'Дата останньої логіну в UTC форматі'
-          example: '2020-05-16 17:00:07'
+          description: "Дата останньої логіну в UTC форматі"
+          example: "2020-05-16 17:00:07"
     loyalty:
-      description: 'Інформація про програми лояльності. Повертається тільки заповнені, якщо вказати `include=loyalty`'
+      description: "Інформація про програми лояльності. Повертається тільки заповнені, якщо вказати `include=loyalty`"
       type: array
       items:
         type: object
         properties:
           loyalty_program_name:
-            description: 'Назва програми лояльності'
+            description: "Назва програми лояльності"
             type: string
-            example: 'Програма лояльності'
+            example: "Програма лояльності"
           loyalty_program_id:
-            description: 'Ідентифікатор програми лояльності'
+            description: "Ідентифікатор програми лояльності"
             type: integer
             example: 10
           loyalty_program_level_name:
-            description: 'Назва поточного рівня покупця в програмі лояльності'
+            description: "Назва поточного рівня покупця в програмі лояльності"
             type: string
-            example: 'Перший рівень'
+            example: "Перший рівень"
           loyalty_program_level_id:
-            description: 'Ідентифікатор поточного рівня покупця в програмі лояльності'
+            description: "Ідентифікатор поточного рівня покупця в програмі лояльності"
             type: integer
             example: 20
           amount:
-            description: 'Сума покупок'
+            description: "Сума покупок"
             type: integer
             example: 270.02
           discount:
-            description: 'Поточна знижка покпуця по програмі лояльності'
+            description: "Поточна знижка покпуця по програмі лояльності"
             type: integer
             example: 5
     shipping:
-      description: 'Інформація про адреси доставки. Повертається тільки заповнені, якщо вказати `include=shipping`'
+      description: "Інформація про адреси доставки. Повертається тільки заповнені, якщо вказати `include=shipping`"
       type: array
       items:
         type: object
@@ -177,11 +177,11 @@ BuyerWithIncludes:
           address:
             type: string
             nullable: true
-            description: 'Адреса доставки'
+            description: "Адреса доставки"
           additional_address:
             type: string
           city:
-            description: 'Місто доставки'
+            description: "Місто доставки"
             type: string
             nullable: true
             example: Kyiv
@@ -189,27 +189,27 @@ BuyerWithIncludes:
             type: string
             nullable: true
             example: Kyivska
-            description: 'Область, штат, регіон'
+            description: "Область, штат, регіон"
           zip_code:
             type: string
             nullable: true
-            example: '50000'
+            example: "50000"
             description: Індекс
           country:
             type: string
             nullable: true
             example: Ukraine
-            description: 'Країна доставки'
+            description: "Країна доставки"
           recipient_full_name:
             type: string
             nullable: true
-            example: 'Ann Doe'
+            example: "Ann Doe"
             description: "Ім'я отримувача (якщо відрізняється від покупця)"
           recipient_phone:
             type: string
             nullable: true
-            example: '+1 555-234-7777'
-            description: 'Номер телефону отримувача (якщо відрізняється від покупця)'
+            example: "+1 555-234-7777"
+            description: "Номер телефону отримувача (якщо відрізняється від покупця)"
           warehouse_ref:
             type: string
             nullable: true
@@ -217,23 +217,23 @@ BuyerWithIncludes:
             description: "UUID складу Нової Пошти (обов'язково з параметром delivery_service_id - ID служби доставки НП в СРМ)"
     custom_fields:
       type: array
-      description: 'Користувацькі поля для покупця'
+      description: "Користувацькі поля для покупця"
       items:
         type: object
         properties:
           uuid:
-            description: 'Зовнішній ідентифікатор поля'
+            description: "Зовнішній ідентифікатор поля"
             type: string
             example: OR_1037
           value:
-            description: 'Значення поля. Для полів з типом `select (список/мультисписок)` передавати масив рядків.'
+            description: "Значення поля. Для полів з типом `select (список/мультисписок)` передавати масив рядків."
             type: string
             example: Лорд
     created_at:
       type: string
-      description: 'Дата створення покупця в UTC форматі'
-      example: '2020-05-16 17:00:07'
+      description: "Дата створення покупця в UTC форматі"
+      example: "2020-05-16 17:00:07"
     updated_at:
       type: string
-      description: 'Дата останньої зміни покупця в UTC форматі'
-      example: '2020-05-16 17:00:07'
+      description: "Дата останньої зміни покупця в UTC форматі"
+      example: "2020-05-16 17:00:07"

@@ -7,12 +7,12 @@ PaymentMethod:
     id:
       type: integer
       example: 2
-      description: 'ID методу платежу у keyCRM'
+      description: "ID методу платежу у keyCRM"
     name:
       type: string
-      example: 'Apple Pay'
+      example: "Apple Pay"
       nullable: true
-      description: 'Назва методу платежу'
+      description: "Назва методу платежу"
     alias:
       type: string
       example: apple_pay
@@ -20,4 +20,4 @@ PaymentMethod:
     is_active:
       type: boolean
       example: true
-      description: 'Статус методу платежу'
+      description: "Статус методу платежу"

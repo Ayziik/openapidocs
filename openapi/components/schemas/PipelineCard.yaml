@@ -5,54 +5,54 @@ PipelineCard:
   properties:
     id:
       type: integer
-      description: 'Ідентифікатор картки воронки'
+      description: "Ідентифікатор картки воронки"
       example: 22
     contact_id:
       type: integer
       example: 1
-      description: 'Ідентифікатор контактної особи картки воронки'
+      description: "Ідентифікатор контактної особи картки воронки"
     source_id:
       type: integer
       example: 11
       nullable: true
-      description: 'Ідентифікатор джерела'
+      description: "Ідентифікатор джерела"
     manager_id:
       type: integer
       example: 11
       nullable: true
-      description: 'Ідентифікатор відповідального менеджера'
+      description: "Ідентифікатор відповідального менеджера"
     status_id:
       type: integer
       example: 1
-      description: 'Ідентифікатор статусу картки воронки'
+      description: "Ідентифікатор статусу картки воронки"
     title:
-      description: 'Назва картки воронки'
+      description: "Назва картки воронки"
       type: string
       nullable: true
       example: №11011
     manager_comment:
-      description: 'Коментар менеджера'
+      description: "Коментар менеджера"
       type: string
       nullable: true
-      example: 'From facebook'
+      example: "From facebook"
     is_finished:
-      description: 'Ідентифікатор закриття картки воронки'
+      description: "Ідентифікатор закриття картки воронки"
       type: string
       nullable: true
-      example: 'From facebook'
+      example: "From facebook"
     status_changed_at:
       type: string
-      description: 'Дата зміни статусу картки воронки в UTC форматі'
-      example: '2020-05-16 17:00:07'
+      description: "Дата зміни статусу картки воронки в UTC форматі"
+      example: "2020-05-16 17:00:07"
     communicate_at:
       type: string
-      description: 'Дата і час планованого контакту по картці воронки у UTC форматі'
-      example: '2020-05-16 17:00:07'
+      description: "Дата і час планованого контакту по картці воронки у UTC форматі"
+      example: "2020-05-16 17:00:07"
     created_at:
       type: string
-      description: 'Дата створення картки воронки в UTC форматі'
-      example: '2020-05-16 17:00:07'
+      description: "Дата створення картки воронки в UTC форматі"
+      example: "2020-05-16 17:00:07"
     updated_at:
       type: string
-      description: 'Дата останньої зміни картки воронки в UTC форматі'
-      example: '2020-05-16 17:00:07'
+      description: "Дата останньої зміни картки воронки в UTC форматі"
+      example: "2020-05-16 17:00:07"

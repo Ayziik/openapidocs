@@ -7,23 +7,23 @@ Expense:
     expense_type_id:
       type: integer
       example: 1
-      description: 'ID типу витрати у keyCRM'
+      description: "ID типу витрати у keyCRM"
     expense_type:
-      $ref: '#/components/schemas/ExpenseType'
+      $ref: "#/components/schemas/ExpenseType"
     amount:
       type: number
       example: 123.5
-      description: 'Сума витрати'
+      description: "Сума витрати"
     description:
       type: string
       example: "Кур'єрська доставка"
       nullable: true
-      description: 'Коментар до витрати'
+      description: "Коментар до витрати"
     payment_date:
       type: string
       nullable: true
-      example: '2021-02-21 14:44:00'
-      description: 'Дата і час витрати'
+      example: "2021-02-21 14:44:00"
+      description: "Дата і час витрати"
     status:
       type: string
       enum:
@@ -31,12 +31,12 @@ Expense:
         - canceled
       example: paid
       nullable: true
-      description: 'Статус оплати'
+      description: "Статус оплати"
     created_at:
       type: string
-      description: 'Дата створення витрати в UTC форматі'
-      example: '2020-05-16 17:00:07'
+      description: "Дата створення витрати в UTC форматі"
+      example: "2020-05-16 17:00:07"
     updated_at:
       type: string
-      description: 'Дата останньої зміни витрати в UTC форматі'
-      example: '2020-05-16 17:00:07'
+      description: "Дата останньої зміни витрати в UTC форматі"
+      example: "2020-05-16 17:00:07"

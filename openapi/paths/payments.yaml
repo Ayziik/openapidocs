@@ -2,16 +2,16 @@
   get:
     tags:
       - Payments
-    summary: 'Отримання списку зовнішніх транзакцій'
-    description: 'Даний маршрут повертає пагінований список зовнішніх транзакцій.'
+    summary: "Отримання списку зовнішніх транзакцій"
+    description: "Даний маршрут повертає пагінований список зовнішніх транзакцій."
     operationId: getPaginatedListOfExternalTransactions
     parameters:
-      - $ref: '#/components/parameters/acceptParam'
-      - $ref: '#/components/parameters/limitParam'
-      - $ref: '#/components/parameters/pageParam'
+      - $ref: "#/components/parameters/acceptParam"
+      - $ref: "#/components/parameters/limitParam"
+      - $ref: "#/components/parameters/pageParam"
       - name: filter
         in: query
-        description: 'Фільтрація списку транзакцій'
+        description: "Фільтрація списку транзакцій"
         required: false
         style: deepObject
         explode: true
@@ -20,56 +20,56 @@
         examples:
           filter_by_id:
             value:
-              id: '4545,4546'
-            summary: 'Фільтр за ідентифікатором транзакції, допустимі значення: 1, 10, 4546,
-              ...'
+              id: "4545,4546"
+            summary: "Фільтр за ідентифікатором транзакції, допустимі значення: 1, 10, 4546,
+              ..."
           filter_by_transaction_uuid:
             value:
-              transaction_uuid: '4545,4546'
-            summary: 'Фільтр за зовнішнім ідентифікатором транзакції, допустимі значення: 1,
-              10, 4546, ...'
+              transaction_uuid: "4545,4546"
+            summary: "Фільтр за зовнішнім ідентифікатором транзакції, допустимі значення: 1,
+              10, 4546, ..."
           filter_by_gateway_id:
             value:
-              gateway_id: '4545,4546'
-            summary: 'Фільтр за ідентифікатором платіжного сервісу, допустимі значення: 1,
-              10, 4546, ...'
+              gateway_id: "4545,4546"
+            summary: "Фільтр за ідентифікатором платіжного сервісу, допустимі значення: 1,
+              10, 4546, ..."
           filter_by_is_attached:
             value:
-              is_attached: 'true'
-            summary: 'Фільтр за статусом прикріплення транзакції до замовлення, допустимі
-              значення: true, false'
+              is_attached: "true"
+            summary: "Фільтр за статусом прикріплення транзакції до замовлення, допустимі
+              значення: true, false"
           filter_by_date_created:
             value:
-              created_between: '2020-08-24 00:00:00, 2020-09-22 23:59:59'
-            summary: 'Фільтр за датою створення'
+              created_between: "2020-08-24 00:00:00, 2020-09-22 23:59:59"
+            summary: "Фільтр за датою створення"
     responses:
       200:
-        description: 'Успішна відповідь відсервера. Результат у пагінованому вигляді.'
+        description: "Успішна відповідь відсервера. Результат у пагінованому вигляді."
         content:
           application/json:
             schema:
               type: object
               allOf:
-                - $ref: '#/components/schemas/PaginatedResponse'
+                - $ref: "#/components/schemas/PaginatedResponse"
                 - properties:
                     data:
                       type: array
                       items:
-                        $ref: '#/components/schemas/ExternalTransaction'
+                        $ref: "#/components/schemas/ExternalTransaction"
       401:
-        description: 'Помилка авторизації.'
+        description: "Помилка авторизації."
     security:
       - bearerAuth: {}
-'/payments/{paymentId}/external-transactions':
+"/payments/{paymentId}/external-transactions":
   post:
     tags:
       - Payments
-    summary: 'Додавання зовнішньої транзакції до оплати'
+    summary: "Додавання зовнішньої транзакції до оплати"
     operationId: attachExternalTransactionToPayment
     parameters:
       - name: paymentId
         in: path
-        description: 'Ідентифікатор оплати.'
+        description: "Ідентифікатор оплати."
         required: true
         schema:
           type: string
@@ -85,23 +85,23 @@
               transaction_id:
                 type: number
                 example: 1
-                description: 'ID зовнішньої транзакції'
+                description: "ID зовнішньої транзакції"
               transaction_uuid:
                 type: string
                 example: NlpssJSQedtUoB9i
-                description: 'Зовнішній ідентифікатор зовнішньої транзакції'
+                description: "Зовнішній ідентифікатор зовнішньої транзакції"
     responses:
       201:
-        description: 'Успішна відповідь від сервера.'
+        description: "Успішна відповідь від сервера."
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/Payment'
+              $ref: "#/components/schemas/Payment"
       401:
-        description: 'Помилка авторизації.'
+        description: "Помилка авторизації."
       404:
-        description: 'Сутності не знайдено.'
+        description: "Сутності не знайдено."
       422:
-        description: 'Помилка валідації.'
+        description: "Помилка валідації."
     security:
       - bearerAuth: {}

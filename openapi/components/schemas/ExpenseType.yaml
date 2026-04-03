@@ -7,12 +7,12 @@ ExpenseType:
     id:
       type: integer
       example: 2
-      description: 'ID типу витрати у keyCRM'
+      description: "ID типу витрати у keyCRM"
     name:
       type: string
       example: Даставка
       nullable: true
-      description: 'Назва типу витрати'
+      description: "Назва типу витрати"
     alias:
       type: string
       example: delivery
@@ -20,12 +20,12 @@ ExpenseType:
     is_active:
       type: boolean
       example: true
-      description: 'Статус типу витрати'
+      description: "Статус типу витрати"
     is_reserved:
       type: boolean
       example: true
-      description: 'Зарезервовано системою'
+      description: "Зарезервовано системою"
     by_order:
       type: boolean
       example: true
-      description: 'Чи використовувати цей тип витрати для замовлень?'
+      description: "Чи використовувати цей тип витрати для замовлень?"

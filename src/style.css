@@ -2,13 +2,13 @@
    BRAND VARIABLES — CUSTOMIZE HERE
    ============================================================ */
 :root {
-  --brand-primary: #0D1117;
+  --brand-primary: #0d1117;
   /* Базовий фон */
-  --brand-surface: #131B27;
+  --brand-surface: #131b27;
   /* Хедер — той самий рівень що і sidebar */
   --brand-secondary: #ffffff;
   /* Текст у хедері */
-  --brand-accent: #00A6F2;
+  --brand-accent: #00a6f2;
   /* Акцент — фірмовий keyCRM */
   --brand-border: rgba(255, 255, 255, 0.07);
   /* Розділювач хедера */

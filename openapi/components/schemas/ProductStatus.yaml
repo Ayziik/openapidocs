@@ -7,32 +7,32 @@ ProductStatus:
   properties:
     id:
       type: integer
-      description: 'Ідентифікатор статусу'
+      description: "Ідентифікатор статусу"
     name:
       type: string
       description: Назва
       example: Hot
     alias:
       type: string
-      description: 'Системна назва'
+      description: "Системна назва"
       example: hot
     position:
-      description: 'Позиція статусу'
+      description: "Позиція статусу"
       type: integer
       example: 3
     is_active:
       type: boolean
-      description: 'Стан активності'
+      description: "Стан активності"
       example: true
     is_reserved:
       type: boolean
-      description: 'Визначає, чи статус зарезервований і чи може він бути видалений'
+      description: "Визначає, чи статус зарезервований і чи може він бути видалений"
       example: true
     created_at:
       type: string
-      description: 'Дата створення в UTC форматі'
-      example: '2020-05-16 16:56:44'
+      description: "Дата створення в UTC форматі"
+      example: "2020-05-16 16:56:44"
     updated_at:
       type: string
-      description: 'Дата останньої зміни в UTC форматі'
-      example: '2020-05-16 16:56:44'
+      description: "Дата останньої зміни в UTC форматі"
+      example: "2020-05-16 16:56:44"

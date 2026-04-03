@@ -3,17 +3,17 @@ Warehouse:
   properties:
     id:
       type: integer
-      description: 'Ідентифікатор складу'
+      description: "Ідентифікатор складу"
       example: 22
     name:
-      description: 'Назва складу'
+      description: "Назва складу"
       type: string
       example: Основний
     quantity:
       type: number
       example: 98
-      description: 'Кількість залишків на складі'
+      description: "Кількість залишків на складі"
     reserve:
       type: number
       example: 8
-      description: 'Кількість зарезервованих залишків на складі'
+      description: "Кількість зарезервованих залишків на складі"

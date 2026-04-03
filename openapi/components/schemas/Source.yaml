@@ -7,38 +7,38 @@ Source:
   properties:
     id:
       type: integer
-      description: 'Ідентифікатор джерела'
+      description: "Ідентифікатор джерела"
     name:
       type: string
       description: Назва
-      example: 'My shop source'
+      example: "My shop source"
     alias:
       type: string
-      description: 'Системна назва'
+      description: "Системна назва"
       example: my_shop_source
     driver:
       type: string
-      description: 'Тип джерела'
+      description: "Тип джерела"
       example: etsy
     source_uuid:
       type: string
       nullable: true
-      description: 'Унікальний ідентифікатор магазину із джерела'
+      description: "Унікальний ідентифікатор магазину із джерела"
       example: 18960006
     source_name:
       type: string
       nullable: true
-      description: 'Назва магазину із джерела'
-      example: 'Coll shop'
+      description: "Назва магазину із джерела"
+      example: "Coll shop"
     currency_code:
       type: string
-      description: 'Валюта за замовчуванням'
+      description: "Валюта за замовчуванням"
       example: USD
     created_at:
       type: string
-      description: 'Дата створення в UTC форматі'
-      example: '2020-05-16 16:56:44'
+      description: "Дата створення в UTC форматі"
+      example: "2020-05-16 16:56:44"
     updated_at:
       type: string
-      description: 'Дата останньої зміни в UTC форматі'
-      example: '2020-05-16 16:56:44'
+      description: "Дата останньої зміни в UTC форматі"
+      example: "2020-05-16 16:56:44"

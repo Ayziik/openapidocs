@@ -5,32 +5,32 @@ Marketing:
       type: string
       nullable: true
       example: facebook
-      description: 'Джерело кампанії'
+      description: "Джерело кампанії"
     utm_medium:
       type: string
       nullable: true
       example: banner
-      description: 'Тип трафіку'
+      description: "Тип трафіку"
     utm_campaign:
       type: string
       nullable: true
       example: sale
-      description: 'Назва кампанії'
+      description: "Назва кампанії"
     utm_term:
       type: string
       nullable: true
-      example: 'landing page'
-      description: 'Ключове слово'
+      example: "landing page"
+      description: "Ключове слово"
     utm_content:
       type: string
       nullable: true
-      example: '-30%'
-      description: 'Ідентифікатор оголошення'
+      example: "-30%"
+      description: "Ідентифікатор оголошення"
     created_at:
       type: string
-      description: 'Дата створення в UTC форматі'
-      example: '2020-05-16 16:56:44'
+      description: "Дата створення в UTC форматі"
+      example: "2020-05-16 16:56:44"
     updated_at:
       type: string
-      description: 'Дата останньої зміни в UTC форматі'
-      example: '2020-05-16 16:56:44'
+      description: "Дата останньої зміни в UTC форматі"
+      example: "2020-05-16 16:56:44"

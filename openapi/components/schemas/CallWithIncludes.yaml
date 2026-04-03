@@ -3,43 +3,43 @@ CallWithIncludes:
   properties:
     id:
       type: integer
-      description: 'Ідентифікатор дзвінка'
+      description: "Ідентифікатор дзвінка"
       example: 22
     internal_number:
       type: string
-      description: 'Внутрішній номер'
-      example: '+1 555-234-7777'
+      description: "Внутрішній номер"
+      example: "+1 555-234-7777"
     external_number:
       type: string
-      description: 'Зовнішній номер'
-      example: '+1 555-234-7777'
+      description: "Зовнішній номер"
+      example: "+1 555-234-7777"
     source_number:
       type: string
-      description: 'Номер телефонії'
-      example: '+1 555-234-7777'
+      description: "Номер телефонії"
+      example: "+1 555-234-7777"
     reference_id:
       type: string
-      description: 'Зовнішній ідентифікатор дзвінка'
+      description: "Зовнішній ідентифікатор дзвінка"
       example: 1ec09d2e-e1c2-11e3-8c4a-0050568002cf
     type:
       type: string
-      description: 'Тип дзвінка (incoming, outgoing)'
+      description: "Тип дзвінка (incoming, outgoing)"
       example: incoming
     state:
       type: string
-      description: 'Стан дзвінка (started, pending, answered, canceled, busy, completed, transferred)'
+      description: "Стан дзвінка (started, pending, answered, canceled, busy, completed, transferred)"
       example: completed
     user_id:
       type: integer
-      description: 'Ідентифікатор менеджера'
+      description: "Ідентифікатор менеджера"
       example: 1
     manager:
       type: object
       nullable: true
-      description: 'Інформація про менеджера компанії. Повертається тільки, якщо вказати `include=manager`'
+      description: "Інформація про менеджера компанії. Повертається тільки, якщо вказати `include=manager`"
       properties:
         id:
-          description: 'ID менеджера'
+          description: "ID менеджера"
           type: integer
           nullable: false
           example: 1
@@ -49,7 +49,7 @@ CallWithIncludes:
           nullable: false
           example: John
         last_name:
-          description: 'Прізвище менеджера'
+          description: "Прізвище менеджера"
           type: string
           nullable: true
           example: Doe
@@ -57,125 +57,125 @@ CallWithIncludes:
           description: "Повне ім'я менеджера"
           type: string
           nullable: true
-          example: 'John Doe'
+          example: "John Doe"
         username:
-          description: 'Логін менеджера'
+          description: "Логін менеджера"
           type: string
           nullable: true
           example: johndoe
         email:
-          description: 'E-mail менеджера'
+          description: "E-mail менеджера"
           type: string
           nullable: true
           example: john.doe@mail.app
         phone:
-          description: 'Телефон менеджера'
+          description: "Телефон менеджера"
           type: string
           nullable: true
-          example: '+1 555-234-1234'
+          example: "+1 555-234-1234"
         role_id:
-          description: 'ID ролі менеджера'
+          description: "ID ролі менеджера"
           type: integer
           nullable: true
           example: 2
         status:
-          description: 'Статус менеджера. Можливі варіанти: active або blocked'
+          description: "Статус менеджера. Можливі варіанти: active або blocked"
           type: string
           nullable: false
           example: active
         created_at:
           type: string
-          description: 'Дата створення в UTC форматі'
-          example: '2020-05-16 17:00:07'
+          description: "Дата створення в UTC форматі"
+          example: "2020-05-16 17:00:07"
         updated_at:
           type: string
-          description: 'Дата останньої зміни в UTC форматі'
-          example: '2020-05-16 17:00:07'
+          description: "Дата останньої зміни в UTC форматі"
+          example: "2020-05-16 17:00:07"
         last_logged_at:
           type: string
-          description: 'Дата останньої логіну в UTC форматі'
-          example: '2020-05-16 17:00:07'
+          description: "Дата останньої логіну в UTC форматі"
+          example: "2020-05-16 17:00:07"
     call_route_service_id:
       type: integer
-      description: 'Ідентифікатор сервісу, який обробляє дзвінок'
+      description: "Ідентифікатор сервісу, який обробляє дзвінок"
       example: 1
     service:
       type: object
-      description: 'Інформація про сервіс, який обробляє дзвінок'
+      description: "Інформація про сервіс, який обробляє дзвінок"
       properties:
         id:
           type: integer
-          description: 'Ідентифікатор сервісу'
+          description: "Ідентифікатор сервісу"
           example: 1
         name:
           type: string
-          description: 'Назва сервісу'
+          description: "Назва сервісу"
           example: Ringostat
         alias:
           type: string
-          description: 'Системна назва сервісу'
+          description: "Системна назва сервісу"
           example: ringostat
         service:
           type: string
-          description: 'Інтерфейс сервісу'
+          description: "Інтерфейс сервісу"
           example: ringostat
         uuid:
           type: string
-          description: 'Унікальний ідентифікатор сервісу'
+          description: "Унікальний ідентифікатор сервісу"
         is_active:
           type: boolean
-          description: 'Ознака того, чи активний сервіс'
+          description: "Ознака того, чи активний сервіс"
           example: true
         configuraion:
           type: object
-          description: 'Конфігурація сервісу'
+          description: "Конфігурація сервісу"
         created_at:
           type: string
-          description: 'Дата створення сервісу в UTC форматі'
+          description: "Дата створення сервісу в UTC форматі"
         updated_at:
           type: string
-          description: 'Дата останньої зміни сервісу в UTC форматі'
+          description: "Дата останньої зміни сервісу в UTC форматі"
         deleted_at:
           type: string
-          description: 'Дата видалення сервісу в UTC форматі'
+          description: "Дата видалення сервісу в UTC форматі"
     duration:
       type: integer
-      description: 'Тривалість дзвінка в секундах'
+      description: "Тривалість дзвінка в секундах"
       example: 30
     call_url:
       type: string
-      description: 'Посилання на дзвінок'
+      description: "Посилання на дзвінок"
     comment:
       type: string
-      description: 'Коментар до дзвінка'
+      description: "Коментар до дзвінка"
     client_id:
       type: integer
-      description: 'Ідентифікатор клієнта'
+      description: "Ідентифікатор клієнта"
       example: 1
     client:
       type: object
       nullable: true
-      description: 'Клієнт з яким асоційований дзвінок'
+      description: "Клієнт з яким асоційований дзвінок"
       properties:
         id:
-          description: 'ID кліента'
+          description: "ID кліента"
           type: integer
           nullable: true
           example: 1
         company_id:
-          description: 'ID компанії'
+          description: "ID компанії"
           type: integer
           nullable: true
           example: 1
         full_name:
           type: string
           description: "Ім'я кліента"
-          example: 'John Doe'
+          example: "John Doe"
         phone:
           type: string
           nullable: true
-          description: 'Телефон менеджера'
-          example: '+1 555-234-1234'
+          description: "Телефон менеджера"
+          example: "+1 555-234-1234"
         formatted_phone:
           type: string
           nullable: true
@@ -187,7 +187,7 @@ CallWithIncludes:
         email:
           type: string
           nullable: true
-          description: 'E-mail кліента'
+          description: "E-mail кліента"
           example: john.doe@mail.app
         note:
           type: string
@@ -207,120 +207,120 @@ CallWithIncludes:
           example: UAH
         orders_sum:
           type: string
-          description: 'Сума всіх замовлень'
-          example: '90247.69'
+          description: "Сума всіх замовлень"
+          example: "90247.69"
         orders_count:
           type: integer
-          description: 'Кількість замовлень'
-          example: '28'
+          description: "Кількість замовлень"
+          example: "28"
         has_duplicates:
           type: integer
           example: 0
         manager_id:
           type: integer
           nullable: true
-          description: 'Ідентифікатор відповідального менеджера'
+          description: "Ідентифікатор відповідального менеджера"
           example: null
         created_at:
           type: string
-          description: 'Дата створення в UTC форматі'
-          example: '2020-05-16 17:00:07'
+          description: "Дата створення в UTC форматі"
+          example: "2020-05-16 17:00:07"
         updated_at:
           type: string
-          description: 'Дата останньої зміни в UTC форматі'
-          example: '2020-05-16 17:00:07'
+          description: "Дата останньої зміни в UTC форматі"
+          example: "2020-05-16 17:00:07"
     lead_id:
       type: integer
-      description: 'Ідентифікатор картки воронки'
+      description: "Ідентифікатор картки воронки"
       example: 1
     lead:
       type: object
       nullable: true
-      description: 'Карта воронки з якою асоційований дзвінок'
+      description: "Карта воронки з якою асоційований дзвінок"
       properties:
         id:
           type: integer
-          description: 'Ідентифікатор картки воронки'
+          description: "Ідентифікатор картки воронки"
           example: 22
         contact_id:
           type: integer
           example: 1
-          description: 'Ідентифікатор контактної особи картки воронки'
+          description: "Ідентифікатор контактної особи картки воронки"
         source_id:
           type: integer
           example: 11
           nullable: true
-          description: 'Ідентифікатор джерела'
+          description: "Ідентифікатор джерела"
         manager_id:
           type: integer
           example: 11
           nullable: true
-          description: 'Ідентифікатор відповідального менеджера'
+          description: "Ідентифікатор відповідального менеджера"
         status_id:
           type: integer
           example: 1
-          description: 'Ідентифікатор статусу картки воронки'
+          description: "Ідентифікатор статусу картки воронки"
         title:
-          description: 'Назва картки воронки'
+          description: "Назва картки воронки"
           type: string
           nullable: true
           example: №11011
         manager_comment:
-          description: 'Коментар менеджера'
+          description: "Коментар менеджера"
           type: string
           nullable: true
-          example: 'From facebook'
+          example: "From facebook"
         is_finished:
-          description: 'Ідентифікатор закриття картки воронки'
+          description: "Ідентифікатор закриття картки воронки"
           type: string
           nullable: true
-          example: 'From facebook'
+          example: "From facebook"
         status_changed_at:
           type: string
-          description: 'Дата зміни статусу картки воронки в UTC форматі'
-          example: '2020-05-16 17:00:07'
+          description: "Дата зміни статусу картки воронки в UTC форматі"
+          example: "2020-05-16 17:00:07"
         communicate_at:
           type: string
-          description: 'Дата і час планованого контакту по картці воронки у UTC форматі'
-          example: '2020-05-16 17:00:07'
+          description: "Дата і час планованого контакту по картці воронки у UTC форматі"
+          example: "2020-05-16 17:00:07"
         created_at:
           type: string
-          description: 'Дата створення картки воронки в UTC форматі'
-          example: '2020-05-16 17:00:07'
+          description: "Дата створення картки воронки в UTC форматі"
+          example: "2020-05-16 17:00:07"
         updated_at:
           type: string
-          description: 'Дата останньої зміни картки воронки в UTC форматі'
-          example: '2020-05-16 17:00:07'
+          description: "Дата останньої зміни картки воронки в UTC форматі"
+          example: "2020-05-16 17:00:07"
     utm_source:
       type: string
       nullable: true
       example: facebook
-      description: 'Джерело кампанії'
+      description: "Джерело кампанії"
     utm_medium:
       type: string
       nullable: true
       example: banner
-      description: 'Тип трафіку'
+      description: "Тип трафіку"
     utm_campaign:
       type: string
       nullable: true
       example: sale
-      description: 'Назва кампанії'
+      description: "Назва кампанії"
     utm_term:
       type: string
       nullable: true
-      example: 'landing page'
-      description: 'Ключове слово'
+      example: "landing page"
+      description: "Ключове слово"
     utm_content:
       type: string
       nullable: true
-      example: '-30%'
-      description: 'Ідентифікатор оголошення'
+      example: "-30%"
+      description: "Ідентифікатор оголошення"
     created_at:
       type: string
-      description: 'Дата створення дзвінка в UTC форматі'
-      example: '2020-05-16 17:00:07'
+      description: "Дата створення дзвінка в UTC форматі"
+      example: "2020-05-16 17:00:07"
     updated_at:
       type: string
-      description: 'Дата останньої зміни дзвінка в UTC форматі'
-      example: '2020-05-16 17:00:07'
+      description: "Дата останньої зміни дзвінка в UTC форматі"
+      example: "2020-05-16 17:00:07"

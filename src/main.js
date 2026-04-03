@@ -1,10 +1,9 @@
-import '@scalar/api-reference/style.css'
-import { createApiReference } from '@scalar/api-reference'
+import "@scalar/api-reference/style.css";
+import { createApiReference } from "@scalar/api-reference";
 
-createApiReference('#app', {
-
+createApiReference("#app", {
   // ── OpenAPI source ──────────────────────────────────────────────
-  url: './api.yaml',
+  url: "./api.yaml",
   // Або передати контент напряму:
   // content: '{ "openapi": "3.1.0", ... }',
 
@@ -12,35 +11,35 @@ createApiReference('#app', {
   // Варіанти: 'alternate' | 'default' | 'moon' | 'purple' | 'solarized'
   //           'bluePlanet' | 'saturn' | 'kepler' | 'mars' | 'deepSpace'
   //           'laserwave' | 'none'
-  theme: 'saturn',
+  theme: "saturn",
 
   // ── Dark mode ───────────────────────────────────────────────────
   darkMode: true,
-  forceDarkModeState: 'dark',
+  forceDarkModeState: "dark",
   hideDarkModeToggle: true,
 
   // ── Layout ──────────────────────────────────────────────────────
-  layout: 'modern',
+  layout: "modern",
 
   // ── Metadata ────────────────────────────────────────────────────
   metaData: {
-    title: 'keyCRM API Reference',
-    description: 'Official REST API documentation for keyCRM',
-    ogDescription: 'Official REST API documentation for keyCRM',
-    ogTitle: 'keyCRM API Reference',
-    ogImage: 'https://example.com/image.png',
-    twitterCard: 'summary_large_image',
+    title: "keyCRM API Reference",
+    description: "Official REST API documentation for keyCRM",
+    ogDescription: "Official REST API documentation for keyCRM",
+    ogTitle: "keyCRM API Reference",
+    ogImage: "https://example.com/image.png",
+    twitterCard: "summary_large_image",
   },
 
   // ── Favicon ─────────────────────────────────────────────────────
-  favicon: '/favicon.png',
+  favicon: "/favicon.png",
 
   // ── Sidebar ─────────────────────────────────────────────────────
   showSidebar: true,
 
   // ── Search ──────────────────────────────────────────────────────
   hideSearch: false,
-  searchHotKey: 'k',
+  searchHotKey: "k",
 
   // ── Tags / sections ─────────────────────────────────────────────
   defaultOpenFirstTag: true,
@@ -55,12 +54,12 @@ createApiReference('#app', {
 
   // ── Operations ──────────────────────────────────────────────────
   showOperationId: false,
-  operationTitleSource: 'summary',
+  operationTitleSource: "summary",
   orderRequiredPropertiesFirst: true,
-  orderSchemaPropertiesBy: 'preserve',
+  orderSchemaPropertiesBy: "preserve",
 
   // ── Developer tools bar ─────────────────────────────────────────
-  showDeveloperTools: 'never',
+  showDeveloperTools: "never",
 
   // ── Test Request button ─────────────────────────────────────────
   hideTestRequestButton: false,
@@ -93,12 +92,12 @@ createApiReference('#app', {
 
   // ── Default HTTP client ─────────────────────────────────────────
   defaultHttpClient: {
-    targetKey: 'node',
-    clientKey: 'fetch',
+    targetKey: "node",
+    clientKey: "fetch",
   },
 
   // ── Download button ─────────────────────────────────────────────
-  documentDownloadType: 'both',
+  documentDownloadType: "both",
 
   // ── Agent (AI chat) ─────────────────────────────────────────────
   agent: {
@@ -106,14 +105,14 @@ createApiReference('#app', {
   },
 
   // ── MCP ─────────────────────────────────────────────────────────
-  mcp: { name: 'My API', url: 'https://mcp.example.com', disabled: true },
+  mcp: { name: "My API", url: "https://mcp.example.com", disabled: true },
 
   // ── Authentication ──────────────────────────────────────────────
   authentication: {
-    preferredSecurityScheme: 'bearerAuth',
+    preferredSecurityScheme: "bearerAuth",
     securitySchemes: {
       bearerAuth: {
-        token: '',
+        token: "",
       },
     },
   },
@@ -220,4 +219,4 @@ createApiReference('#app', {
   .darklight-reference > div:last-child a[href="https://www.scalar.com"] { display: none !important; }
   .introduction-card-item.scalar-reference-intro-clients { display: none !important; }
 `,
-})
+});

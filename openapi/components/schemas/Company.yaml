@@ -5,16 +5,16 @@ Company:
   properties:
     id:
       type: integer
-      description: 'Ідентифікатор компанії'
+      description: "Ідентифікатор компанії"
       example: 22
     name:
       type: string
       nullable: false
-      example: 'Назва компанії'
+      example: "Назва компанії"
     title:
       type: string
       nullable: true
-      example: 'Повна назва компанії'
+      example: "Повна назва компанії"
     notes:
       type: string
       nullable: true
@@ -26,27 +26,27 @@ Company:
     manager_id:
       type: integer
       nullable: true
-      description: 'Ідентифікатор відповідального менеджера'
+      description: "Ідентифікатор відповідального менеджера"
       example: 12
     custom_fields:
       type: array
-      description: 'Користувацькі поля для компанії'
+      description: "Користувацькі поля для компанії"
       items:
         type: object
         properties:
           uuid:
-            description: 'Зовнішній ідентифікатор поля'
+            description: "Зовнішній ідентифікатор поля"
             type: string
             example: CY_1108
           value:
-            description: 'Значення поля. Для полів з типом `select (список/мультисписок)` передавати масив рядків.'
+            description: "Значення поля. Для полів з типом `select (список/мультисписок)` передавати масив рядків."
             type: string
             example: Лорд
     created_at:
       type: string
-      description: 'Дата створення компанії в UTC форматі'
-      example: '2020-05-16 17:00:07'
+      description: "Дата створення компанії в UTC форматі"
+      example: "2020-05-16 17:00:07"
     updated_at:
       type: string
-      description: 'Дата останньої зміни компанії в UTC форматі'
-      example: '2020-05-16 17:00:07'
+      description: "Дата останньої зміни компанії в UTC форматі"
+      example: "2020-05-16 17:00:07"

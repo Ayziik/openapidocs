@@ -3,88 +3,88 @@ Call:
   properties:
     id:
       type: integer
-      description: 'Ідентифікатор дзвінка'
+      description: "Ідентифікатор дзвінка"
       example: 22
     internal_number:
       type: string
-      description: 'Внутрішній номер'
-      example: '+1 555-234-7777'
+      description: "Внутрішній номер"
+      example: "+1 555-234-7777"
     external_number:
       type: string
-      description: 'Зовнішній номер'
-      example: '+1 555-234-7777'
+      description: "Зовнішній номер"
+      example: "+1 555-234-7777"
     source_number:
       type: string
-      description: 'Номер телефонії'
-      example: '+1 555-234-7777'
+      description: "Номер телефонії"
+      example: "+1 555-234-7777"
     reference_id:
       type: string
-      description: 'Зовнішній ідентифікатор дзвінка'
+      description: "Зовнішній ідентифікатор дзвінка"
       example: 1ec09d2e-e1c2-11e3-8c4a-0050568002cf
     type:
       type: string
-      description: 'Тип дзвінка (incoming, outgoing)'
+      description: "Тип дзвінка (incoming, outgoing)"
       example: incoming
     state:
       type: string
-      description: 'Стан дзвінка (started, pending, answered, canceled, busy, completed, transferred)'
+      description: "Стан дзвінка (started, pending, answered, canceled, busy, completed, transferred)"
       example: completed
     user_id:
       type: integer
-      description: 'Ідентифікатор менеджера'
+      description: "Ідентифікатор менеджера"
       example: 1
     call_route_service_id:
       type: integer
-      description: 'Ідентифікатор сервісу, який обробляє дзвінок'
+      description: "Ідентифікатор сервісу, який обробляє дзвінок"
       example: 1
     duration:
       type: integer
-      description: 'Тривалість дзвінка в секундах'
+      description: "Тривалість дзвінка в секундах"
       example: 30
     call_url:
       type: string
-      description: 'Посилання на дзвінок'
+      description: "Посилання на дзвінок"
     comment:
       type: string
-      description: 'Коментар до дзвінка'
+      description: "Коментар до дзвінка"
     client_id:
       type: integer
-      description: 'Ідентифікатор клієнта'
+      description: "Ідентифікатор клієнта"
       example: 1
     lead_id:
       type: integer
-      description: 'Ідентифікатор картки воронки'
+      description: "Ідентифікатор картки воронки"
       example: 1
     utm_source:
       type: string
       nullable: true
       example: facebook
-      description: 'Джерело кампанії'
+      description: "Джерело кампанії"
     utm_medium:
       type: string
       nullable: true
       example: banner
-      description: 'Тип трафіку'
+      description: "Тип трафіку"
     utm_campaign:
       type: string
       nullable: true
       example: sale
-      description: 'Назва кампанії'
+      description: "Назва кампанії"
     utm_term:
       type: string
       nullable: true
-      example: 'landing page'
-      description: 'Ключове слово'
+      example: "landing page"
+      description: "Ключове слово"
     utm_content:
       type: string
       nullable: true
-      example: '-30%'
-      description: 'Ідентифікатор оголошення'
+      example: "-30%"
+      description: "Ідентифікатор оголошення"
     created_at:
       type: string
-      description: 'Дата створення дзвінка в UTC форматі'
-      example: '2020-05-16 17:00:07'
+      description: "Дата створення дзвінка в UTC форматі"
+      example: "2020-05-16 17:00:07"
     updated_at:
       type: string
-      description: 'Дата останньої зміни дзвінка в UTC форматі'
-      example: '2020-05-16 17:00:07'
+      description: "Дата останньої зміни дзвінка в UTC форматі"
+      example: "2020-05-16 17:00:07"

@@ -3,25 +3,25 @@ PaginatedResponse:
   properties:
     total:
       type: integer
-      description: 'Кількість знайдених елементів у запиті'
+      description: "Кількість знайдених елементів у запиті"
       example: 100
     current_page:
       type: integer
       example: 1
     per_page:
       type: integer
-      description: 'Кількість елементів у масиві для кожного запиту'
+      description: "Кількість елементів у масиві для кожного запиту"
       example: 15
     data:
       type: array
       description: "Масив об'ектів у відповіді від сервера"
-      items: {  }
+      items: {}
     first_page_url:
       type: string
-      example: 'https://openapi.keycrm.app/{current_path}?page=1'
+      example: "https://openapi.keycrm.app/{current_path}?page=1"
     last_page_url:
       type: string
-      example: 'https://openapi.keycrm.app/{current_path}?page=5'
+      example: "https://openapi.keycrm.app/{current_path}?page=5"
     next_page_url:
       type: string
-      example: 'https://openapi.keycrm.app/{current_path}?page=2'
+      example: "https://openapi.keycrm.app/{current_path}?page=2"

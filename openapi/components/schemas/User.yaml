@@ -4,7 +4,7 @@ User:
   type: object
   properties:
     id:
-      description: 'ID менеджера'
+      description: "ID менеджера"
       type: integer
       nullable: true
       example: 1
@@ -14,7 +14,7 @@ User:
       nullable: true
       example: John
     last_name:
-      description: 'Прізвище менеджера'
+      description: "Прізвище менеджера"
       type: string
       nullable: true
       example: Doe
@@ -22,41 +22,41 @@ User:
       description: "Повне ім'я менеджера"
       type: string
       nullable: true
-      example: 'John Doe'
+      example: "John Doe"
     username:
-      description: 'Логін менеджера'
+      description: "Логін менеджера"
       type: string
       nullable: true
       example: johndoe
     email:
-      description: 'E-mail менеджера'
+      description: "E-mail менеджера"
       type: string
       nullable: true
       example: john.doe@mail.app
     phone:
-      description: 'Телефон менеджера'
+      description: "Телефон менеджера"
       type: string
       nullable: true
-      example: '+1 555-234-1234'
+      example: "+1 555-234-1234"
     role_id:
-      description: 'ID ролі менеджера'
+      description: "ID ролі менеджера"
       type: integer
       nullable: true
       example: 2
     status:
-      description: 'Статус менеджера. Можливі варіанти: active, pending або blocked'
+      description: "Статус менеджера. Можливі варіанти: active, pending або blocked"
       type: string
       nullable: false
       example: active
     created_at:
       type: string
-      description: 'Дата створення в UTC форматі'
-      example: '2020-05-16 17:00:07'
+      description: "Дата створення в UTC форматі"
+      example: "2020-05-16 17:00:07"
     updated_at:
       type: string
-      description: 'Дата останньої зміни в UTC форматі'
-      example: '2020-05-16 17:00:07'
+      description: "Дата останньої зміни в UTC форматі"
+      example: "2020-05-16 17:00:07"
     last_logged_at:
       type: string
-      description: 'Дата останньої логіну в UTC форматі'
-      example: '2020-05-16 17:00:07'
+      description: "Дата останньої логіну в UTC форматі"
+      example: "2020-05-16 17:00:07"

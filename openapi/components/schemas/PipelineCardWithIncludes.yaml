@@ -2,108 +2,108 @@ PipelineCardWithIncludes:
   required:
     - source_id
   type: object
-  description: 'Схема картки воронки з усіма доступними асоціаціями'
+  description: "Схема картки воронки з усіма доступними асоціаціями"
   properties:
     id:
       type: integer
-      description: 'Ідентифікатор картки воронки'
+      description: "Ідентифікатор картки воронки"
       example: 22
     contact_id:
       type: integer
       example: 1
-      description: 'Ідентифікатор контактної особи картки воронки'
+      description: "Ідентифікатор контактної особи картки воронки"
     source_id:
       type: integer
       example: 11
       nullable: true
-      description: 'Ідентифікатор джерела'
+      description: "Ідентифікатор джерела"
     manager_id:
       type: integer
       example: 11
       nullable: true
-      description: 'Ідентифікатор відповідального менеджера'
+      description: "Ідентифікатор відповідального менеджера"
     target_id:
       type: integer
       example: 1112
       nullable: true
-      description: 'Ідентифікатор створеної на основі картки сутності'
+      description: "Ідентифікатор створеної на основі картки сутності"
     target_type:
-      description: 'Тип створеної на основі картки сутності. Можливі варіанти: `order` (замовлення), `lead` (картка)'
+      description: "Тип створеної на основі картки сутності. Можливі варіанти: `order` (замовлення), `lead` (картка)"
       type: string
       nullable: true
       example: order
     status_id:
       type: integer
       example: 1
-      description: 'Ідентифікатор статусу картки воронки'
+      description: "Ідентифікатор статусу картки воронки"
     title:
-      description: 'Назва картки воронки'
+      description: "Назва картки воронки"
       type: string
       nullable: true
       example: №11011
     manager_comment:
-      description: 'Коментар менеджера'
+      description: "Коментар менеджера"
       type: string
       nullable: true
-      example: 'From facebook'
+      example: "From facebook"
     utm_source:
       type: string
       nullable: true
       example: facebook
-      description: 'Джерело кампанії'
+      description: "Джерело кампанії"
     utm_medium:
       type: string
       nullable: true
       example: banner
-      description: 'Тип трафіку'
+      description: "Тип трафіку"
     utm_campaign:
       type: string
       nullable: true
       example: sale
-      description: 'Назва кампанії'
+      description: "Назва кампанії"
     utm_term:
       type: string
       nullable: true
-      example: 'landing page'
-      description: 'Ключове слово'
+      example: "landing page"
+      description: "Ключове слово"
     utm_content:
       type: string
       nullable: true
-      example: '-30%'
-      description: 'Ідентифікатор оголошення'
+      example: "-30%"
+      description: "Ідентифікатор оголошення"
     is_finished:
-      description: 'Ідентифікатор закриття картки воронки'
+      description: "Ідентифікатор закриття картки воронки"
       type: string
       nullable: true
-      example: 'From facebook'
+      example: "From facebook"
     status_changed_at:
       type: string
-      description: 'Дата зміни статусу картки воронки в UTC форматі'
-      example: '2020-05-16 17:00:07'
+      description: "Дата зміни статусу картки воронки в UTC форматі"
+      example: "2020-05-16 17:00:07"
     communicate_at:
       type: string
-      description: 'Дата і час планованого контакту по картці воронки у UTC форматі'
-      example: '2020-05-16 17:00:07'
+      description: "Дата і час планованого контакту по картці воронки у UTC форматі"
+      example: "2020-05-16 17:00:07"
     created_at:
       type: string
-      description: 'Дата створення картки воронки в UTC форматі'
-      example: '2020-05-16 17:00:07'
+      description: "Дата створення картки воронки в UTC форматі"
+      example: "2020-05-16 17:00:07"
     updated_at:
       type: string
-      description: 'Дата останньої зміни картки воронки в UTC форматі'
-      example: '2020-05-16 17:00:07'
+      description: "Дата останньої зміни картки воронки в UTC форматі"
+      example: "2020-05-16 17:00:07"
     contact:
       type: object
       properties:
         id:
-          description: 'ID контакту'
+          description: "ID контакту"
           type: integer
           nullable: true
           example: 1
         full_name:
           type: string
           nullable: true
-          example: 'John Doe'
+          example: "John Doe"
         email:
           type: string
           nullable: true
@@ -116,56 +116,56 @@ PipelineCardWithIncludes:
           type: string
           nullable: true
           example: null
-          description: 'Посилання на зображеня контакту'
+          description: "Посилання на зображеня контакту"
         additional_details:
           type: array
           items:
             type: string
           nullable: true
-          description: 'Додаткові деталі контакту'
+          description: "Додаткові деталі контакту"
         client_id:
           type: integer
           nullable: true
           example: 1
-          description: 'ID кліента'
+          description: "ID кліента"
         social_name:
           type: string
           example: telegram
         social_id:
           type: string
-          example: '@john_doe'
+          example: "@john_doe"
         created_at:
           type: string
-          description: 'Дата створення в UTC форматі'
-          example: '2020-05-16 17:00:07'
+          description: "Дата створення в UTC форматі"
+          example: "2020-05-16 17:00:07"
         updated_at:
           type: string
-          description: 'Дата останньої зміни в UTC форматі'
-          example: '2020-05-16 17:00:07'
+          description: "Дата останньої зміни в UTC форматі"
+          example: "2020-05-16 17:00:07"
         client:
           type: object
           nullable: true
-          description: 'Клієнт з яким асоційований контакт'
+          description: "Клієнт з яким асоційований контакт"
           properties:
             id:
-              description: 'ID кліента'
+              description: "ID кліента"
               type: integer
               nullable: true
               example: 1
             company_id:
-              description: 'ID компанії'
+              description: "ID компанії"
               type: integer
               nullable: true
               example: 1
             full_name:
               type: string
               description: "Ім'я кліента"
-              example: 'John Doe'
+              example: "John Doe"
             phone:
               type: string
               nullable: true
-              description: 'Телефон менеджера'
-              example: '+1 555-234-1234'
+              description: "Телефон менеджера"
+              example: "+1 555-234-1234"
             formatted_phone:
               type: string
               nullable: true
@@ -177,7 +177,7 @@ PipelineCardWithIncludes:
             email:
               type: string
               nullable: true
-              description: 'E-mail кліента'
+              description: "E-mail кліента"
               example: john.doe@mail.app
             note:
               type: string
@@ -197,30 +197,30 @@ PipelineCardWithIncludes:
               example: UAH
             orders_sum:
               type: string
-              description: 'Сума всіх замовлень'
-              example: '90247.69'
+              description: "Сума всіх замовлень"
+              example: "90247.69"
             orders_count:
               type: integer
-              description: 'Кількість замовлень'
-              example: '28'
+              description: "Кількість замовлень"
+              example: "28"
             has_duplicates:
               type: integer
               example: 0
             manager_id:
               type: integer
               nullable: true
-              description: 'Ідентифікатор відповідального менеджера'
+              description: "Ідентифікатор відповідального менеджера"
               example: null
             created_at:
               type: string
-              description: 'Дата створення в UTC форматі'
-              example: '2020-05-16 17:00:07'
+              description: "Дата створення в UTC форматі"
+              example: "2020-05-16 17:00:07"
             updated_at:
               type: string
-              description: 'Дата останньої зміни в UTC форматі'
-              example: '2020-05-16 17:00:07'
+              description: "Дата останньої зміни в UTC форматі"
+              example: "2020-05-16 17:00:07"
     products:
-      description: 'Товари в картці воронки. Повертаються тільки, якщо вказати `include=products`'
+      description: "Товари в картці воронки. Повертаються тільки, якщо вказати `include=products`"
       type: array
       items:
         type: object
@@ -228,88 +228,88 @@ PipelineCardWithIncludes:
           id:
             type: integer
             example: 22
-            description: 'Ідентифікатор товару'
+            description: "Ідентифікатор товару"
           product_id:
             type: integer
             example: 22
-            description: 'Ідентифікатор варіанту товару'
+            description: "Ідентифікатор варіанту товару"
           name:
             type: string
-            example: 'Iphone XS max 256gb'
-            description: 'Назва товару'
+            example: "Iphone XS max 256gb"
+            description: "Назва товару"
           sku:
             type: string
             example: 001-242
-            description: 'Артикул товару'
+            description: "Артикул товару"
           price:
             type: number
             example: 124.5
-            description: 'Ціна товару за одиницю'
+            description: "Ціна товару за одиницю"
           quantity:
             type: number
             example: 1
-            description: 'Кількість одиниць товару'
+            description: "Кількість одиниць товару"
           unit_type:
             type: string
             nullable: true
             example: кг
-            description: 'Одиниці виміру товару. Якщо використовуються системні `шт`, то значення буде `null`'
+            description: "Одиниці виміру товару. Якщо використовуються системні `шт`, то значення буде `null`"
           picture:
             type: string
             nullable: true
-            description: 'Посилання на зображеня товару'
-            example: 'https://i.etsystatic.com/22591342/r/il/52142a/2285383547/il_570xN.2285383547_h8a2.jpg'
+            description: "Посилання на зображеня товару"
+            example: "https://i.etsystatic.com/22591342/r/il/52142a/2285383547/il_570xN.2285383547_h8a2.jpg"
           offer:
-            description: 'Інформація про товар в каталозі keyCRM'
+            description: "Інформація про товар в каталозі keyCRM"
             type: object
             properties:
               id:
                 type: integer
-                description: 'Ідентифікатор варіанту товару'
+                description: "Ідентифікатор варіанту товару"
                 example: 22
               product_id:
                 type: integer
-                description: 'Ідентифікатор товару до якого відноситься варіант'
+                description: "Ідентифікатор товару до якого відноситься варіант"
                 example: 22
               sku:
-                description: 'SKU варіанту товару'
+                description: "SKU варіанту товару"
                 type: string
                 example: sku001
               barcode:
-                description: 'Штрих-код товару'
+                description: "Штрих-код товару"
                 type: string
-                example: '11222111211'
+                example: "11222111211"
               price:
                 type: number
                 example: 123.5
-                description: 'Вартість варіанту товару'
+                description: "Вартість варіанту товару"
               purchased_price:
                 type: number
                 example: 50.5
-                description: 'Закупівельна вартість варіанту товару'
+                description: "Закупівельна вартість варіанту товару"
               quantity:
                 type: number
                 example: 98
-                description: 'Загальна кількість залишків'
+                description: "Загальна кількість залишків"
               weight:
                 type: number
                 example: 12.5
-                description: 'Вага варіанту товару в системних одиницях'
+                description: "Вага варіанту товару в системних одиницях"
               length:
                 type: number
                 example: 25.0
-                description: 'Довжина варіанту товару в системних одиницях'
+                description: "Довжина варіанту товару в системних одиницях"
               width:
                 type: number
                 example: 10.0
-                description: 'Ширина варіанту товару в системних одиницях'
+                description: "Ширина варіанту товару в системних одиницях"
               height:
                 type: number
                 example: 7.5
-                description: 'Висота варіанту товару в системних одиницях'
+                description: "Висота варіанту товару в системних одиницях"
               properties:
                 type: array
-                description: 'Властивості варіанту товару'
+                description: "Властивості варіанту товару"
                 items:
                   type: object
                   properties:
@@ -321,10 +321,10 @@ PipelineCardWithIncludes:
                       example: Gol
     manager:
       type: object
-      description: 'Інформація про менеджера картки воронки. Повертається тільки, якщо вказати `include=manager`'
+      description: "Інформація про менеджера картки воронки. Повертається тільки, якщо вказати `include=manager`"
       properties:
         id:
-          description: 'ID менеджера'
+          description: "ID менеджера"
           type: integer
           nullable: true
           example: 1
@@ -334,7 +334,7 @@ PipelineCardWithIncludes:
           nullable: true
           example: John
         last_name:
-          description: 'Прізвище менеджера'
+          description: "Прізвище менеджера"
           type: string
           nullable: true
           example: Doe
@@ -342,98 +342,98 @@ PipelineCardWithIncludes:
           description: "Повне ім'я менеджера"
           type: string
           nullable: true
-          example: 'John Doe'
+          example: "John Doe"
         username:
-          description: 'Логін менеджера'
+          description: "Логін менеджера"
           type: string
           nullable: true
           example: johndoe
         email:
-          description: 'E-mail менеджера'
+          description: "E-mail менеджера"
           type: string
           nullable: true
           example: john.doe@mail.app
         phone:
-          description: 'Телефон менеджера'
+          description: "Телефон менеджера"
           type: string
           nullable: true
-          example: '+1 555-234-1234'
+          example: "+1 555-234-1234"
         role_id:
-          description: 'ID ролі менеджера'
+          description: "ID ролі менеджера"
           type: integer
           nullable: true
           example: 2
         status:
-          description: 'Статус менеджера. Можливі варіанти: active або blocked'
+          description: "Статус менеджера. Можливі варіанти: active або blocked"
           type: string
           nullable: false
           example: active
         created_at:
           type: string
-          description: 'Дата створення в UTC форматі'
-          example: '2020-05-16 17:00:07'
+          description: "Дата створення в UTC форматі"
+          example: "2020-05-16 17:00:07"
         updated_at:
           type: string
-          description: 'Дата останньої зміни в UTC форматі'
-          example: '2020-05-16 17:00:07'
+          description: "Дата останньої зміни в UTC форматі"
+          example: "2020-05-16 17:00:07"
         last_logged_at:
           type: string
-          description: 'Дата останньої логіну в UTC форматі'
-          example: '2020-05-16 17:00:07'
+          description: "Дата останньої логіну в UTC форматі"
+          example: "2020-05-16 17:00:07"
     status:
-      description: 'Інформація про поточний статус картки воронки. Повертається тільки, якщо вказати `include=status`'
+      description: "Інформація про поточний статус картки воронки. Повертається тільки, якщо вказати `include=status`"
       type: object
       properties:
         id:
           type: integer
-          description: 'Ідентифікатор статусу'
+          description: "Ідентифікатор статусу"
         name:
           type: string
           description: Назва
           example: Hot
         alias:
           type: string
-          description: 'Системна назва'
+          description: "Системна назва"
           example: hot
         is_active:
           type: boolean
-          description: 'Стан активності'
+          description: "Стан активності"
           example: true
         pipeline_id:
           type: integer
-          description: 'Ідентифікатор воронки'
+          description: "Ідентифікатор воронки"
           example: 1
         created_at:
           type: string
-          description: 'Дата створення в UTC форматі'
-          example: '2020-05-16 16:56:44'
+          description: "Дата створення в UTC форматі"
+          example: "2020-05-16 16:56:44"
         updated_at:
           type: string
-          description: 'Дата останньої зміни в UTC форматі'
-          example: '2020-05-16 16:56:44'
+          description: "Дата останньої зміни в UTC форматі"
+          example: "2020-05-16 16:56:44"
     payments:
       type: array
-      description: 'Платежі в замовленні. Повертаються тільки, якщо вказати `include=payments`'
+      description: "Платежі в замовленні. Повертаються тільки, якщо вказати `include=payments`"
       items:
         type: object
         properties:
           id:
             type: integer
             example: 2233
-            description: 'ID платежу в keyCRM'
+            description: "ID платежу в keyCRM"
           payment_method_id:
             type: integer
             example: 2
-            description: 'ID методу платежу в keyCRM'
+            description: "ID методу платежу в keyCRM"
           amount:
             type: number
             example: 123.5
-            description: 'Сума платежу'
+            description: "Сума платежу"
           actual_currency:
             type: string
             example: UAH
             nullable: true
-            description: 'Валюта платежу'
+            description: "Валюта платежу"
           transaction_uuid:
             type: string
             example: UD12345
@@ -441,9 +441,9 @@ PipelineCardWithIncludes:
             description: "ID зовнішньої транзакції зв'язаної з платежем"
           description:
             type: string
-            example: 'Авансовий платіж'
+            example: "Авансовий платіж"
             nullable: true
-            description: 'Коментар до платежу'
+            description: "Коментар до платежу"
           status:
             type: string
             enum:
@@ -452,43 +452,43 @@ PipelineCardWithIncludes:
               - canceled
             example: paid
             nullable: true
-            description: 'Статус оплати'
+            description: "Статус оплати"
           payment_date:
             type: string
             nullable: true
-            example: '2021-02-21 14:44:00'
-            description: 'Дата і час платежу'
+            example: "2021-02-21 14:44:00"
+            description: "Дата і час платежу"
           created_at:
             type: string
-            description: 'Дата створення платежу в UTC форматі'
-            example: '2020-05-16 17:00:07'
+            description: "Дата створення платежу в UTC форматі"
+            example: "2020-05-16 17:00:07"
           updated_at:
             type: string
-            description: 'Дата останньої зміни платежу в UTC форматі'
-            example: '2020-05-16 17:00:07'
+            description: "Дата останньої зміни платежу в UTC форматі"
+            example: "2020-05-16 17:00:07"
     custom_fields:
       type: array
-      description: 'Користувацькі поля в картці воронки. Повертаються тільки заповнені, якщо вказати `include=custom_fields`'
+      description: "Користувацькі поля в картці воронки. Повертаються тільки заповнені, якщо вказати `include=custom_fields`"
       items:
         type: object
         properties:
           id:
-            description: 'ID поля в системі'
+            description: "ID поля в системі"
             type: integer
             example: 123
           uuid:
-            description: 'Зовнішній ідентифікатор поля'
+            description: "Зовнішній ідентифікатор поля"
             type: string
             example: OR_1037
           name:
-            description: 'Назва поля'
+            description: "Назва поля"
             type: string
             example: Кличка
           type:
-            description: 'Тип поля. Можливі значення: `link (посилання)`, `select (список/мультисписок)`, `switcher (так/ні)`, `float (число)`, `number (ціле число)`, `textarea (текст)`, `text (рядок)`, `date (дата)`, `datetime (дата і час)`'
+            description: "Тип поля. Можливі значення: `link (посилання)`, `select (список/мультисписок)`, `switcher (так/ні)`, `float (число)`, `number (ціле число)`, `textarea (текст)`, `text (рядок)`, `date (дата)`, `datetime (дата і час)`"
             type: string
             example: text
           value:
-            description: 'Значення поля. Для полів з типом `select (список/мультисписок)` повертається масив рядків.'
+            description: "Значення поля. Для полів з типом `select (список/мультисписок)` повертається масив рядків."
             type: string
             example: Лорд

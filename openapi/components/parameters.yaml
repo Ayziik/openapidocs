@@ -11,7 +11,7 @@ parameters:
   correlationIdParam:
     name: X-Correlation-ID
     in: header
-    description: 'Ідентифікатор запиту'
+    description: "Ідентифікатор запиту"
     required: false
     style: simple
     explode: false
@@ -20,7 +20,7 @@ parameters:
   pageParam:
     name: page
     in: query
-    description: 'Вкажіть сторінку'
+    description: "Вкажіть сторінку"
     required: false
     style: form
     explode: true
@@ -36,4 +36,4 @@ parameters:
       minimum: 1
       maximum: 50
       default: 15
-    description: 'Максимальна кількість елементів у пагінованому списку. Максимум 50.'
+    description: "Максимальна кількість елементів у пагінованому списку. Максимум 50."

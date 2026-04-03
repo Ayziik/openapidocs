@@ -2,20 +2,20 @@
   get:
     tags:
       - Order
-    summary: 'Отримання списку замовлень'
-    description: 'Даний маршрут повертає список замовлень.'
+    summary: "Отримання списку замовлень"
+    description: "Даний маршрут повертає список замовлень."
     operationId: getPaginatedListOfOrders
     parameters:
-      - $ref: '#/components/parameters/acceptParam'
-      - $ref: '#/components/parameters/limitParam'
-      - $ref: '#/components/parameters/pageParam'
+      - $ref: "#/components/parameters/acceptParam"
+      - $ref: "#/components/parameters/limitParam"
+      - $ref: "#/components/parameters/pageParam"
       - name: include
         in: query
-        description: 'Підключення додаткових асоціацій, розділені комами. Приклад:
+        description: "Підключення додаткових асоціацій, розділені комами. Приклад:
           <strong>buyer,status,tags</strong> <br/><br/> Допустимі асоціації
           `buyer`, `products.offer`, `manager`, `tags`, `status`,
           `marketing`,  `payments`, `shipping.lastHistory`,
-          `shipping.deliveryService`, `expenses`, `custom_fields`, `assigned`'
+          `shipping.deliveryService`, `expenses`, `custom_fields`, `assigned`"
         required: false
         style: form
         explode: true
@@ -23,7 +23,7 @@
           type: string
       - name: sort
         in: query
-        description: 'Сортування списку замовлень'
+        description: "Сортування списку замовлень"
         required: false
         style: form
         explode: true
@@ -32,13 +32,13 @@
         examples:
           sort_asc:
             value: id
-            summary: 'Сортування за зростанням'
+            summary: "Сортування за зростанням"
           sort_desc:
-            value: '-id'
-            summary: 'Сортування за зменшенням'
+            value: "-id"
+            summary: "Сортування за зменшенням"
       - name: filter
         in: query
-        description: 'Фільтрація списку замовлень'
+        description: "Фільтрація списку замовлень"
         required: false
         style: deepObject
         explode: true
@@ -48,81 +48,81 @@
           filter_by_status:
             value:
               status_id: 1
-            summary: 'Фільтр за статусом'
+            summary: "Фільтр за статусом"
           filter_by_source:
             value:
               source_id: 1
-            summary: 'Фільтр за джерелом'
+            summary: "Фільтр за джерелом"
           filter_by_source_order_id:
             value:
               source_uuid: abc-123
-            summary: 'Фільтр ідентифікатору замовлення з джерела'
+            summary: "Фільтр ідентифікатору замовлення з джерела"
           filter_by_phone:
             value:
-              buyer_phone: '+1 555-234-1234, +1 555-234-1234'
-            summary: 'Фільтр за телефоном покупця'
+              buyer_phone: "+1 555-234-1234, +1 555-234-1234"
+            summary: "Фільтр за телефоном покупця"
           filter_by_email:
             value:
-              buyer_email: 'john.doe@example.com, john.doe@example.com'
-            summary: 'Фільтр за email покупця'
+              buyer_email: "john.doe@example.com, john.doe@example.com"
+            summary: "Фільтр за email покупця"
           filter_by_date_created:
             value:
-              created_between: '2020-08-24 00:00:00, 2020-09-22 23:59:59'
-            summary: 'Фільтр за датою створення'
+              created_between: "2020-08-24 00:00:00, 2020-09-22 23:59:59"
+            summary: "Фільтр за датою створення"
           filter_by_date_updated:
             value:
-              updated_between: '2020-08-24 00:00:00, 2020-09-22 23:59:59'
-            summary: 'Фільтр за датою оновлення'
+              updated_between: "2020-08-24 00:00:00, 2020-09-22 23:59:59"
+            summary: "Фільтр за датою оновлення"
           filter_by_date_shipping:
             value:
-              shipping_between: '2020-08-24 00:00:00, 2020-09-22 23:59:59'
-            summary: 'Фільтр за датою доставки'
+              shipping_between: "2020-08-24 00:00:00, 2020-09-22 23:59:59"
+            summary: "Фільтр за датою доставки"
           filter_by_payment_status:
             value:
-              payment_status: 'paid,overpaid'
-            summary: 'Фільтр за статусом оплати, допустимі значення: paid, overpaid,
-              part_paid, not_paid'
+              payment_status: "paid,overpaid"
+            summary: "Фільтр за статусом оплати, допустимі значення: paid, overpaid,
+              part_paid, not_paid"
           filter_by_tracking_status:
             value:
               has_tracking_code: true
-            summary: 'Фільтр за станом трекінгу (доданий чи ні)'
+            summary: "Фільтр за станом трекінгу (доданий чи ні)"
           filter_combined:
             value:
               status_id: 1
               source_uuid: abc-123
               source_id: 1
               buyer_email: john.doe@example.com
-              created_between: '2020-08-24,2020-09-22'
+              created_between: "2020-08-24,2020-09-22"
               has_tracking_code: true
-            summary: 'Комбінований приклад'
+            summary: "Комбінований приклад"
     responses:
       200:
-        description: 'Успішна відповідь. Результат у пагінованому вигляді. Значення
+        description: "Успішна відповідь. Результат у пагінованому вигляді. Значення
           ключа `id` з масиву можна використовувати для операцій
-          `/order/{orderId}` як `orderId` параметр.'
+          `/order/{orderId}` як `orderId` параметр."
         content:
           application/json:
             schema:
               type: object
               allOf:
-                - $ref: '#/components/schemas/PaginatedResponse'
+                - $ref: "#/components/schemas/PaginatedResponse"
                 - properties:
                     data:
                       type: array
                       items:
-                        $ref: '#/components/schemas/OrderWithIncludes'
+                        $ref: "#/components/schemas/OrderWithIncludes"
       401:
-        description: 'Помилка авторизації.'
+        description: "Помилка авторизації."
     security:
       - bearerAuth: {}
   post:
     tags:
       - Order
-    summary: 'Створення нового замовлення'
-    description: 'Даний маршрут створює нове замовлення.'
+    summary: "Створення нового замовлення"
+    description: "Даний маршрут створює нове замовлення."
     operationId: createNewOrder
     parameters:
-      - $ref: '#/components/parameters/acceptParam'
+      - $ref: "#/components/parameters/acceptParam"
     requestBody:
       description: "Приклад об'єкту запиту для створення нового замовлення"
       required: true
@@ -141,88 +141,88 @@
               source_uuid:
                 type: string
                 nullable: true
-                description: 'Номер замовлення у джерелі'
+                description: "Номер замовлення у джерелі"
                 example: 115
               buyer_comment:
                 type: string
                 nullable: true
-                description: 'Коментар покупця'
-                example: 'I want this sentence to be my `buyer` comment on keyCRM'
+                description: "Коментар покупця"
+                example: "I want this sentence to be my `buyer` comment on keyCRM"
               manager_id:
                 type: integer
                 example: 1
                 nullable: true
-                description: 'Ідентифікатор відповідального менеджера'
+                description: "Ідентифікатор відповідального менеджера"
               manager_comment:
                 type: string
                 nullable: true
-                description: 'Коментар менеджера'
-                example: 'Handle till weekend'
+                description: "Коментар менеджера"
+                example: "Handle till weekend"
               promocode:
                 type: string
                 example: MERRYCHRISTMAS
                 nullable: true
-                description: 'Промо код'
+                description: "Промо код"
               discount_percent:
                 type: number
                 example: 11.5
                 nullable: true
-                description: 'Знижка на замовлення у %'
+                description: "Знижка на замовлення у %"
               discount_amount:
                 type: number
                 example: 9.99
                 nullable: true
-                description: 'Знижка на замовлення фіксована'
+                description: "Знижка на замовлення фіксована"
               shipping_price:
-                description: 'Вартість доставки'
+                description: "Вартість доставки"
                 type: number
                 nullable: true
                 example: 2.5
               wrap_price:
-                description: 'Вартість подарункової упаковки'
+                description: "Вартість подарункової упаковки"
                 type: number
                 nullable: true
                 example: 3.5
               gift_message:
-                description: 'Привітальне повідомлення'
+                description: "Привітальне повідомлення"
                 type: string
                 nullable: true
-                example: 'Вітаємо з ДР!'
+                example: "Вітаємо з ДР!"
               is_gift:
-                description: 'Ознака, що замовлення для подарунку'
+                description: "Ознака, що замовлення для подарунку"
                 type: boolean
                 example: true
               gift_wrap:
-                description: 'Ознака, що потрібна подарункова упаковка'
+                description: "Ознака, що потрібна подарункова упаковка"
                 type: boolean
                 example: true
               taxes:
-                description: 'Сума податків'
+                description: "Сума податків"
                 type: number
                 nullable: true
                 example: 2.5
               ordered_at:
                 type: string
                 nullable: true
-                description: 'Дата і час замовлення. Якщо не передається, буде використаний
-                  поточний час'
-                example: '2021-12-21 14:44:00'
+                description: "Дата і час замовлення. Якщо не передається, буде використаний
+                  поточний час"
+                example: "2021-12-21 14:44:00"
               buyer:
                 type: object
                 properties:
                   full_name:
                     type: string
                     nullable: true
-                    example: 'John Doe'
+                    example: "John Doe"
                   email:
                     type: string
                     nullable: true
                     example: john.doe@mail.app
                   phone:
                     type: string
-                    description: 'Телефон рекомендуємо передавати в міжнародному форматі з плюсом'
+                    description: "Телефон рекомендуємо передавати в міжнародному форматі з плюсом"
                     nullable: true
-                    example: '+1 555-234-1234'
+                    example: "+1 555-234-1234"
               shipping:
                 type: object
                 properties:
@@ -230,17 +230,17 @@
                     type: integer
                     nullable: true
                     example: 1
-                    description: 'ID служби доставки у keyCRM'
+                    description: "ID служби доставки у keyCRM"
                   tracking_code:
                     type: string
                     nullable: true
-                    example: '530005665555556'
-                    description: 'Трек-номер відправлення служби доставки'
+                    example: "530005665555556"
+                    description: "Трек-номер відправлення служби доставки"
                   shipping_service:
                     type: string
                     nullable: true
-                    example: 'Нова Пошта'
-                    description: 'Назва служби доставки'
+                    example: "Нова Пошта"
+                    description: "Назва служби доставки"
                   shipping_address_city:
                     type: string
                     nullable: true
@@ -253,29 +253,29 @@
                     type: string
                     nullable: true
                     example: Kyivska
-                    description: 'Область, штат, регіон'
+                    description: "Область, штат, регіон"
                   shipping_address_zip:
                     type: string
                     nullable: true
-                    example: '50000'
+                    example: "50000"
                   shipping_secondary_line:
                     type: string
                   shipping_receive_point:
                     type: string
                     nullable: true
-                    example: 'Склад #12'
-                    description: 'Точка видачі замовлення'
+                    example: "Склад #12"
+                    description: "Точка видачі замовлення"
                   recipient_full_name:
                     type: string
                     nullable: true
-                    example: 'Ann Doe'
+                    example: "Ann Doe"
                     description: "Ім'я отримувача (якщо відрізняється від покупця)"
                   recipient_phone:
                     type: string
                     nullable: true
-                    example: '+1 555-234-7777'
-                    description: 'Номер телефону отримувача (якщо відрізняється від покупця).
-                      Рекомендуємо передавати в міжнародному форматі з плюсом'
+                    example: "+1 555-234-7777"
+                    description: "Номер телефону отримувача (якщо відрізняється від покупця).
+                      Рекомендуємо передавати в міжнародному форматі з плюсом"
                   warehouse_ref:
                     type: string
                     nullable: true
@@ -285,8 +285,8 @@
                   shipping_date:
                     type: string
                     nullable: true
-                    description: 'Дата доставки / відправки'
-                    example: '2023-12-21'
+                    description: "Дата доставки / відправки"
+                    example: "2023-12-21"
               marketing:
                 type: object
                 properties:
@@ -294,27 +294,27 @@
                     type: string
                     nullable: true
                     example: facebook
-                    description: 'Джерело кампанії'
+                    description: "Джерело кампанії"
                   utm_medium:
                     type: string
                     nullable: true
                     example: banner
-                    description: 'Тип трафіку'
+                    description: "Тип трафіку"
                   utm_campaign:
                     type: string
                     nullable: true
                     example: sale
-                    description: 'Назва кампанії'
+                    description: "Назва кампанії"
                   utm_term:
                     type: string
                     nullable: true
-                    example: 'landing page'
-                    description: 'Ключове слово'
+                    example: "landing page"
+                    description: "Ключове слово"
                   utm_content:
                     type: string
                     nullable: true
-                    example: '-30%'
-                    description: 'Ідентифікатор оголошення'
+                    example: "-30%"
+                    description: "Ідентифікатор оголошення"
               products:
                 type: array
                 items:
@@ -323,54 +323,54 @@
                     sku:
                       type: string
                       example: 001-242
-                      description: 'Артикул товару'
+                      description: "Артикул товару"
                     price:
                       type: number
                       example: 124.5
-                      description: 'Ціна товару за одиницю'
+                      description: "Ціна товару за одиницю"
                     purchased_price:
                       type: number
                       example: 100
-                      description: 'Ціна закупки товару за одиницю'
+                      description: "Ціна закупки товару за одиницю"
                     discount_percent:
                       type: number
                       example: 11.5
                       nullable: true
-                      description: 'Знижка на товар у %'
+                      description: "Знижка на товар у %"
                     discount_amount:
                       type: number
                       example: 9.99
                       nullable: true
-                      description: 'Знижка на товар фіксована'
+                      description: "Знижка на товар фіксована"
                     quantity:
                       type: number
                       example: 1
-                      description: 'Кількість замовлених одиниць товару'
+                      description: "Кількість замовлених одиниць товару"
                     unit_type:
                       type: string
                       example: кг
-                      description: 'Одиниці виміру товару'
+                      description: "Одиниці виміру товару"
                     name:
                       type: string
-                      example: 'Iphone XS max 256gb'
-                      description: 'Назва товару'
+                      example: "Iphone XS max 256gb"
+                      description: "Назва товару"
                     comment:
                       type: string
-                      example: 'Наклеїти плівку'
-                      description: 'Коментар до товару'
+                      example: "Наклеїти плівку"
+                      description: "Коментар до товару"
                     picture:
                       type: string
                       nullable: true
-                      description: 'Посилання на зображеня товару'
-                      example: 'https://i.etsystatic.com/22591342/r/il/52142a/2285383547/il_570xN.2285383547_h8a2.jpg'
+                      description: "Посилання на зображеня товару"
+                      example: "https://i.etsystatic.com/22591342/r/il/52142a/2285383547/il_570xN.2285383547_h8a2.jpg"
                     properties:
                       required:
                         - name
                         - value
                       type: array
-                      description: 'Атрибути товару. <br/> Важливо: Кожен атрибут мае включати в себе
+                      description: "Атрибути товару. <br/> Важливо: Кожен атрибут мае включати в себе
                         поля `name` і `value`. <br/> Атрибут без цих ключів буде
-                        ігноруватися '
+                        ігноруватися "
                       items:
                         type: object
                         properties:
@@ -394,24 +394,24 @@
                         `payment_method` не заданий"
                     payment_method:
                       type: string
-                      example: 'Apple Pay'
+                      example: "Apple Pay"
                       description: "Назва методу платежу, обов'язковий параметр, якщо
                         `payment_method_id` не заданий"
                     amount:
                       type: number
                       example: 123.5
-                      description: 'Сума платежу'
+                      description: "Сума платежу"
                     description:
                       type: string
-                      example: 'Авансовий платіж'
+                      example: "Авансовий платіж"
                       nullable: true
-                      description: 'Коментар до платежу'
+                      description: "Коментар до платежу"
                     payment_date:
                       type: string
                       nullable: true
-                      example: '2021-02-21 14:44:00'
-                      description: 'Дата і час платежу. Якщо не передається, буде використаний
-                        поточний час'
+                      example: "2021-02-21 14:44:00"
+                      description: "Дата і час платежу. Якщо не передається, буде використаний
+                        поточний час"
                     status:
                       type: string
                       nullable: true
@@ -424,53 +424,53 @@
 
               custom_fields:
                 type: array
-                description: 'Користувацькі поля в замовленні'
+                description: "Користувацькі поля в замовленні"
                 items:
                   type: object
                   properties:
                     uuid:
-                      description: 'Зовнішній ідентифікатор поля'
+                      description: "Зовнішній ідентифікатор поля"
                       type: string
                       example: OR_1037
                     value:
-                      description: 'Значення поля. Для полів з типом `select (список/мультисписок)`
-                        передавати масив рядків.'
+                      description: "Значення поля. Для полів з типом `select (список/мультисписок)`
+                        передавати масив рядків."
                       type: string
                       example: Лорд
     responses:
       201:
-        description: 'Успішна відповідь від сервера.'
+        description: "Успішна відповідь від сервера."
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/Order'
+              $ref: "#/components/schemas/Order"
       401:
-        description: 'Помилка авторизації.'
+        description: "Помилка авторизації."
     security:
       - bearerAuth: {}
-'/order/{orderId}':
+"/order/{orderId}":
   get:
     tags:
       - Order
-    summary: 'Отримання сутності замовлення за ідентифікатором'
+    summary: "Отримання сутності замовлення за ідентифікатором"
     operationId: getOrderById
     parameters:
       - name: orderId
         in: path
-        description: 'Ідентифікатор замовлення'
+        description: "Ідентифікатор замовлення"
         required: true
         style: simple
         explode: false
         schema:
           type: string
-      - $ref: '#/components/parameters/acceptParam'
+      - $ref: "#/components/parameters/acceptParam"
       - name: include
         in: query
-        description: 'Підключення додаткових асоціацій, розділені комами. Приклад:
+        description: "Підключення додаткових асоціацій, розділені комами. Приклад:
           <strong>buyer,status,tags</strong> <br/><br/> Допустимі асоціації
           `buyer`, `products.offer`, `manager`, `tags`, `status`,
           `marketing`,  `payments`, `shipping.lastHistory`,
-          `shipping.deliveryService`, `expenses`, `custom_fields`, `assigned`'
+          `shipping.deliveryService`, `expenses`, `custom_fields`, `assigned`"
         required: false
         style: form
         explode: true
@@ -478,33 +478,33 @@
           type: string
     responses:
       200:
-        description: 'Успішна відповідь від сервера.'
+        description: "Успішна відповідь від сервера."
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/OrderWithIncludes'
+              $ref: "#/components/schemas/OrderWithIncludes"
       401:
-        description: 'Помилка авторизації.'
+        description: "Помилка авторизації."
       404:
-        description: 'Замовлення не знайдено.'
+        description: "Замовлення не знайдено."
     security:
       - bearerAuth: {}
   put:
     tags:
       - Order
-    summary: 'Оновлення існуючого замовлення'
+    summary: "Оновлення існуючого замовлення"
     parameters:
       - name: orderId
         in: path
         required: true
-        description: 'Ідентифікатор замовлення'
+        description: "Ідентифікатор замовлення"
         schema:
           type: string
-      - $ref: '#/components/parameters/acceptParam'
-    description: 'Даний маршрут оновлює існуюче замовлення. Зверніть увагу, що можна
+      - $ref: "#/components/parameters/acceptParam"
+    description: "Даний маршрут оновлює існуюче замовлення. Зверніть увагу, що можна
       тільки оновити уже доданий в замовлення товар, а не додати новий. Також,
       якщо в замовленні вже є трекінг-код, то при повторному додаванні буде
-      помилка.'
+      помилка."
     operationId: updateExistingOrder
     requestBody:
       description: "Приклад об'єкту запиту для оновлення існуючого замовлення"
@@ -517,80 +517,80 @@
               buyer_comment:
                 type: string
                 nullable: true
-                description: 'Коментар покупця'
-                example: 'I want this sentence to be my `buyer` comment on keyCRM'
+                description: "Коментар покупця"
+                example: "I want this sentence to be my `buyer` comment on keyCRM"
               manager_comment:
                 type: string
                 nullable: true
-                description: 'Коментар менеджера'
-                example: 'Handle till weekend'
+                description: "Коментар менеджера"
+                example: "Handle till weekend"
               status_id:
                 type: integer
                 example: 1
-                description: 'Ідентифікатор статусу замовлення'
+                description: "Ідентифікатор статусу замовлення"
               discount_percent:
                 type: number
                 example: 11.5
                 nullable: true
-                description: 'Знижка на замовлення у %'
+                description: "Знижка на замовлення у %"
               discount_amount:
                 type: number
                 example: 9.99
                 nullable: true
-                description: 'Знижка на замовлення фіксована'
+                description: "Знижка на замовлення фіксована"
               products:
                 type: array
-                description: 'Масив товарів. Нові товари в замовлення не додаються, тільки
-                  оновлюються існуючі'
+                description: "Масив товарів. Нові товари в замовлення не додаються, тільки
+                  оновлюються існуючі"
                 items:
                   type: object
                   properties:
                     sku:
                       type: string
                       example: 001-242
-                      description: 'Артикул товару. Не оновлюється, використовується лише для
-                        ідентифікації товару'
+                      description: "Артикул товару. Не оновлюється, використовується лише для
+                        ідентифікації товару"
                     id:
                       type: integer
                       example: 124
-                      description: 'Ідентифікатор товару в замовленні. Не оновлюється,
-                        використовується лише для ідентифікації товару'
+                      description: "Ідентифікатор товару в замовленні. Не оновлюється,
+                        використовується лише для ідентифікації товару"
                     name:
                       type: string
-                      example: 'Iphone XS max 256gb'
-                      description: 'Назва товару. Оновлюється лише для «разових» товарів (ті, що
+                      example: "Iphone XS max 256gb"
+                      description: "Назва товару. Оновлюється лише для «разових» товарів (ті, що
                         існують в рамках конкретного замовлення, але в каталозі
-                        їх немає)'
+                        їх немає)"
                     comment:
                       type: string
-                      example: 'Наклеїти плівку'
-                      description: 'Коментар до товару. Оновлюється завжди, замінюючи попередній'
+                      example: "Наклеїти плівку"
+                      description: "Коментар до товару. Оновлюється завжди, замінюючи попередній"
                     price:
                       type: number
                       example: 11.99
-                      description: 'Вартість товару'
+                      description: "Вартість товару"
                     purchased_price:
                       type: number
                       example: 9.99
-                      description: 'Закупівельна вартість товару'
+                      description: "Закупівельна вартість товару"
                     discount_amount:
                       type: number
                       example: 9.99
                       nullable: true
-                      description: 'Знижка на товар фіксована'
+                      description: "Знижка на товар фіксована"
                     discount_percent:
                       type: number
                       example: 11.5
                       nullable: true
-                      description: 'Знижка на товар у %'
+                      description: "Знижка на товар у %"
                     quantity:
                       type: number
                       example: 1
-                      description: 'Кількість одиниць товару'
+                      description: "Кількість одиниць товару"
                     product_status_id:
                       type: integer
                       example: 2
-                      description: 'ID статусу товару в замовленні'
+                      description: "ID статусу товару в замовленні"
               shipping:
                 type: object
                 properties:
@@ -598,12 +598,12 @@
                     type: integer
                     nullable: true
                     example: 1
-                    description: 'ID служби доставки у keyCRM'
+                    description: "ID служби доставки у keyCRM"
                   tracking_code:
                     type: string
                     nullable: true
-                    example: '530005665555556'
-                    description: 'Трек-номер відправлення служби доставки'
+                    example: "530005665555556"
+                    description: "Трек-номер відправлення служби доставки"
                   shipping_address_city:
                     type: string
                     nullable: true
@@ -616,29 +616,29 @@
                     type: string
                     nullable: true
                     example: Kyivska
-                    description: 'Область, штат, регіон'
+                    description: "Область, штат, регіон"
                   shipping_address_zip:
                     type: string
                     nullable: true
-                    example: '50000'
+                    example: "50000"
                   shipping_receive_point:
                     type: string
                     nullable: true
-                    example: 'Склад #12'
-                    description: 'Точка видачі замовлення'
+                    example: "Склад #12"
+                    description: "Точка видачі замовлення"
                   shipping_secondary_line:
                     type: string
                     nullable: true
                   recipient_full_name:
                     type: string
                     nullable: true
-                    example: 'Ann Doe'
+                    example: "Ann Doe"
                     description: "Ім'я отримувача (якщо відрізняється від покупця)"
                   recipient_phone:
                     type: string
                     nullable: true
-                    example: '+1 555-234-7777'
-                    description: 'Номер телефону отримувача (якщо відрізняється від покупця)'
+                    example: "+1 555-234-7777"
+                    description: "Номер телефону отримувача (якщо відрізняється від покупця)"
                   warehouse_ref:
                     type: string
                     nullable: true
@@ -648,46 +648,46 @@
                   shipping_date:
                     type: string
                     nullable: true
-                    description: 'Дата доставки / відправки'
-                    example: '2023-12-21'
+                    description: "Дата доставки / відправки"
+                    example: "2023-12-21"
               custom_fields:
                 type: array
-                description: 'Користувацькі поля в замовленні'
+                description: "Користувацькі поля в замовленні"
                 items:
                   type: object
                   properties:
                     uuid:
-                      description: 'Зовнішній ідентифікатор поля'
+                      description: "Зовнішній ідентифікатор поля"
                       type: string
                       example: OR_1037
                     value:
-                      description: 'Значення поля. Для полів з типом `select (список/мультисписок)`
-                        передавати масив рядків.'
+                      description: "Значення поля. Для полів з типом `select (список/мультисписок)`
+                        передавати масив рядків."
                       type: string
                       example: Лорд
     responses:
       202:
-        description: 'Успішна відповідь від сервера.'
+        description: "Успішна відповідь від сервера."
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/Order'
+              $ref: "#/components/schemas/Order"
       401:
-        description: 'Помилка авторизації.'
+        description: "Помилка авторизації."
     security:
       - bearerAuth: {}
 /order/import:
   post:
     tags:
       - Order
-    summary: 'Створення нових замовлень списком'
-    description: 'Даний маршрут дозволяє створювати нові замовлення списком, до 50
-      шт. за один запит.'
+    summary: "Створення нових замовлень списком"
+    description: "Даний маршрут дозволяє створювати нові замовлення списком, до 50
+      шт. за один запит."
     operationId: createNewOrderImport
     parameters:
-      - $ref: '#/components/parameters/acceptParam'
+      - $ref: "#/components/parameters/acceptParam"
     requestBody:
-      description: 'Приклад запиту для створення нових заломлень списком.'
+      description: "Приклад запиту для створення нових заломлень списком."
       required: true
       content:
         application/json:
@@ -712,70 +712,70 @@
                     source_uuid:
                       type: string
                       nullable: true
-                      description: 'Номер замовлення у джерелі'
+                      description: "Номер замовлення у джерелі"
                       example: 115
                     buyer_comment:
                       type: string
                       nullable: true
-                      description: 'Коментар покупця'
-                      example: 'I want this sentence to be my `buyer` comment on keyCRM'
+                      description: "Коментар покупця"
+                      example: "I want this sentence to be my `buyer` comment on keyCRM"
                     manager_comment:
                       type: string
                       nullable: true
-                      description: 'Коментар менеджера'
-                      example: 'Handle till weekend'
+                      description: "Коментар менеджера"
+                      example: "Handle till weekend"
                     promocode:
                       type: string
                       example: MERRYCHRISTMAS
                       nullable: true
-                      description: 'Промо код'
+                      description: "Промо код"
                     discount_percent:
                       type: number
                       example: 11.5
                       nullable: true
-                      description: 'Знижка на замовлення у %'
+                      description: "Знижка на замовлення у %"
                     discount_amount:
                       type: number
                       example: 9.99
                       nullable: true
-                      description: 'Знижка на замовлення фіксована'
+                      description: "Знижка на замовлення фіксована"
                     shipping_price:
-                      description: 'Вартість доставки'
+                      description: "Вартість доставки"
                       type: number
                       nullable: true
                       example: 2.5
                     wrap_price:
-                      description: 'Вартість подарункової упаковки'
+                      description: "Вартість подарункової упаковки"
                       type: number
                       nullable: true
                       example: 3.5
                     taxes:
-                      description: 'Сума податків'
+                      description: "Сума податків"
                       type: number
                       nullable: true
                       example: 2.5
                     ordered_at:
                       type: string
                       nullable: true
-                      description: 'Дата і час замовлення. Якщо не передається, буде використаний
-                        поточний час'
-                      example: '2021-12-21 14:44:00'
+                      description: "Дата і час замовлення. Якщо не передається, буде використаний
+                        поточний час"
+                      example: "2021-12-21 14:44:00"
                     buyer:
                       type: object
                       properties:
                         full_name:
                           type: string
                           nullable: true
-                          example: 'John Doe'
+                          example: "John Doe"
                         email:
                           type: string
                           nullable: true
                           example: john.doe@mail.app
                         phone:
                           type: string
-                          description: 'Телефон рекомендуємо передавати в міжнародному форматі з плюсом'
+                          description: "Телефон рекомендуємо передавати в міжнародному форматі з плюсом"
                           nullable: true
-                          example: '+1 555-234-1234'
+                          example: "+1 555-234-1234"
                     shipping:
                       type: object
                       properties:
@@ -783,12 +783,12 @@
                           type: integer
                           nullable: true
                           example: 1
-                          description: 'ID служби доставки у keyCRM'
+                          description: "ID служби доставки у keyCRM"
                         tracking_code:
                           type: string
                           nullable: true
-                          example: '530005665555556'
-                          description: 'Трек-номер відправлення служби доставки'
+                          example: "530005665555556"
+                          description: "Трек-номер відправлення служби доставки"
                         shipping_address_city:
                           type: string
                           nullable: true
@@ -801,30 +801,30 @@
                           type: string
                           nullable: true
                           example: Kyivska
-                          description: 'Область, штат, регіон'
+                          description: "Область, штат, регіон"
                         shipping_address_zip:
                           type: string
                           nullable: true
-                          example: '50000'
+                          example: "50000"
                         shipping_secondary_line:
                           type: string
                         shipping_receive_point:
                           type: string
                           nullable: true
-                          example: 'Склад #12'
-                          description: 'Точка видачі замовлення'
+                          example: "Склад #12"
+                          description: "Точка видачі замовлення"
                         recipient_full_name:
                           type: string
                           nullable: true
-                          example: 'Ann Doe'
+                          example: "Ann Doe"
                           description: "Ім'я отримувача (якщо відрізняється від покупця)"
                         recipient_phone:
                           type: string
                           nullable: true
-                          example: '+1 555-234-7777'
-                          description: 'Номер телефону отримувача (якщо відрізняється від покупця).
+                          example: "+1 555-234-7777"
+                          description: "Номер телефону отримувача (якщо відрізняється від покупця).
                             Рекомендуємо передавати в міжнародному форматі з
-                            плюсом.'
+                            плюсом."
                         warehouse_ref:
                           type: string
                           nullable: true
@@ -834,8 +834,8 @@
                         shipping_date:
                           type: string
                           nullable: true
-                          description: 'Дата доставки / відправки'
-                          example: '2023-12-21'
+                          description: "Дата доставки / відправки"
+                          example: "2023-12-21"
                     marketing:
                       type: object
                       properties:
@@ -843,84 +843,84 @@
                           type: string
                           nullable: true
                           example: facebook
-                          description: 'Джерело кампанії'
+                          description: "Джерело кампанії"
                         utm_medium:
                           type: string
                           nullable: true
                           example: banner
-                          description: 'Тип трафіку'
+                          description: "Тип трафіку"
                         utm_campaign:
                           type: string
                           nullable: true
                           example: sale
-                          description: 'Назва кампанії'
+                          description: "Назва кампанії"
                         utm_term:
                           type: string
                           nullable: true
-                          example: 'landing page'
-                          description: 'Ключове слово'
+                          example: "landing page"
+                          description: "Ключове слово"
                         utm_content:
                           type: string
                           nullable: true
-                          example: '-30%'
-                          description: 'Ідентифікатор оголошення'
+                          example: "-30%"
+                          description: "Ідентифікатор оголошення"
                     products:
                       type: array
-                      description: 'Масив з товарами'
+                      description: "Масив з товарами"
                       items:
                         type: object
                         properties:
                           sku:
                             type: string
                             example: 001-242
-                            description: 'Артикул товару'
+                            description: "Артикул товару"
                           price:
                             type: number
                             example: 124.5
-                            description: 'Ціна товару за одиницю'
+                            description: "Ціна товару за одиницю"
                           purchased_price:
                             type: number
                             example: 100
-                            description: 'Ціна закупки товару за одиницю'
+                            description: "Ціна закупки товару за одиницю"
                           discount_percent:
                             type: number
                             example: 11.5
                             nullable: true
-                            description: 'Знижка на товар у %'
+                            description: "Знижка на товар у %"
                           discount_amount:
                             type: number
                             example: 9.99
                             nullable: true
-                            description: 'Знижка на товар фіксована'
+                            description: "Знижка на товар фіксована"
                           quantity:
                             type: number
                             example: 1
-                            description: 'Кількість замовлених одиниць товару'
+                            description: "Кількість замовлених одиниць товару"
                           unit_type:
                             type: string
                             example: кг
-                            description: 'Одиниці виміру товару'
+                            description: "Одиниці виміру товару"
                           name:
                             type: string
-                            example: 'Iphone XS max 256gb'
-                            description: 'Назва товару'
+                            example: "Iphone XS max 256gb"
+                            description: "Назва товару"
                           comment:
                             type: string
-                            example: 'Наклеїти плівку'
-                            description: 'Коментар до товару'
+                            example: "Наклеїти плівку"
+                            description: "Коментар до товару"
                           picture:
                             type: string
                             nullable: true
-                            description: 'Посилання на зображеня товару'
-                            example: 'https://i.etsystatic.com/22591342/r/il/52142a/2285383547/il_570xN.2285383547_h8a2.jpg'
+                            description: "Посилання на зображеня товару"
+                            example: "https://i.etsystatic.com/22591342/r/il/52142a/2285383547/il_570xN.2285383547_h8a2.jpg"
                           properties:
                             required:
                               - name
                               - value
                             type: array
-                            description: 'Атрибути товару. <br/> Важливо: Кожен атрибут мае включати в себе
+                            description: "Атрибути товару. <br/> Важливо: Кожен атрибут мае включати в себе
                               поля `name` і `value`. <br/> Атрибут без цих
-                              ключів буде ігноруватися '
+                              ключів буде ігноруватися "
                             items:
                               type: object
                               properties:
@@ -932,7 +932,7 @@
                                   example: Gold
                     payments:
                       type: array
-                      description: 'Масив з платежами'
+                      description: "Масив з платежами"
                       items:
                         type: object
                         required:
@@ -945,24 +945,24 @@
                               `payment_method` не заданий"
                           payment_method:
                             type: string
-                            example: 'Apple Pay'
+                            example: "Apple Pay"
                             description: "Назва методу платежу, обов'язковий параметр, якщо
                               `payment_method_id` не заданий"
                           amount:
                             type: number
                             example: 123.5
-                            description: 'Сума платежу'
+                            description: "Сума платежу"
                           description:
                             type: string
-                            example: 'Авансовий платіж'
+                            example: "Авансовий платіж"
                             nullable: true
-                            description: 'Коментар до платежу'
+                            description: "Коментар до платежу"
                           payment_date:
                             type: string
                             nullable: true
-                            example: '2021-02-21 14:44:00'
-                            description: 'Дата і час платежу. Якщо не передається, буде використаний
-                              поточний час'
+                            example: "2021-02-21 14:44:00"
+                            description: "Дата і час платежу. Якщо не передається, буде використаний
+                              поточний час"
                           status:
                             type: string
                             nullable: true
@@ -975,40 +975,40 @@
 
                     custom_fields:
                       type: array
-                      description: 'Користувацькі поля в замовленні'
+                      description: "Користувацькі поля в замовленні"
                       items:
                         type: object
                         properties:
                           uuid:
-                            description: 'Зовнішній ідентифікатор поля'
+                            description: "Зовнішній ідентифікатор поля"
                             type: string
                             example: OR_1037
                           value:
-                            description: 'Значення поля. Для полів з типом `select (список/мультисписок)`
-                              передавати масив рядків.'
+                            description: "Значення поля. Для полів з типом `select (список/мультисписок)`
+                              передавати масив рядків."
                             type: string
                             example: Лорд
     responses:
       201:
-        description: 'Успішна відповідь від сервера.'
+        description: "Успішна відповідь від сервера."
       401:
-        description: 'Помилка авторизації.'
+        description: "Помилка авторизації."
     security:
       - bearerAuth: {}
-'/order/{orderId}/payment':
+"/order/{orderId}/payment":
   post:
     tags:
       - Order
-    summary: 'Додавання нової оплати для існуючого замовлення'
-    description: 'Даний маршрут створює нову оплату для замовлення.'
+    summary: "Додавання нової оплати для існуючого замовлення"
+    description: "Даний маршрут створює нову оплату для замовлення."
     parameters:
       - name: orderId
         in: path
-        description: 'Ідентифікатор замовлення'
+        description: "Ідентифікатор замовлення"
         required: true
         schema:
           type: string
-      - $ref: '#/components/parameters/acceptParam'
+      - $ref: "#/components/parameters/acceptParam"
     operationId: createNewOrderPayment
     requestBody:
       description: "Приклад об'єкту запиту для створення нової оплати"
@@ -1027,13 +1027,13 @@
                   `payment_method` не заданий"
               payment_method:
                 type: string
-                example: 'Apple Pay'
+                example: "Apple Pay"
                 description: "Назва методу платежу, обов'язковий параметр, якщо
                   `payment_method_id` не заданий"
               amount:
                 type: number
                 example: 123.5
-                description: 'Сума платежу'
+                description: "Сума платежу"
               status:
                 type: string
                 default: paid
@@ -1043,50 +1043,50 @@
                   - canceled
                 example: paid
                 nullable: true
-                description: 'Статус оплати'
+                description: "Статус оплати"
               description:
                 type: string
-                example: 'Авансовий платіж'
+                example: "Авансовий платіж"
                 nullable: true
-                description: 'Коментар до платежу'
+                description: "Коментар до платежу"
               payment_date:
                 type: string
                 nullable: true
-                example: '2021-02-21 14:44:00'
-                description: 'Дата і час платежу. Якщо не передається, буде використаний
-                  поточний час'
+                example: "2021-02-21 14:44:00"
+                description: "Дата і час платежу. Якщо не передається, буде використаний
+                  поточний час"
     responses:
       201:
-        description: 'Успішна відповідь від сервера.'
+        description: "Успішна відповідь від сервера."
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/Payment'
+              $ref: "#/components/schemas/Payment"
       401:
-        description: 'Помилка авторизації.'
+        description: "Помилка авторизації."
     security:
       - bearerAuth: {}
-'/order/{orderId}/payment/{paymentId}':
+"/order/{orderId}/payment/{paymentId}":
   put:
     tags:
       - Order
-    summary: 'Оновлення оплати для існуючого замовлення'
-    description: 'Даний маршрут оновлює оплату існуючого замовлення.'
+    summary: "Оновлення оплати для існуючого замовлення"
+    description: "Даний маршрут оновлює оплату існуючого замовлення."
     operationId: updateExistingOrderPayment
     parameters:
       - name: orderId
         in: path
-        description: 'Ідентифікатор замовлення'
+        description: "Ідентифікатор замовлення"
         required: true
         schema:
           type: string
       - name: paymentId
         in: path
-        description: 'Ідентифікатор оплати'
+        description: "Ідентифікатор оплати"
         required: true
         schema:
           type: string
-      - $ref: '#/components/parameters/acceptParam'
+      - $ref: "#/components/parameters/acceptParam"
     requestBody:
       description: "Приклад об'єкту запиту для оновлення оплати"
       required: true
@@ -1103,37 +1103,37 @@
                   - canceled
                 example: paid
                 nullable: true
-                description: 'Статус оплати'
+                description: "Статус оплати"
               description:
                 type: string
-                example: 'Авансовий платіж'
+                example: "Авансовий платіж"
                 nullable: true
-                description: 'Коментар до платежу'
+                description: "Коментар до платежу"
     responses:
       202:
-        description: 'Успішна відповідь від сервера.'
+        description: "Успішна відповідь від сервера."
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/Payment'
+              $ref: "#/components/schemas/Payment"
       401:
-        description: 'Помилка авторизації.'
+        description: "Помилка авторизації."
     security:
       - bearerAuth: {}
-'/order/{orderId}/expense':
+"/order/{orderId}/expense":
   post:
     tags:
       - Order
-    summary: 'Додавання нової витрати для існуючого замовлення'
-    description: 'Даний маршрут створює нову витрату для замовлення.'
+    summary: "Додавання нової витрати для існуючого замовлення"
+    description: "Даний маршрут створює нову витрату для замовлення."
     parameters:
       - name: orderId
         in: path
-        description: 'Ідентифікатор замовлення'
+        description: "Ідентифікатор замовлення"
         required: true
         schema:
           type: string
-      - $ref: '#/components/parameters/acceptParam'
+      - $ref: "#/components/parameters/acceptParam"
     operationId: createNewOrderExpense
     requestBody:
       description: "Приклад об'єкту запиту для створення нової витрати"
@@ -1158,50 +1158,50 @@
               amount:
                 type: number
                 example: 123.5
-                description: 'Сума витрати'
+                description: "Сума витрати"
               description:
                 type: string
-                example: 'Комісія за пакування'
+                example: "Комісія за пакування"
                 nullable: true
-                description: 'Коментар до витрати'
+                description: "Коментар до витрати"
               payment_date:
                 type: string
                 nullable: true
-                example: '2021-02-21 14:44:00'
-                description: 'Дата і час витрати. Якщо не передається, буде використаний
-                  поточний час'
+                example: "2021-02-21 14:44:00"
+                description: "Дата і час витрати. Якщо не передається, буде використаний
+                  поточний час"
     responses:
       201:
-        description: 'Успішна відповідь від сервера.'
+        description: "Успішна відповідь від сервера."
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/Expense'
+              $ref: "#/components/schemas/Expense"
       401:
-        description: 'Помилка авторизації.'
+        description: "Помилка авторизації."
     security:
       - bearerAuth: {}
-'/order/{orderId}/expense/{expenseId}':
+"/order/{orderId}/expense/{expenseId}":
   put:
     tags:
       - Order
-    summary: 'Оновлення витрати для існуючого замовлення'
-    description: 'Даний маршрут оновлює витрату існуючого замовлення.'
+    summary: "Оновлення витрати для існуючого замовлення"
+    description: "Даний маршрут оновлює витрату існуючого замовлення."
     operationId: updateExistingOrderExpense
     parameters:
       - name: orderId
         in: path
-        description: 'Ідентифікатор замовлення'
+        description: "Ідентифікатор замовлення"
         required: true
         schema:
           type: string
       - name: expenseId
         in: path
-        description: 'Ідентифікатор витрати'
+        description: "Ідентифікатор витрати"
         required: true
         schema:
           type: string
-      - $ref: '#/components/parameters/acceptParam'
+      - $ref: "#/components/parameters/acceptParam"
     requestBody:
       description: "Приклад об'єкту запиту для оновлення витрати"
       required: true
@@ -1216,47 +1216,47 @@
                   - canceled
                 example: canceled
                 nullable: true
-                description: 'Статус витрати'
+                description: "Статус витрати"
               description:
                 type: string
-                example: 'Повернення завдатку'
+                example: "Повернення завдатку"
                 nullable: true
-                description: 'Коментар до витрати'
+                description: "Коментар до витрати"
     responses:
       202:
-        description: 'Успішна відповідь від сервера.'
+        description: "Успішна відповідь від сервера."
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/Expense'
+              $ref: "#/components/schemas/Expense"
       401:
-        description: 'Помилка авторизації.'
+        description: "Помилка авторизації."
     security:
       - bearerAuth: {}
-'/order/{orderId}/tag/{tagId}':
+"/order/{orderId}/tag/{tagId}":
   post:
     tags:
       - Order
-    summary: 'Додавання тегу для існуючого замовлення'
-    description: 'Даний маршрут додає тег до існуючого замовлення.'
+    summary: "Додавання тегу для існуючого замовлення"
+    description: "Даний маршрут додає тег до існуючого замовлення."
     operationId: attachTagToOrder
     parameters:
       - name: orderId
         in: path
-        description: 'Ідентифікатор замовлення'
+        description: "Ідентифікатор замовлення"
         required: true
         schema:
           type: string
       - name: tagId
         in: path
-        description: 'Ідентифікатор тегу'
+        description: "Ідентифікатор тегу"
         required: true
         schema:
           type: string
-      - $ref: '#/components/parameters/acceptParam'
+      - $ref: "#/components/parameters/acceptParam"
     responses:
       202:
-        description: 'Успішна відповідь'
+        description: "Успішна відповідь"
         content:
           application/json:
             schema:
@@ -1266,62 +1266,62 @@
                   type: boolean
                   example: true
       401:
-        description: 'Помилка авторизації.'
+        description: "Помилка авторизації."
     security:
       - bearerAuth: {}
   delete:
     tags:
       - Order
-    summary: 'Видалення тегу з існуючого замовлення'
-    description: 'Даний маршрут видаляє тег із існуючого замовлення.'
+    summary: "Видалення тегу з існуючого замовлення"
+    description: "Даний маршрут видаляє тег із існуючого замовлення."
     operationId: deleteTagFromOrder
     parameters:
       - name: orderId
         in: path
-        description: 'Ідентифікатор замовлення'
+        description: "Ідентифікатор замовлення"
         required: true
         schema:
           type: string
       - name: tagId
         in: path
-        description: 'Ідентифікатор тегу'
+        description: "Ідентифікатор тегу"
         required: true
         schema:
           type: string
-      - $ref: '#/components/parameters/acceptParam'
+      - $ref: "#/components/parameters/acceptParam"
     responses:
       204:
-        description: 'Успішна відповідь'
+        description: "Успішна відповідь"
       400:
-        description: 'Помилка запиту.'
+        description: "Помилка запиту."
       401:
-        description: 'Помилка авторизації.'
+        description: "Помилка авторизації."
     security:
       - bearerAuth: {}
-'/order/{orderId}/attachment/{fileId}':
+"/order/{orderId}/attachment/{fileId}":
   post:
     tags:
       - Order
-    summary: 'Додавання файлу для існуючого замовлення'
-    description: 'Даний маршрут додає файл до існуючого замовлення.'
+    summary: "Додавання файлу для існуючого замовлення"
+    description: "Даний маршрут додає файл до існуючого замовлення."
     operationId: attachFileToOrder
     parameters:
       - name: orderId
         in: path
-        description: 'Ідентифікатор замовлення'
+        description: "Ідентифікатор замовлення"
         required: true
         schema:
           type: string
       - name: fileId
         in: path
-        description: 'Ідентифікатор файлу'
+        description: "Ідентифікатор файлу"
         required: true
         schema:
           type: string
-      - $ref: '#/components/parameters/acceptParam'
+      - $ref: "#/components/parameters/acceptParam"
     responses:
       202:
-        description: 'Успішна відповідь'
+        description: "Успішна відповідь"
         content:
           application/json:
             schema:
@@ -1331,32 +1331,32 @@
                   type: boolean
                   example: true
       401:
-        description: 'Помилка авторизації.'
+        description: "Помилка авторизації."
     security:
       - bearerAuth: {}
   delete:
     tags:
       - Order
-    summary: 'Видалення файлу із існуючого замовлення'
-    description: 'Даний маршрут видаляє файл із існуючого замовлення.'
+    summary: "Видалення файлу із існуючого замовлення"
+    description: "Даний маршрут видаляє файл із існуючого замовлення."
     operationId: deleteFileFromOrder
     parameters:
       - name: orderId
         in: path
-        description: 'Ідентифікатор замовлення'
+        description: "Ідентифікатор замовлення"
         required: true
         schema:
           type: string
       - name: fileId
         in: path
-        description: 'Ідентифікатор файлу'
+        description: "Ідентифікатор файлу"
         required: true
         schema:
           type: string
-      - $ref: '#/components/parameters/acceptParam'
+      - $ref: "#/components/parameters/acceptParam"
     responses:
       201:
-        description: 'Успішна відповідь'
+        description: "Успішна відповідь"
         content:
           application/json:
             schema:
@@ -1366,302 +1366,302 @@
                   type: boolean
                   example: true
       400:
-        description: 'Помилка запиту.'
+        description: "Помилка запиту."
       401:
-        description: 'Помилка авторизації.'
+        description: "Помилка авторизації."
     security:
       - bearerAuth: {}
 /order/tag:
   get:
     tags:
       - Order
-    summary: 'Отримання списку тегів'
-    description: 'Даний маршрут повертає список створених тегів.'
+    summary: "Отримання списку тегів"
+    description: "Даний маршрут повертає список створених тегів."
     operationId: getPaginatedListOfTags
     parameters:
-      - $ref: '#/components/parameters/acceptParam'
-      - $ref: '#/components/parameters/limitParam'
-      - $ref: '#/components/parameters/pageParam'
+      - $ref: "#/components/parameters/acceptParam"
+      - $ref: "#/components/parameters/limitParam"
+      - $ref: "#/components/parameters/pageParam"
       - name: sort
         in: query
-        description: 'Сортування списку замовлень'
+        description: "Сортування списку замовлень"
         required: false
         style: form
         explode: true
         schema:
           type: string
         examples:
-          'Сортування за зростанням':
+          "Сортування за зростанням":
             value: id
-          'Сортування за зменшенням':
-            value: '-id'
+          "Сортування за зменшенням":
+            value: "-id"
     responses:
       200:
-        description: 'Успішна відповідь. Результат в пагінованому вигляді.'
+        description: "Успішна відповідь. Результат в пагінованому вигляді."
         content:
           application/json:
             schema:
               type: object
               allOf:
-                - $ref: '#/components/schemas/PaginatedResponse'
+                - $ref: "#/components/schemas/PaginatedResponse"
                 - properties:
                     data:
                       type: array
                       items:
-                        $ref: '#/components/schemas/Tag'
+                        $ref: "#/components/schemas/Tag"
       401:
-        description: 'Помилка авторизації.'
+        description: "Помилка авторизації."
     security:
       - bearerAuth: {}
 /order/source:
   get:
     tags:
       - Order
-    summary: 'Отримання списку джерел'
-    description: 'Даний маршрут повертає список створених джерел замовлень.'
+    summary: "Отримання списку джерел"
+    description: "Даний маршрут повертає список створених джерел замовлень."
     operationId: getPaginatedListOfSources
     parameters:
-      - $ref: '#/components/parameters/acceptParam'
-      - $ref: '#/components/parameters/limitParam'
-      - $ref: '#/components/parameters/pageParam'
+      - $ref: "#/components/parameters/acceptParam"
+      - $ref: "#/components/parameters/limitParam"
+      - $ref: "#/components/parameters/pageParam"
       - name: sort
         in: query
-        description: 'Сортування списку замовлень'
+        description: "Сортування списку замовлень"
         required: false
         style: form
         explode: true
         schema:
           type: string
         examples:
-          'Сортування за зростанням':
+          "Сортування за зростанням":
             value: id
-          'Сортування за зменшенням':
-            value: '-id'
+          "Сортування за зменшенням":
+            value: "-id"
     responses:
       200:
-        description: 'Успішна відповідь. Результат у пагінованому вигляді.'
+        description: "Успішна відповідь. Результат у пагінованому вигляді."
         content:
           application/json:
             schema:
               type: object
               allOf:
-                - $ref: '#/components/schemas/PaginatedResponse'
+                - $ref: "#/components/schemas/PaginatedResponse"
                 - properties:
                     data:
                       type: array
                       items:
-                        $ref: '#/components/schemas/Source'
+                        $ref: "#/components/schemas/Source"
       401:
-        description: 'Помилка авторизації.'
+        description: "Помилка авторизації."
     security:
       - bearerAuth: {}
 /order/status:
   get:
     tags:
       - Order
-    summary: 'Отримання списку статусів'
-    description: 'Даний маршрут повертає список активних статусів замовлень.'
+    summary: "Отримання списку статусів"
+    description: "Даний маршрут повертає список активних статусів замовлень."
     operationId: getPaginatedListOfStatuses
     parameters:
-      - $ref: '#/components/parameters/acceptParam'
-      - $ref: '#/components/parameters/limitParam'
-      - $ref: '#/components/parameters/pageParam'
+      - $ref: "#/components/parameters/acceptParam"
+      - $ref: "#/components/parameters/limitParam"
+      - $ref: "#/components/parameters/pageParam"
       - name: sort
         in: query
-        description: 'Сортування списку статусів'
+        description: "Сортування списку статусів"
         required: false
         style: form
         explode: true
         schema:
           type: string
         examples:
-          'Сортування за зростанням':
+          "Сортування за зростанням":
             value: id
-          'Сортування за зменшенням':
-            value: '-id'
+          "Сортування за зменшенням":
+            value: "-id"
     responses:
       200:
-        description: 'Успішна відповідь. Результат у пагінованому вигляді.'
+        description: "Успішна відповідь. Результат у пагінованому вигляді."
         content:
           application/json:
             schema:
               type: object
               allOf:
-                - $ref: '#/components/schemas/PaginatedResponse'
+                - $ref: "#/components/schemas/PaginatedResponse"
                 - properties:
                     data:
                       type: array
                       items:
-                        $ref: '#/components/schemas/Status'
+                        $ref: "#/components/schemas/Status"
       401:
-        description: 'Помилка авторизації.'
+        description: "Помилка авторизації."
     security:
       - bearerAuth: {}
 /order/payment-method:
   get:
     tags:
       - Order
-    summary: 'Отримання списку платіжних методів'
-    description: 'Даний маршрут повертає список платіжних методів.'
+    summary: "Отримання списку платіжних методів"
+    description: "Даний маршрут повертає список платіжних методів."
     operationId: getPaginatedListOfPaymentMethods
     parameters:
-      - $ref: '#/components/parameters/acceptParam'
-      - $ref: '#/components/parameters/limitParam'
-      - $ref: '#/components/parameters/pageParam'
+      - $ref: "#/components/parameters/acceptParam"
+      - $ref: "#/components/parameters/limitParam"
+      - $ref: "#/components/parameters/pageParam"
       - name: sort
         in: query
-        description: 'Сортування списку методів'
+        description: "Сортування списку методів"
         required: false
         style: form
         explode: true
         schema:
           type: string
         examples:
-          'Сортування за зростанням':
+          "Сортування за зростанням":
             value: id
-          'Сортування за зменшенням':
-            value: '-id'
+          "Сортування за зменшенням":
+            value: "-id"
     responses:
       200:
-        description: 'Успішна відповідь. Результат у пагінованому вигляді.'
+        description: "Успішна відповідь. Результат у пагінованому вигляді."
         content:
           application/json:
             schema:
               type: object
               allOf:
-                - $ref: '#/components/schemas/PaginatedResponse'
+                - $ref: "#/components/schemas/PaginatedResponse"
                 - properties:
                     data:
                       type: array
                       items:
-                        $ref: '#/components/schemas/PaymentMethod'
+                        $ref: "#/components/schemas/PaymentMethod"
       401:
-        description: 'Помилка авторизації.'
+        description: "Помилка авторизації."
     security:
       - bearerAuth: {}
 /order/expense-type:
   get:
     tags:
       - Order
-    summary: 'Отримання списку типів витрат'
-    description: 'Даний маршрут повертає список типів витрат.'
+    summary: "Отримання списку типів витрат"
+    description: "Даний маршрут повертає список типів витрат."
     operationId: getPaginatedListOfExpenseTypes
     parameters:
-      - $ref: '#/components/parameters/acceptParam'
-      - $ref: '#/components/parameters/limitParam'
-      - $ref: '#/components/parameters/pageParam'
+      - $ref: "#/components/parameters/acceptParam"
+      - $ref: "#/components/parameters/limitParam"
+      - $ref: "#/components/parameters/pageParam"
       - name: sort
         in: query
-        description: 'Сортування списку типів витрат'
+        description: "Сортування списку типів витрат"
         required: false
         style: form
         explode: true
         schema:
           type: string
         examples:
-          'Сортування за зростанням':
+          "Сортування за зростанням":
             value: id
-          'Сортування за зменшенням':
-            value: '-id'
+          "Сортування за зменшенням":
+            value: "-id"
     responses:
       200:
-        description: 'Успішна відповідь. Результат у пагінованому вигляді.'
+        description: "Успішна відповідь. Результат у пагінованому вигляді."
         content:
           application/json:
             schema:
               type: object
               allOf:
-                - $ref: '#/components/schemas/PaginatedResponse'
+                - $ref: "#/components/schemas/PaginatedResponse"
                 - properties:
                     data:
                       type: array
                       items:
-                        $ref: '#/components/schemas/ExpenseType'
+                        $ref: "#/components/schemas/ExpenseType"
       401:
-        description: 'Помилка авторизації.'
+        description: "Помилка авторизації."
     security:
       - bearerAuth: {}
 /order/delivery-service:
   get:
     tags:
       - Order
-    summary: 'Отримання списку доступних методів доставки'
-    description: 'Даний маршрут повертає список доступних методів доставки.'
+    summary: "Отримання списку доступних методів доставки"
+    description: "Даний маршрут повертає список доступних методів доставки."
     operationId: getPaginatedListOfDeliveryServices
     parameters:
-      - $ref: '#/components/parameters/acceptParam'
-      - $ref: '#/components/parameters/limitParam'
-      - $ref: '#/components/parameters/pageParam'
+      - $ref: "#/components/parameters/acceptParam"
+      - $ref: "#/components/parameters/limitParam"
+      - $ref: "#/components/parameters/pageParam"
       - name: sort
         in: query
-        description: 'Сортування списку методів'
+        description: "Сортування списку методів"
         required: false
         style: form
         explode: true
         schema:
           type: string
         examples:
-          'Сортування за зростанням':
+          "Сортування за зростанням":
             value: id
-          'Сортування за зменшенням':
-            value: '-id'
+          "Сортування за зменшенням":
+            value: "-id"
     responses:
       200:
-        description: 'Успішна відповідь. Результат у пагінованому вигляді.'
+        description: "Успішна відповідь. Результат у пагінованому вигляді."
         content:
           application/json:
             schema:
               type: object
               allOf:
-                - $ref: '#/components/schemas/PaginatedResponse'
+                - $ref: "#/components/schemas/PaginatedResponse"
                 - properties:
                     data:
                       type: array
                       items:
-                        $ref: '#/components/schemas/DeliveryService'
+                        $ref: "#/components/schemas/DeliveryService"
       401:
-        description: 'Помилка авторизації.'
+        description: "Помилка авторизації."
     security:
       - bearerAuth: {}
 /order/product-status:
   get:
     tags:
       - Order
-    summary: 'Отримання списку статусів товарів'
-    description: 'Даний маршрут повертає список активних статусів товарів.'
+    summary: "Отримання списку статусів товарів"
+    description: "Даний маршрут повертає список активних статусів товарів."
     operationId: getPaginatedListOfProductStatuses
     parameters:
-      - $ref: '#/components/parameters/acceptParam'
-      - $ref: '#/components/parameters/limitParam'
-      - $ref: '#/components/parameters/pageParam'
+      - $ref: "#/components/parameters/acceptParam"
+      - $ref: "#/components/parameters/limitParam"
+      - $ref: "#/components/parameters/pageParam"
       - name: sort
         in: query
-        description: 'Сортування списку статусів товарів'
+        description: "Сортування списку статусів товарів"
         required: false
         style: form
         explode: true
         schema:
           type: string
         examples:
-          'Сортування за зростанням':
+          "Сортування за зростанням":
             value: id
-          'Сортування за зменшенням':
-            value: '-id'
+          "Сортування за зменшенням":
+            value: "-id"
     responses:
       200:
-        description: 'Успішна відповідь. Результат у пагінованому вигляді.'
+        description: "Успішна відповідь. Результат у пагінованому вигляді."
         content:
           application/json:
             schema:
               type: object
               allOf:
-                - $ref: '#/components/schemas/PaginatedResponse'
+                - $ref: "#/components/schemas/PaginatedResponse"
                 - properties:
                     data:
                       type: array
                       items:
-                        $ref: '#/components/schemas/Status'
+                        $ref: "#/components/schemas/Status"
       401:
-        description: 'Помилка авторизації.'
+        description: "Помилка авторизації."
     security:
       - bearerAuth: {}

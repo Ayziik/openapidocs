@@ -2,16 +2,16 @@
   get:
     tags:
       - Users
-    summary: 'Отримання списку користувачів'
-    description: 'Даний маршрут повертає пагінований список користувачів.'
+    summary: "Отримання списку користувачів"
+    description: "Даний маршрут повертає пагінований список користувачів."
     operationId: getPaginatedListOfUsers
     parameters:
-      - $ref: '#/components/parameters/acceptParam'
-      - $ref: '#/components/parameters/limitParam'
-      - $ref: '#/components/parameters/pageParam'
+      - $ref: "#/components/parameters/acceptParam"
+      - $ref: "#/components/parameters/limitParam"
+      - $ref: "#/components/parameters/pageParam"
       - name: filter
         in: query
-        description: 'Фільтрація списку користувачів'
+        description: "Фільтрація списку користувачів"
         required: false
         style: deepObject
         explode: true
@@ -20,53 +20,53 @@
         examples:
           filter_by_id:
             value:
-              id: '4545,4546'
-            summary: 'Фільтр за ідентифікатором користувача: 1, 10, 4546, ...'
+              id: "4545,4546"
+            summary: "Фільтр за ідентифікатором користувача: 1, 10, 4546, ..."
           filter_by_full_name:
             value:
-              full_name: 'John Doe'
-            summary: 'Фільтр за іменем клієнта'
+              full_name: "John Doe"
+            summary: "Фільтр за іменем клієнта"
           filter_by_role_id:
             value:
-              role_id: '4545,4546'
-            summary: 'Фільтр за роллю менеджера'
+              role_id: "4545,4546"
+            summary: "Фільтр за роллю менеджера"
           filter_by_status:
             value:
               status: active
-            summary: 'Фільтр за статусом користувача, допустимі значення: active, pending,
-              blocked'
+            summary: "Фільтр за статусом користувача, допустимі значення: active, pending,
+              blocked"
           filter_by_email:
             value:
               email: any@gmail.com
-            summary: 'Фільтр за email користувача'
+            summary: "Фільтр за email користувача"
           filter_by_phone:
             value:
-              phone: '+15552341234'
-            summary: 'Фільтр за телефоном користувача'
+              phone: "+15552341234"
+            summary: "Фільтр за телефоном користувача"
           filter_by_date_created:
             value:
-              created_between: '2020-08-24 00:00:00, 2020-09-22 23:59:59'
-            summary: 'Фільтр за датою створення'
+              created_between: "2020-08-24 00:00:00, 2020-09-22 23:59:59"
+            summary: "Фільтр за датою створення"
           filter_by_last_logged:
             value:
-              last_logged_between: '2020-08-24 00:00:00, 2020-09-22 23:59:59'
-            summary: 'Фільтр за датою останньої активності'
+              last_logged_between: "2020-08-24 00:00:00, 2020-09-22 23:59:59"
+            summary: "Фільтр за датою останньої активності"
     responses:
       200:
-        description: 'Успішна відповідь для запиту з усіма доступними значеннями.
-          Результат у пагінованому вигляді.'
+        description: "Успішна відповідь для запиту з усіма доступними значеннями.
+          Результат у пагінованому вигляді."
         content:
           application/json:
             schema:
               type: object
               allOf:
-                - $ref: '#/components/schemas/PaginatedResponse'
+                - $ref: "#/components/schemas/PaginatedResponse"
                 - properties:
                     data:
                       type: array
                       items:
-                        $ref: '#/components/schemas/User'
+                        $ref: "#/components/schemas/User"
       401:
-        description: 'Помилка авторизації.'
+        description: "Помилка авторизації."
     security:
       - bearerAuth: {}

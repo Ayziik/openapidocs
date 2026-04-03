@@ -3,45 +3,45 @@ ExternalTransaction:
   properties:
     id:
       type: integer
-      description: 'Ідентифікатор транзакції'
+      description: "Ідентифікатор транзакції"
       example: 22
     uuid:
       type: integer
       example: 11
-      description: 'ID зовнішньої транзакції'
+      description: "ID зовнішньої транзакції"
     source_uuid:
       type: string
       nullable: true
-      description: 'Унікальний ідентифікатор транзакції із завантаженого джерела'
-      example: '4815162342'
+      description: "Унікальний ідентифікатор транзакції із завантаженого джерела"
+      example: "4815162342"
     gateway_id:
       type: integer
       example: 1
-      description: 'Ідентифікатор платіжного сервісу'
+      description: "Ідентифікатор платіжного сервісу"
     payments_data:
       type: array
-      description: 'Данні платіжу'
+      description: "Данні платіжу"
     amount:
       type: number
-      description: 'Сума транзакції'
+      description: "Сума транзакції"
       example: 122.5
     description:
       type: string
       nullable: true
-      description: 'Опис транзакції'
+      description: "Опис транзакції"
     currency:
       type: string
       example: UAH
-      description: 'Валюта транзакції'
+      description: "Валюта транзакції"
     transaction_date:
       type: string
-      example: '2020-05-16 17:00:07'
-      description: 'Дата і час транзакції в UTC форматі'
+      example: "2020-05-16 17:00:07"
+      description: "Дата і час транзакції в UTC форматі"
     created_at:
       type: string
-      description: 'Дата створення платежу в UTC форматі'
-      example: '2020-05-16 17:00:07'
+      description: "Дата створення платежу в UTC форматі"
+      example: "2020-05-16 17:00:07"
     updated_at:
       type: string
-      description: 'Дата останньої зміни платежу в UTC форматі'
-      example: '2020-05-16 17:00:07'
+      description: "Дата останньої зміни платежу в UTC форматі"
+      example: "2020-05-16 17:00:07"

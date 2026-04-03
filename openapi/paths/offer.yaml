@@ -2,19 +2,19 @@
   get:
     tags:
       - Offer
-    summary: 'Отримання варіантів товарів'
-    description: 'Даний маршрут дозволяє отримати список варіантів товарів. Якщо
+    summary: "Отримання варіантів товарів"
+    description: "Даний маршрут дозволяє отримати список варіантів товарів. Якщо
       потрібно отримати інформацію про товар, якому належить варіант, то вкажіть
-      параметр `include=product`.'
+      параметр `include=product`."
     operationId: getPaginatedListOfOffers
     parameters:
-      - $ref: '#/components/parameters/acceptParam'
-      - $ref: '#/components/parameters/limitParam'
-      - $ref: '#/components/parameters/pageParam'
+      - $ref: "#/components/parameters/acceptParam"
+      - $ref: "#/components/parameters/limitParam"
+      - $ref: "#/components/parameters/pageParam"
       - name: include
         in: query
-        description: ' Підключення додаткових асоціацій<br/><br/> Допустимі асоціації
-          `product` '
+        description: " Підключення додаткових асоціацій<br/><br/> Допустимі асоціації
+          `product` "
         required: false
         style: form
         explode: true
@@ -22,7 +22,7 @@
           type: string
       - name: sort
         in: query
-        description: 'Сортування списку вариантів товарів'
+        description: "Сортування списку вариантів товарів"
         required: false
         style: form
         explode: true
@@ -31,13 +31,13 @@
         examples:
           sort_asc:
             value: id
-            summary: 'Сортування за зростанням'
+            summary: "Сортування за зростанням"
           sort_desc:
-            value: '-id'
-            summary: 'Сортування за зменшенням'
+            value: "-id"
+            summary: "Сортування за зменшенням"
       - name: filter
         in: query
-        description: 'Фільтрація списку вариантів товарів'
+        description: "Фільтрація списку вариантів товарів"
         required: false
         style: deepObject
         explode: true
@@ -46,46 +46,46 @@
         examples:
           filter_by_id:
             value:
-              id: '1,2'
-            summary: 'Фільтр за ідентифікатором варіанту товару'
+              id: "1,2"
+            summary: "Фільтр за ідентифікатором варіанту товару"
           filter_by_product_id:
             value:
-              product_id: '1,2'
-            summary: 'Фільтр за ідентифікатором товару в каталозі keyCRM'
+              product_id: "1,2"
+            summary: "Фільтр за ідентифікатором товару в каталозі keyCRM"
           filter_by_sku:
             value:
-              sku: 'sku1,sku2'
-            summary: 'Фільтр по артикулу'
+              sku: "sku1,sku2"
+            summary: "Фільтр по артикулу"
           filter_by_is_archived:
             value:
               is_archived: true
-            summary: 'Фільтр за статусом архівації варіанту товару, допустимі значення:
-              true, false'
+            summary: "Фільтр за статусом архівації варіанту товару, допустимі значення:
+              true, false"
     responses:
       200:
-        description: 'Успішна відповідь для запиту з параметром `include=product`.
-          Результат у пагінованому вигляді.'
+        description: "Успішна відповідь для запиту з параметром `include=product`.
+          Результат у пагінованому вигляді."
         content:
           application/json:
             schema:
               type: object
               allOf:
-                - $ref: '#/components/schemas/PaginatedResponse'
+                - $ref: "#/components/schemas/PaginatedResponse"
                 - properties:
                     data:
                       type: array
                       items:
-                        $ref: '#/components/schemas/Offer'
+                        $ref: "#/components/schemas/Offer"
       401:
-        description: 'Помилка авторизації.'
+        description: "Помилка авторизації."
     security:
       - bearerAuth: {}
   put:
     tags:
       - Offer
-    summary: 'Редагування варіантів товару'
-    description: 'Даний маршрут дозволяє змінити параметри вартості, закупівельної
-      вартості, ваги і габаритів варіанту товару.'
+    summary: "Редагування варіантів товару"
+    description: "Даний маршрут дозволяє змінити параметри вартості, закупівельної
+      вартості, ваги і габаритів варіанту товару."
     operationId: offersUpdate
     requestBody:
       description: "Приклад об'єкту запиту для зміни варіантів. Для кожного з товарів
@@ -107,42 +107,42 @@
                     id:
                       type: integer
                       example: 1
-                      description: 'ID варіанту товару у keyCRM'
+                      description: "ID варіанту товару у keyCRM"
                     sku:
                       type: string
                       example: 001-242
-                      description: 'Артикул варіанту товару'
+                      description: "Артикул варіанту товару"
                     price:
                       type: number
                       example: 11.99
-                      description: 'Вартість варіанту товару'
+                      description: "Вартість варіанту товару"
                     purchased_price:
                       type: number
                       example: 9.99
-                      description: 'Закупівельна вартість варіанту товару'
+                      description: "Закупівельна вартість варіанту товару"
                     weight:
                       type: number
                       example: 0.2
-                      description: 'Вага варіанту товару в одиницях налаштувань у keyCRM'
+                      description: "Вага варіанту товару в одиницях налаштувань у keyCRM"
                     height:
                       type: number
                       example: 10.0
-                      description: 'Висота варіанту товару в одиницях налаштувань у keyCRM'
+                      description: "Висота варіанту товару в одиницях налаштувань у keyCRM"
                     image_url:
                       type: string
-                      example: 'https://example.com/image.jpg'
-                      description: 'Посилання на зображення варіанту товару'
+                      example: "https://example.com/image.jpg"
+                      description: "Посилання на зображення варіанту товару"
                     length:
                       type: number
                       example: 15.0
-                      description: 'Довжина варіанту товару в одиницях налаштувань у keyCRM'
+                      description: "Довжина варіанту товару в одиницях налаштувань у keyCRM"
                     width:
                       type: number
                       example: 5.0
-                      description: 'Ширина варіанту товару в одиницях налаштувань у keyCRM'
+                      description: "Ширина варіанту товару в одиницях налаштувань у keyCRM"
     responses:
       202:
-        description: 'Успішна відповідь'
+        description: "Успішна відповідь"
         content:
           application/json:
             schema:
@@ -152,25 +152,25 @@
                   type: boolean
                   example: true
       401:
-        description: 'Помилка авторизації.'
+        description: "Помилка авторизації."
       422:
-        description: 'Помилка валідації.'
+        description: "Помилка валідації."
     security:
       - bearerAuth: {}
 /offers/stocks:
   get:
     tags:
       - Offer
-    summary: 'Отримання списку залишків'
-    description: 'Даний маршрут повертає список залишків.'
+    summary: "Отримання списку залишків"
+    description: "Даний маршрут повертає список залишків."
     operationId: getPaginatedListOfStocks
     parameters:
-      - $ref: '#/components/parameters/acceptParam'
-      - $ref: '#/components/parameters/limitParam'
-      - $ref: '#/components/parameters/pageParam'
+      - $ref: "#/components/parameters/acceptParam"
+      - $ref: "#/components/parameters/limitParam"
+      - $ref: "#/components/parameters/pageParam"
       - name: filter
         in: query
-        description: 'Фільтрація списку залишків'
+        description: "Фільтрація списку залишків"
         required: false
         style: deepObject
         explode: true
@@ -179,49 +179,49 @@
         examples:
           filter_by_offers_id:
             value:
-              offers_id: '4545,4546'
-            summary: 'Фільтр за ідентифікатором варіанту товару, допустимі значення: 1, 10,
-              4546, ...'
+              offers_id: "4545,4546"
+            summary: "Фільтр за ідентифікатором варіанту товару, допустимі значення: 1, 10,
+              4546, ..."
           filter_by_offers_sku:
             value:
-              offers_sku: 'sku001,sku002'
-            summary: 'Фільтр за sku варіанту товару, допустимі значення: sku001, sku002,
-              ...'
+              offers_sku: "sku001,sku002"
+            summary: "Фільтр за sku варіанту товару, допустимі значення: sku001, sku002,
+              ..."
           filter_by_details:
             value:
               details: true
-            summary: 'Отримувати залишки по кожному складу окремо'
+            summary: "Отримувати залишки по кожному складу окремо"
           filter_combined:
             value:
               offers_id: 1
               offers_sku: sku001
               details: true
-            summary: 'Комбінований приклад'
+            summary: "Комбінований приклад"
     responses:
       200:
-        description: 'Успішна відповідь для запиту з параметром `filter[details]=true`.
-          Результат у пагінованому вигляді.'
+        description: "Успішна відповідь для запиту з параметром `filter[details]=true`.
+          Результат у пагінованому вигляді."
         content:
           application/json:
             schema:
               type: object
               allOf:
-                - $ref: '#/components/schemas/PaginatedResponse'
+                - $ref: "#/components/schemas/PaginatedResponse"
                 - properties:
                     data:
                       type: array
                       items:
-                        $ref: '#/components/schemas/OfferStocks'
+                        $ref: "#/components/schemas/OfferStocks"
       401:
-        description: 'Помилка авторизації.'
+        description: "Помилка авторизації."
     security:
       - bearerAuth: {}
   put:
     tags:
       - Offer
-    summary: 'Оновлення залишків товару на складі'
-    description: 'Створює запис руху товарів для приведення залишків на складі до
-      потрібної кількості.'
+    summary: "Оновлення залишків товару на складі"
+    description: "Створює запис руху товарів для приведення залишків на складі до
+      потрібної кількості."
     operationId: offersStocksUpdate
     requestBody:
       description: "Приклад об'єкту запиту для зміни залишків на складі. Для кожного
@@ -251,18 +251,18 @@
                     id:
                       type: integer
                       example: 1
-                      description: 'ID варіанту товару у keyCRM'
+                      description: "ID варіанту товару у keyCRM"
                     sku:
                       type: string
                       example: 001-242
-                      description: 'Артикул товару'
+                      description: "Артикул товару"
                     quantity:
                       type: number
                       example: 1
-                      description: 'Кількість одиниць на складі'
+                      description: "Кількість одиниць на складі"
     responses:
       202:
-        description: 'Успішна відповідь'
+        description: "Успішна відповідь"
         content:
           application/json:
             schema:
@@ -272,8 +272,8 @@
                   type: boolean
                   example: true
       401:
-        description: 'Помилка авторизації.'
+        description: "Помилка авторизації."
       422:
-        description: 'Помилка валідації.'
+        description: "Помилка валідації."
     security:
       - bearerAuth: {}

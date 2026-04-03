@@ -4,10 +4,10 @@ Pipeline:
     id:
       type: integer
       example: 1
-      description: 'Ідентифікатор воронки'
+      description: "Ідентифікатор воронки"
     name:
       type: string
-      description: 'Назва воронки'
+      description: "Назва воронки"
       example: Лендінги
     target_type:
       type: string

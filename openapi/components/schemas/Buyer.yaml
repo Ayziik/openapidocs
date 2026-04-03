@@ -5,17 +5,17 @@ Buyer:
   properties:
     id:
       type: integer
-      description: 'Ідентифікатор покупця'
+      description: "Ідентифікатор покупця"
       example: 22
     full_name:
       type: string
       nullable: false
-      example: 'John Doe'
+      example: "John Doe"
     birthday:
       type: string
-      description: 'Дата народження'
+      description: "Дата народження"
       nullable: true
-      example: '2020-05-16'
+      example: "2020-05-16"
     email:
       type: array
       nullable: true
@@ -30,17 +30,17 @@ Buyer:
       items:
         type: string
       example:
-        - '+1 555-234-1234'
-        - '+1 555-234-7777'
+        - "+1 555-234-1234"
+        - "+1 555-234-7777"
     note:
       type: string
       nullable: true
       example: Примітка
     created_at:
       type: string
-      description: 'Дата створення покупця в UTC форматі'
-      example: '2020-05-16 17:00:07'
+      description: "Дата створення покупця в UTC форматі"
+      example: "2020-05-16 17:00:07"
     updated_at:
       type: string
-      description: 'Дата останньої зміни покупця в UTC форматі'
-      example: '2020-05-16 17:00:07'
+      description: "Дата останньої зміни покупця в UTC форматі"
+      example: "2020-05-16 17:00:07"
