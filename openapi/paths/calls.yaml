@@ -6,23 +6,20 @@
     description: 'Даний маршрут повертає пагінований список дзвінків.'
     operationId: getPaginatedListOfCalls
     parameters:
-      -
-        $ref: '#/components/parameters/acceptParam'
-      -
-        $ref: '#/components/parameters/limitParam'
-      -
-        $ref: '#/components/parameters/pageParam'
-      -
-        name: include
+      - $ref: '#/components/parameters/acceptParam'
+      - $ref: '#/components/parameters/limitParam'
+      - $ref: '#/components/parameters/pageParam'
+      - name: include
         in: query
-        description: 'Підключення додаткових асоціацій, розділені комами. Приклад: <strong>manager</strong> <br/><br/> Допустимі асоціації `manager`, `service`, `lead`, `client`'
+        description: 'Підключення додаткових асоціацій, розділені комами. Приклад:
+          <strong>manager</strong> <br/><br/> Допустимі асоціації `manager`,
+          `service`, `lead`, `client`'
         required: false
         style: form
         explode: true
         schema:
           type: string
-      -
-        name: filter
+      - name: filter
         in: query
         description: 'Фільтрація списку дзвінків'
         required: false
@@ -34,7 +31,8 @@
           filter_by_reference_id:
             value:
               reference_id: '4545,4546'
-            summary: 'Фільтр за ідентифікатором товара, допустимі значення: 1, 10, 4546, ...'
+            summary: 'Фільтр за ідентифікатором товара, допустимі значення: 1, 10, 4546,
+              ...'
           filter_by_client_id:
             value:
               client_id: '4545,4546'
@@ -61,16 +59,15 @@
             summary: 'Фільтр за датою створення'
     responses:
       200:
-        description: 'Успішна відповідь для запиту з усіма доступними значеннями параметра `include`. Результат у пагінованому вигляді.'
+        description: 'Успішна відповідь для запиту з усіма доступними значеннями
+          параметра `include`. Результат у пагінованому вигляді.'
         content:
           application/json:
             schema:
               type: object
               allOf:
-                -
-                  $ref: '#/components/schemas/PaginatedResponse'
-                -
-                  properties:
+                - $ref: '#/components/schemas/PaginatedResponse'
+                - properties:
                     data:
                       type: array
                       items:
@@ -78,5 +75,4 @@
       401:
         description: 'Помилка авторизації.'
     security:
-      -
-        bearerAuth: {  }
+      - bearerAuth: {}

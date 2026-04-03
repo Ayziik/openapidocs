@@ -6,14 +6,10 @@
     description: 'Даний маршрут повертає пагінований список користувачів.'
     operationId: getPaginatedListOfUsers
     parameters:
-      -
-        $ref: '#/components/parameters/acceptParam'
-      -
-        $ref: '#/components/parameters/limitParam'
-      -
-        $ref: '#/components/parameters/pageParam'
-      -
-        name: filter
+      - $ref: '#/components/parameters/acceptParam'
+      - $ref: '#/components/parameters/limitParam'
+      - $ref: '#/components/parameters/pageParam'
+      - name: filter
         in: query
         description: 'Фільтрація списку користувачів'
         required: false
@@ -37,7 +33,8 @@
           filter_by_status:
             value:
               status: active
-            summary: 'Фільтр за статусом користувача, допустимі значення: active, pending, blocked'
+            summary: 'Фільтр за статусом користувача, допустимі значення: active, pending,
+              blocked'
           filter_by_email:
             value:
               email: any@gmail.com
@@ -56,16 +53,15 @@
             summary: 'Фільтр за датою останньої активності'
     responses:
       200:
-        description: 'Успішна відповідь для запиту з усіма доступними значеннями. Результат у пагінованому вигляді.'
+        description: 'Успішна відповідь для запиту з усіма доступними значеннями.
+          Результат у пагінованому вигляді.'
         content:
           application/json:
             schema:
               type: object
               allOf:
-                -
-                  $ref: '#/components/schemas/PaginatedResponse'
-                -
-                  properties:
+                - $ref: '#/components/schemas/PaginatedResponse'
+                - properties:
                     data:
                       type: array
                       items:
@@ -73,5 +69,4 @@
       401:
         description: 'Помилка авторизації.'
     security:
-      -
-        bearerAuth: {  }
+      - bearerAuth: {}

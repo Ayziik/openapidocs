@@ -3,26 +3,24 @@
     tags:
       - Offer
     summary: 'Отримання варіантів товарів'
-    description: 'Даний маршрут дозволяє отримати список варіантів товарів. Якщо потрібно отримати інформацію про товар, якому належить варіант, то вкажіть параметр `include=product`.'
+    description: 'Даний маршрут дозволяє отримати список варіантів товарів. Якщо
+      потрібно отримати інформацію про товар, якому належить варіант, то вкажіть
+      параметр `include=product`.'
     operationId: getPaginatedListOfOffers
     parameters:
-      -
-        $ref: '#/components/parameters/acceptParam'
-      -
-        $ref: '#/components/parameters/limitParam'
-      -
-        $ref: '#/components/parameters/pageParam'
-      -
-        name: include
+      - $ref: '#/components/parameters/acceptParam'
+      - $ref: '#/components/parameters/limitParam'
+      - $ref: '#/components/parameters/pageParam'
+      - name: include
         in: query
-        description: ' Підключення додаткових асоціацій<br/><br/> Допустимі асоціації `product` '
+        description: ' Підключення додаткових асоціацій<br/><br/> Допустимі асоціації
+          `product` '
         required: false
         style: form
         explode: true
         schema:
           type: string
-      -
-        name: sort
+      - name: sort
         in: query
         description: 'Сортування списку вариантів товарів'
         required: false
@@ -37,8 +35,7 @@
           sort_desc:
             value: '-id'
             summary: 'Сортування за зменшенням'
-      -
-        name: filter
+      - name: filter
         in: query
         description: 'Фільтрація списку вариантів товарів'
         required: false
@@ -62,19 +59,19 @@
           filter_by_is_archived:
             value:
               is_archived: true
-            summary: 'Фільтр за статусом архівації варіанту товару, допустимі значення: true, false'
+            summary: 'Фільтр за статусом архівації варіанту товару, допустимі значення:
+              true, false'
     responses:
       200:
-        description: 'Успішна відповідь для запиту з параметром `include=product`. Результат у пагінованому вигляді.'
+        description: 'Успішна відповідь для запиту з параметром `include=product`.
+          Результат у пагінованому вигляді.'
         content:
           application/json:
             schema:
               type: object
               allOf:
-                -
-                  $ref: '#/components/schemas/PaginatedResponse'
-                -
-                  properties:
+                - $ref: '#/components/schemas/PaginatedResponse'
+                - properties:
                     data:
                       type: array
                       items:
@@ -82,16 +79,17 @@
       401:
         description: 'Помилка авторизації.'
     security:
-      -
-        bearerAuth: {  }
+      - bearerAuth: {}
   put:
     tags:
       - Offer
     summary: 'Редагування варіантів товару'
-    description: 'Даний маршрут дозволяє змінити параметри вартості, закупівельної вартості, ваги і габаритів варіанту товару.'
+    description: 'Даний маршрут дозволяє змінити параметри вартості, закупівельної
+      вартості, ваги і габаритів варіанту товару.'
     operationId: offersUpdate
     requestBody:
-      description: "Приклад об'єкту запиту для зміни варіантів. Для кожного з товарів у масиві обов'язково має бути вказано один з параметрів, id або sku."
+      description: "Приклад об'єкту запиту для зміни варіантів. Для кожного з товарів
+        у масиві обов'язково має бути вказано один з параметрів, id або sku."
       required: true
       content:
         application/json:
@@ -158,8 +156,7 @@
       422:
         description: 'Помилка валідації.'
     security:
-      -
-        bearerAuth: {  }
+      - bearerAuth: {}
 /offers/stocks:
   get:
     tags:
@@ -168,14 +165,10 @@
     description: 'Даний маршрут повертає список залишків.'
     operationId: getPaginatedListOfStocks
     parameters:
-      -
-        $ref: '#/components/parameters/acceptParam'
-      -
-        $ref: '#/components/parameters/limitParam'
-      -
-        $ref: '#/components/parameters/pageParam'
-      -
-        name: filter
+      - $ref: '#/components/parameters/acceptParam'
+      - $ref: '#/components/parameters/limitParam'
+      - $ref: '#/components/parameters/pageParam'
+      - name: filter
         in: query
         description: 'Фільтрація списку залишків'
         required: false
@@ -187,11 +180,13 @@
           filter_by_offers_id:
             value:
               offers_id: '4545,4546'
-            summary: 'Фільтр за ідентифікатором варіанту товару, допустимі значення: 1, 10, 4546, ...'
+            summary: 'Фільтр за ідентифікатором варіанту товару, допустимі значення: 1, 10,
+              4546, ...'
           filter_by_offers_sku:
             value:
               offers_sku: 'sku001,sku002'
-            summary: 'Фільтр за sku варіанту товару, допустимі значення: sku001, sku002, ...'
+            summary: 'Фільтр за sku варіанту товару, допустимі значення: sku001, sku002,
+              ...'
           filter_by_details:
             value:
               details: true
@@ -204,16 +199,15 @@
             summary: 'Комбінований приклад'
     responses:
       200:
-        description: 'Успішна відповідь для запиту з параметром `filter[details]=true`. Результат у пагінованому вигляді.'
+        description: 'Успішна відповідь для запиту з параметром `filter[details]=true`.
+          Результат у пагінованому вигляді.'
         content:
           application/json:
             schema:
               type: object
               allOf:
-                -
-                  $ref: '#/components/schemas/PaginatedResponse'
-                -
-                  properties:
+                - $ref: '#/components/schemas/PaginatedResponse'
+                - properties:
                     data:
                       type: array
                       items:
@@ -221,16 +215,18 @@
       401:
         description: 'Помилка авторизації.'
     security:
-      -
-        bearerAuth: {  }
+      - bearerAuth: {}
   put:
     tags:
       - Offer
     summary: 'Оновлення залишків товару на складі'
-    description: 'Створює запис руху товарів для приведення залишків на складі до потрібної кількості.'
+    description: 'Створює запис руху товарів для приведення залишків на складі до
+      потрібної кількості.'
     operationId: offersStocksUpdate
     requestBody:
-      description: "Приклад об'єкту запиту для зміни залишків на складі. Для кожного із товарів у масиві обов'язково має бути вказаний один із параметрів, offer_id або sku"
+      description: "Приклад об'єкту запиту для зміни залишків на складі. Для кожного
+        із товарів у масиві обов'язково має бути вказаний один із параметрів,
+        offer_id або sku"
       required: true
       content:
         application/json:
@@ -280,5 +276,4 @@
       422:
         description: 'Помилка валідації.'
     security:
-      -
-        bearerAuth: {  }
+      - bearerAuth: {}

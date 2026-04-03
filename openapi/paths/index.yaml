@@ -1,12 +1,12 @@
 include:
   - ./paths/order.yaml
-  - ./paths/storage.yaml
-  - ./paths/custom-fields.yaml
-  - ./paths/offer.yaml
   - ./paths/pipelines.yaml
   - ./paths/buyer.yaml
   - ./paths/company.yaml
-  - ./paths/payments.yaml
   - ./paths/products.yaml
+  - ./paths/offer.yaml
+  - ./paths/custom-fields.yaml
+  - ./paths/storage.yaml
+  - ./paths/payments.yaml
   - ./paths/calls.yaml
   - ./paths/users.yaml

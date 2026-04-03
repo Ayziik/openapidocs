@@ -5,6 +5,26 @@ info:
   version: 1.2.0
 security:
   - bearerAuth: []
+x-tagGroups:
+  - name: '🛒 Продажі'
+    tags:
+      - Pipelines
+      - Order
+  - name: '👥 Клієнтська база'
+    tags:
+      - Buyer
+      - Company
+  - name: '📦 Каталог'
+    tags:
+      - Products
+      - Offer
+  - name: '⚙️ Інше'
+    tags:
+      - Custom Fields
+      - Storage
+      - Payments
+      - Calls
+      - Users
 tags:
   - $ref: ./tags/pipelines.yaml
   - $ref: ./tags/order.yaml
@@ -15,6 +35,8 @@ tags:
   - $ref: ./tags/custom-fields.yaml
   - $ref: ./tags/storage.yaml
   - $ref: ./tags/payments.yaml
+  - $ref: ./tags/calls.yaml
+  - $ref: ./tags/users.yaml
 paths:
   $ref: ./paths/index.yaml
 components: {  }

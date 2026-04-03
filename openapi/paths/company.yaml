@@ -1,4 +1,65 @@
 /companies:
+  get:
+    tags:
+      - Company
+    summary: 'Отримання списку компаній'
+    description: 'Даний маршрут повертає список компаній.'
+    operationId: getPaginatedListOfCompanies
+    parameters:
+      - $ref: '#/components/parameters/acceptParam'
+      - $ref: '#/components/parameters/limitParam'
+      - $ref: '#/components/parameters/pageParam'
+      - name: include
+        in: query
+        description: 'Підключення додаткових асоціацій, розділені комами. Приклад:
+          <strong>manager,company</strong> <br/><br/> Допустимі асоціації
+          `manager`, `buyer`, `custom_fields`'
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: string
+      - name: filter
+        in: query
+        description: 'Фільтрація списку компаній'
+        required: false
+        style: deepObject
+        explode: true
+        schema:
+          type: object
+        examples:
+          filter_by_company_id:
+            value:
+              company_id: '4545,4546'
+            summary: 'Фільтр за ідентифікатором компанії, допустимі значення: 1, 10, 4546,
+              ...'
+          filter_by_date_created:
+            value:
+              created_between: '2020-08-24 00:00:00, 2020-09-22 23:59:59'
+            summary: 'Фільтр за датою створення'
+          filter_by_date_updated:
+            value:
+              updated_between: '2020-08-24 00:00:00, 2020-09-22 23:59:59'
+            summary: 'Фільтр за датою оновлення'
+    responses:
+      200:
+        description: 'Успішна відповідь для запиту з усіма доступними значеннями
+          параметра `include`. Результат у пагінованому вигляді.'
+        content:
+          application/json:
+            schema:
+              type: object
+              allOf:
+                - $ref: '#/components/schemas/PaginatedResponse'
+                - properties:
+                    data:
+                      type: array
+                      items:
+                        $ref: '#/components/schemas/CompanyWithIncludes'
+      401:
+        description: 'Помилка авторизації.'
+    security:
+      - bearerAuth: {}
   post:
     tags:
       - Company
@@ -6,8 +67,7 @@
     description: 'Даний маршрут створює нову компанію.'
     operationId: createNewCompany
     parameters:
-      -
-        $ref: '#/components/parameters/acceptParam'
+      - $ref: '#/components/parameters/acceptParam'
     requestBody:
       description: "Приклад об'єкту запиту для створення нової компанії"
       required: true
@@ -63,7 +123,8 @@
                       type: string
                       example: CY_1108
                     value:
-                      description: 'Значення поля. Для полів з типом `select (список/мультисписок)` передавати масив рядків.'
+                      description: 'Значення поля. Для полів з типом `select (список/мультисписок)`
+                        передавати масив рядків.'
                       type: string
                       example: Лорд
     responses:
@@ -76,73 +137,7 @@
       401:
         description: 'Помилка авторизації.'
     security:
-      -
-        bearerAuth: {  }
-  get:
-    tags:
-      - Company
-    summary: 'Отримання списку компаній'
-    description: 'Даний маршрут повертає список компаній.'
-    operationId: getPaginatedListOfCompanies
-    parameters:
-      -
-        $ref: '#/components/parameters/acceptParam'
-      -
-        $ref: '#/components/parameters/limitParam'
-      -
-        $ref: '#/components/parameters/pageParam'
-      -
-        name: include
-        in: query
-        description: 'Підключення додаткових асоціацій, розділені комами. Приклад: <strong>manager,company</strong> <br/><br/> Допустимі асоціації `manager`, `buyer`, `custom_fields`'
-        required: false
-        style: form
-        explode: true
-        schema:
-          type: string
-      -
-        name: filter
-        in: query
-        description: 'Фільтрація списку компаній'
-        required: false
-        style: deepObject
-        explode: true
-        schema:
-          type: object
-        examples:
-          filter_by_company_id:
-            value:
-              company_id: '4545,4546'
-            summary: 'Фільтр за ідентифікатором компанії, допустимі значення: 1, 10, 4546, ...'
-          filter_by_date_created:
-            value:
-              created_between: '2020-08-24 00:00:00, 2020-09-22 23:59:59'
-            summary: 'Фільтр за датою створення'
-          filter_by_date_updated:
-            value:
-              updated_between: '2020-08-24 00:00:00, 2020-09-22 23:59:59'
-            summary: 'Фільтр за датою оновлення'
-    responses:
-      200:
-        description: 'Успішна відповідь для запиту з усіма доступними значеннями параметра `include`. Результат у пагінованому вигляді.'
-        content:
-          application/json:
-            schema:
-              type: object
-              allOf:
-                -
-                  $ref: '#/components/schemas/PaginatedResponse'
-                -
-                  properties:
-                    data:
-                      type: array
-                      items:
-                        $ref: '#/components/schemas/CompanyWithIncludes'
-      401:
-        description: 'Помилка авторизації.'
-    security:
-      -
-        bearerAuth: {  }
+      - bearerAuth: {}
 '/companies/{companyId}':
   get:
     tags:
@@ -150,8 +145,7 @@
     summary: 'Отримання сутності компанії за ідентифікатором'
     operationId: getCompanyById
     parameters:
-      -
-        name: companyId
+      - name: companyId
         in: path
         description: 'Ідентифікатор компанії'
         required: true
@@ -159,12 +153,12 @@
         explode: false
         schema:
           type: string
-      -
-        $ref: '#/components/parameters/acceptParam'
-      -
-        name: include
+      - $ref: '#/components/parameters/acceptParam'
+      - name: include
         in: query
-        description: 'Підключення додаткових асоціацій, розділені комами. Приклад: <strong>manager,company</strong> <br/><br/> Допустимі асоціації `manager`, `buyer`, `custom_fields`'
+        description: 'Підключення додаткових асоціацій, розділені комами. Приклад:
+          <strong>manager,company</strong> <br/><br/> Допустимі асоціації
+          `manager`, `buyer`, `custom_fields`'
         required: false
         style: form
         explode: true
@@ -172,7 +166,8 @@
           type: string
     responses:
       200:
-        description: 'Успішна відповідь для запиту з усіма доступними значеннями параметра `include`.'
+        description: 'Успішна відповідь для запиту з усіма доступними значеннями
+          параметра `include`.'
         content:
           application/json:
             schema:
@@ -182,22 +177,19 @@
       404:
         description: 'Компанію не знайдено.'
     security:
-      -
-        bearerAuth: {  }
+      - bearerAuth: {}
   put:
     tags:
       - Company
     summary: 'Оновлення існуючої компанії'
     parameters:
-      -
-        name: companyId
+      - name: companyId
         in: path
         required: true
         description: 'Ідентифікатор компанії'
         schema:
           type: string
-      -
-        $ref: '#/components/parameters/acceptParam'
+      - $ref: '#/components/parameters/acceptParam'
     description: 'Даний маршрут оновлює існуючу компанію.'
     operationId: updateExistingCompany
     requestBody:
@@ -255,7 +247,8 @@
                       type: string
                       example: CY_1108
                     value:
-                      description: 'Значення поля. Для полів з типом `select (список/мультисписок)` передавати масив рядків.'
+                      description: 'Значення поля. Для полів з типом `select (список/мультисписок)`
+                        передавати масив рядків.'
                       type: string
                       example: Лорд
     responses:
@@ -270,5 +263,4 @@
       404:
         description: 'Компанію не знайдено.'
     security:
-      -
-        bearerAuth: {  }
+      - bearerAuth: {}

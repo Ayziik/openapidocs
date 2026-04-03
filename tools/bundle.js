@@ -73,10 +73,12 @@ const bundled = {
     { url: apiServer, description: 'Основний сервер API keyCRM' }
   ],
   security: root.security || [],
+  ...(root['x-tagGroups'] ? { 'x-tagGroups': root['x-tagGroups'] } : {}),
   tags: resolvedTags,
   paths: paths,
   components: components
 };
+
 
 fs.writeFileSync(outFile, yaml.stringify(bundled, { indent: 2 }));
 console.log(`Pre-bundled OpenAPI written to ${outFile}`);

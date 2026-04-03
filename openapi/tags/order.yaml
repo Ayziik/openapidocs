@@ -1,2 +1,3 @@
 name: Order
+x-displayName: Замовлення
 description: 'Робота із замовленнями та їх асоціаціями.'

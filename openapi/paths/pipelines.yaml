@@ -6,12 +6,9 @@
     description: 'Даний маршрут повертає список воронок.'
     operationId: getPaginatedListOfPipelines
     parameters:
-      -
-        $ref: '#/components/parameters/acceptParam'
-      -
-        $ref: '#/components/parameters/limitParam'
-      -
-        $ref: '#/components/parameters/pageParam'
+      - $ref: '#/components/parameters/acceptParam'
+      - $ref: '#/components/parameters/limitParam'
+      - $ref: '#/components/parameters/pageParam'
     responses:
       200:
         description: 'Успішна відповідь. Результат у пагінованому вигляді.'
@@ -20,10 +17,8 @@
             schema:
               type: object
               allOf:
-                -
-                  $ref: '#/components/schemas/PaginatedResponse'
-                -
-                  properties:
+                - $ref: '#/components/schemas/PaginatedResponse'
+                - properties:
                     data:
                       type: array
                       items:
@@ -41,8 +36,7 @@
       401:
         description: 'Помилка авторизації.'
     security:
-      -
-        bearerAuth: {  }
+      - bearerAuth: {}
 '/pipelines/{pipelineId}/statuses':
   get:
     tags:
@@ -51,8 +45,7 @@
     description: 'Даний маршрут повертає список статусів воронки.'
     operationId: getPaginatedListOfPipelinesStatuses
     parameters:
-      -
-        name: pipelineId
+      - name: pipelineId
         in: path
         description: 'Ідентифікатор воронки'
         required: true
@@ -60,12 +53,9 @@
         explode: false
         schema:
           type: string
-      -
-        $ref: '#/components/parameters/acceptParam'
-      -
-        $ref: '#/components/parameters/limitParam'
-      -
-        $ref: '#/components/parameters/pageParam'
+      - $ref: '#/components/parameters/acceptParam'
+      - $ref: '#/components/parameters/limitParam'
+      - $ref: '#/components/parameters/pageParam'
     responses:
       200:
         description: 'Успішна відповідь. Результат у пагінованому вигляді.'
@@ -74,10 +64,8 @@
             schema:
               type: object
               allOf:
-                -
-                  $ref: '#/components/schemas/PaginatedResponse'
-                -
-                  properties:
+                - $ref: '#/components/schemas/PaginatedResponse'
+                - properties:
                     data:
                       type: array
                       items:
@@ -95,8 +83,7 @@
       401:
         description: 'Помилка авторизації.'
     security:
-      -
-        bearerAuth: {  }
+      - bearerAuth: {}
 /pipelines/cards:
   get:
     tags:
@@ -105,23 +92,21 @@
     description: 'Даний маршрут повертає список карток воронок.'
     operationId: getPaginatedListOfPipelinesCards
     parameters:
-      -
-        $ref: '#/components/parameters/acceptParam'
-      -
-        $ref: '#/components/parameters/limitParam'
-      -
-        $ref: '#/components/parameters/pageParam'
-      -
-        name: include
+      - $ref: '#/components/parameters/acceptParam'
+      - $ref: '#/components/parameters/limitParam'
+      - $ref: '#/components/parameters/pageParam'
+      - name: include
         in: query
-        description: 'Підключення додаткових асоціацій, розділені комами. Приклад: <strong>contact,products.offer,manager</strong> <br/><br/> Допустимі асоціації `contact.client`, `products`, `manager`, `status`, `payments`,  `custom_fields`'
+        description: 'Підключення додаткових асоціацій, розділені комами. Приклад:
+          <strong>contact,products.offer,manager</strong> <br/><br/> Допустимі
+          асоціації `contact.client`, `products`, `manager`, `status`,
+          `payments`,  `custom_fields`'
         required: false
         style: form
         explode: true
         schema:
           type: string
-      -
-        name: filter
+      - name: filter
         in: query
         description: 'Фільтрація списку карток воронок'
         required: false
@@ -152,16 +137,16 @@
             summary: 'Фільтр за датою оновлення'
     responses:
       200:
-        description: 'Успішна відповідь. Результат у пагінованому вигляді. Значення ключа `id` з масиву можна використовувати для операцій `/pipelines/cards/{cardId}` як `cardId` параметр.'
+        description: 'Успішна відповідь. Результат у пагінованому вигляді. Значення
+          ключа `id` з масиву можна використовувати для операцій
+          `/pipelines/cards/{cardId}` як `cardId` параметр.'
         content:
           application/json:
             schema:
               type: object
               allOf:
-                -
-                  $ref: '#/components/schemas/PaginatedResponse'
-                -
-                  properties:
+                - $ref: '#/components/schemas/PaginatedResponse'
+                - properties:
                     data:
                       type: array
                       items:
@@ -179,8 +164,7 @@
       401:
         description: 'Помилка авторизації.'
     security:
-      -
-        bearerAuth: {  }
+      - bearerAuth: {}
   post:
     tags:
       - Pipelines
@@ -198,7 +182,8 @@
               - contact
             properties:
               title:
-                description: 'Назва картки. При відсутності параметра буде використано ID створеної картки'
+                description: 'Назва картки. При відсутності параметра буде використано ID
+                  створеної картки'
                 type: string
                 nullable: true
                 example: №11011
@@ -221,7 +206,8 @@
                 type: integer
                 example: 1
                 nullable: true
-                description: 'Ідентифікатор воронки (при відсутності параметра буде використана перша воронка у списку)'
+                description: 'Ідентифікатор воронки (при відсутності параметра буде використана
+                  перша воронка у списку)'
               communicate_at:
                 type: string
                 nullable: true
@@ -244,7 +230,9 @@
                     nullable: true
                     example: '+1 555-234-1234'
                   client_id:
-                    description: 'Ідентифікатор існуючого покупця. Якщо він є в системі, то картка буде створена на нього. Решта параметрів буде проігнорована.'
+                    description: 'Ідентифікатор існуючого покупця. Якщо він є в системі, то картка
+                      буде створена на нього. Решта параметрів буде
+                      проігнорована.'
                     type: integer
                     example: 1
                     nullable: true
@@ -314,11 +302,13 @@
                     payment_method_id:
                       type: integer
                       example: 2
-                      description: "ID методу платежу в keyCRM, обов'язковий параметр, якщо `payment_method` не заданий"
+                      description: "ID методу платежу в keyCRM, обов'язковий параметр, якщо
+                        `payment_method` не заданий"
                     payment_method:
                       type: string
                       example: 'Apple Pay'
-                      description: "Назва методу платежу, обов'язковий параметр, якщо `payment_method_id` не заданий"
+                      description: "Назва методу платежу, обов'язковий параметр, якщо
+                        `payment_method_id` не заданий"
                     amount:
                       type: number
                       example: 123.5
@@ -332,7 +322,8 @@
                       type: string
                       nullable: true
                       example: '2021-02-21 14:44:00'
-                      description: 'Дата і час платежу. Якщо не передається, буде використаний поточний час'
+                      description: 'Дата і час платежу. Якщо не передається, буде використаний
+                        поточний час'
                     status:
                       type: string
                       nullable: true
@@ -342,8 +333,7 @@
                          - paid
                          - not_paid
                          - canceled
-                         
-                         
+
               custom_fields:
                 type: array
                 description: 'Користувацькі поля у картці воронки'
@@ -355,7 +345,8 @@
                       type: string
                       example: LD_1021
                     value:
-                      description: 'Значення поля. Для полів з типом `select (список/мультисписок)` передавати масив рядків.'
+                      description: 'Значення поля. Для полів з типом `select (список/мультисписок)`
+                        передавати масив рядків.'
                       type: string
                       example: Лорд
     responses:
@@ -380,8 +371,7 @@
       403:
         description: 'Помилкові аргументи або воронки не активовані.'
     security:
-      -
-        bearerAuth: {  }
+      - bearerAuth: {}
 '/pipelines/cards/{cardId}':
   get:
     tags:
@@ -390,8 +380,7 @@
     description: 'Даний маршрут повертає картку воронки.'
     operationId: getPipelinesCard
     parameters:
-      -
-        name: cardId
+      - name: cardId
         in: path
         description: 'Ідентифікатор картки у воронці'
         required: true
@@ -399,12 +388,13 @@
         explode: false
         schema:
           type: string
-      -
-        $ref: '#/components/parameters/acceptParam'
-      -
-        name: include
+      - $ref: '#/components/parameters/acceptParam'
+      - name: include
         in: query
-        description: 'Підключення додаткових асоціацій, розділені комами. Приклад: <strong>contact,products.offer,manager</strong> <br/><br/> Допустимі асоціації `contact.client`, `products`, `manager`, `status`, `payments`,  `custom_fields`'
+        description: 'Підключення додаткових асоціацій, розділені комами. Приклад:
+          <strong>contact,products.offer,manager</strong> <br/><br/> Допустимі
+          асоціації `contact.client`, `products`, `manager`, `status`,
+          `payments`,  `custom_fields`'
         required: false
         style: form
         explode: true
@@ -418,10 +408,8 @@
             schema:
               type: object
               allOf:
-                -
-                  $ref: '#/components/schemas/PaginatedResponse'
-                -
-                  properties:
+                - $ref: '#/components/schemas/PaginatedResponse'
+                - properties:
                     data:
                       type: array
                       items:
@@ -439,8 +427,7 @@
       401:
         description: 'Помилка авторизації.'
     security:
-      -
-        bearerAuth: {  }
+      - bearerAuth: {}
   put:
     tags:
       - Pipelines
@@ -448,8 +435,7 @@
     description: 'Даний маршрут оновлює картку воронки.'
     operationId: updatePipelinesCard
     parameters:
-      -
-        name: cardId
+      - name: cardId
         in: path
         description: 'Ідентифікатор картки у воронці'
         required: true
@@ -457,8 +443,7 @@
         explode: false
         schema:
           type: string
-      -
-        $ref: '#/components/parameters/acceptParam'
+      - $ref: '#/components/parameters/acceptParam'
     requestBody:
       description: "Приклад об'єкту запиту для оновлення картки воронки"
       required: true
@@ -480,7 +465,8 @@
               status_id:
                 type: integer
                 example: 1
-                description: 'Ідентифікатор статусу картки. Щоб змінити воронку картки, достатньо просто передати статус з потрібної воронки'
+                description: 'Ідентифікатор статусу картки. Щоб змінити воронку картки,
+                  достатньо просто передати статус з потрібної воронки'
               source_id:
                 type: integer
                 example: 11
@@ -490,7 +476,8 @@
                 type: integer
                 nullable: true
                 example: 1
-                description: "Ідентифікатор існуючого в системі покупця. Якщо передати, то картка буде зв'язана з цим покупцем"
+                description: "Ідентифікатор існуючого в системі покупця. Якщо передати, то
+                  картка буде зв'язана з цим покупцем"
               manager_id:
                 type: integer
                 nullable: true
@@ -502,7 +489,8 @@
                 example: '2021-02-21 14:44:00'
                 description: 'Дата і час наступного контакту'
               products:
-                description: 'Масив товарів для додавання в картку. Існуючі товари в картці не оновлюються, завжди додаються нові'
+                description: 'Масив товарів для додавання в картку. Існуючі товари в картці не
+                  оновлюються, завжди додаються нові'
                 type: array
                 items:
                   type: object
@@ -539,7 +527,8 @@
                       type: string
                       example: LD_1021
                     value:
-                      description: 'Значення поля. Для полів з типом `select (список/мультисписок)` передавати масив рядків.'
+                      description: 'Значення поля. Для полів з типом `select (список/мультисписок)`
+                        передавати масив рядків.'
                       type: string
                       example: Лорд
     responses:
@@ -566,8 +555,7 @@
       401:
         description: 'Помилка авторизації.'
     security:
-      -
-        bearerAuth: {  }
+      - bearerAuth: {}
 '/pipelines/cards/{cardId}/payment':
   post:
     tags:
@@ -575,15 +563,13 @@
     summary: 'Додавання нової оплати для існуючої картки у воронці'
     description: 'Даний маршрут створює нову оплату для картки у воронці.'
     parameters:
-      -
-        name: cardId
+      - name: cardId
         in: path
         description: 'Ідентифікатор картки у воронці'
         required: true
         schema:
           type: string
-      -
-        $ref: '#/components/parameters/acceptParam'
+      - $ref: '#/components/parameters/acceptParam'
     operationId: createNewPipelinesCardPayment
     requestBody:
       description: "Приклад об'єкту запиту для створення нової оплати"
@@ -598,11 +584,13 @@
               payment_method_id:
                 type: integer
                 example: 2
-                description: "ID методу платежу в keyCRM, обов'язковий параметр, якщо `payment_method` не заданий"
+                description: "ID методу платежу в keyCRM, обов'язковий параметр, якщо
+                  `payment_method` не заданий"
               payment_method:
                 type: string
                 example: 'Apple Pay'
-                description: "Назва методу платежу, обов'язковий параметр, якщо `payment_method_id` не заданий"
+                description: "Назва методу платежу, обов'язковий параметр, якщо
+                  `payment_method_id` не заданий"
               amount:
                 type: number
                 example: 123.5
@@ -626,7 +614,8 @@
                 type: string
                 nullable: true
                 example: '2021-02-21 14:44:00'
-                description: 'Дата і час платежу. Якщо не передається, буде використаний поточний час'
+                description: 'Дата і час платежу. Якщо не передається, буде використаний
+                  поточний час'
     responses:
       201:
         description: 'Успішна відповідь від сервера.'
@@ -647,8 +636,7 @@
       401:
         description: 'Помилка авторизації.'
     security:
-      -
-        bearerAuth: {  }
+      - bearerAuth: {}
 '/pipelines/cards/{cardId}/payment/{paymentId}':
   put:
     tags:
@@ -657,22 +645,19 @@
     description: 'Даний маршрут оновлює оплату існуючої картки у воронці.'
     operationId: updateExistingPipelinesCardPayment
     parameters:
-      -
-        name: cardId
+      - name: cardId
         in: path
         description: 'Ідентифікатор картки у воронці'
         required: true
         schema:
           type: string
-      -
-        name: paymentId
+      - name: paymentId
         in: path
         description: 'Ідентифікатор оплати'
         required: true
         schema:
           type: string
-      -
-        $ref: '#/components/parameters/acceptParam'
+      - $ref: '#/components/parameters/acceptParam'
     requestBody:
       description: "Приклад об'єкту запиту для оновлення оплати"
       required: true
@@ -715,8 +700,7 @@
       401:
         description: 'Помилка авторизації.'
     security:
-      -
-        bearerAuth: {  }
+      - bearerAuth: {}
 '/pipelines/cards/{cardId}/attachment/{fileId}':
   post:
     tags:
@@ -725,22 +709,19 @@
     description: 'Даний маршрут додає файл до картки у воронці.'
     operationId: attachFileToPipelinesCard
     parameters:
-      -
-        name: cardId
+      - name: cardId
         in: path
         description: 'Ідентифікатор картки у воронці'
         required: true
         schema:
           type: string
-      -
-        name: fileId
+      - name: fileId
         in: path
         description: 'Ідентифікатор файлу'
         required: true
         schema:
           type: string
-      -
-        $ref: '#/components/parameters/acceptParam'
+      - $ref: '#/components/parameters/acceptParam'
     responses:
       202:
         description: 'Успішна відповідь'
@@ -755,8 +736,7 @@
       401:
         description: 'Помилка авторизації.'
     security:
-      -
-        bearerAuth: {  }
+      - bearerAuth: {}
   delete:
     tags:
       - Pipelines
@@ -764,22 +744,19 @@
     description: 'Даний маршрут видаляє файл з картки воронки.'
     operationId: deleteFileFromCard
     parameters:
-      -
-        name: cardId
+      - name: cardId
         in: path
         description: 'Ідентифікатор картки воронки'
         required: true
         schema:
           type: string
-      -
-        name: fileId
+      - name: fileId
         in: path
         description: 'Ідентифікатор файлу'
         required: true
         schema:
           type: string
-      -
-        $ref: '#/components/parameters/acceptParam'
+      - $ref: '#/components/parameters/acceptParam'
     responses:
       201:
         description: 'Успішна відповідь'
@@ -796,5 +773,4 @@
       401:
         description: 'Помилка авторизації.'
     security:
-      -
-        bearerAuth: {  }
+      - bearerAuth: {}

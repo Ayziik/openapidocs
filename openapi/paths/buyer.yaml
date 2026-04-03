@@ -1,3 +1,219 @@
+/buyer:
+  get:
+    tags:
+      - Buyer
+    summary: 'Отримання списку покупців'
+    description: 'Даний маршрут повертає список покупців.'
+    operationId: getPaginatedListOfBuyers
+    parameters:
+      - $ref: '#/components/parameters/acceptParam'
+      - $ref: '#/components/parameters/limitParam'
+      - $ref: '#/components/parameters/pageParam'
+      - name: include
+        in: query
+        description: 'Підключення додаткових асоціацій, розділені комами. Приклад:
+          <strong>manager,company</strong> <br/><br/> Допустимі асоціації
+          `manager`, `shipping`, `company`, `loyalty`, `custom_fields`'
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: string
+      - name: filter
+        in: query
+        description: 'Фільтрація списку покупців'
+        required: false
+        style: deepObject
+        explode: true
+        schema:
+          type: object
+        examples:
+          filter_by_buyer_id:
+            value:
+              buyer_id: '4545,4546'
+            summary: 'Фільтр за ідентифікатором покупця, допустимі значення: 1, 10, 4546,
+              ...'
+          filter_by_buyer_phone:
+            value:
+              buyer_phone: '+1 555-234-1234,+1 555-234-1234'
+            summary: 'Фільтр за телефоном покупця.'
+          filter_by_buyer_email:
+            value:
+              buyer_email: 'john.doe@example.com,john.doe@example.com'
+            summary: 'Фільтр за email покупця'
+          filter_by_date_created:
+            value:
+              created_between: '2020-08-24 00:00:00, 2020-09-22 23:59:59'
+            summary: 'Фільтр за датою створення'
+          filter_by_date_updated:
+            value:
+              updated_between: '2020-08-24 00:00:00, 2020-09-22 23:59:59'
+            summary: 'Фільтр за датою оновлення'
+    responses:
+      200:
+        description: 'Успішна відповідь для запиту з усіма доступними значеннями
+          параметра `include`. Результат у пагінованому вигляді.'
+        content:
+          application/json:
+            schema:
+              type: object
+              allOf:
+                - $ref: '#/components/schemas/PaginatedResponse'
+                - properties:
+                    data:
+                      type: array
+                      items:
+                        $ref: '#/components/schemas/BuyerWithIncludes'
+      401:
+        description: 'Помилка авторизації.'
+    security:
+      - bearerAuth: {}
+  post:
+    tags:
+      - Buyer
+    summary: 'Створення нового покупця'
+    description: 'Даний маршрут створює нового покупця.'
+    operationId: createNewBuyer
+    parameters:
+      - $ref: '#/components/parameters/acceptParam'
+    requestBody:
+      description: "Приклад об'єкту запиту для створення нового покупця"
+      required: true
+      content:
+        application/json:
+          schema:
+            type: object
+            required:
+              - full_name
+            properties:
+              full_name:
+                description: "Повне ім'я покупця"
+                type: string
+                nullable: false
+                example: 'John Doe'
+              birthday:
+                description: 'Дата народження'
+                type: string
+                nullable: true
+                example: '2020-05-16'
+              email:
+                description: 'Перелік e-mail покупця'
+                type: array
+                nullable: true
+                items:
+                  type: string
+                example:
+                  - john.doe@mail.app
+                  - john.doe2@mail.app
+              phone:
+                description: 'Перелік телефонів покупця. Телефони рекомендуємо передавати в
+                  міжнародному форматі з плюсом'
+                type: array
+                nullable: true
+                items:
+                  type: string
+                example:
+                  - '+1 555-234-1234'
+                  - '+1 555-234-7777'
+              note:
+                description: 'Примітка до покупця'
+                type: string
+                nullable: true
+                example: Примітка
+              discount:
+                description: 'Знижка для покупця'
+                type: number
+                nullable: true
+                example: 10
+              company_id:
+                description: "ID компанії зв'язаної с покупцем"
+                type: integer
+                nullable: true
+                example: 112
+              manager_id:
+                description: "ID менеджера зв'язаного с покупцем"
+                type: integer
+                nullable: true
+                example: 12
+              shipping:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    address:
+                      type: string
+                      nullable: true
+                      description: 'Адреса доставки'
+                    additional_address:
+                      type: string
+                    city:
+                      description: 'Місто доставки'
+                      type: string
+                      nullable: true
+                      example: Kyiv
+                    region:
+                      type: string
+                      nullable: true
+                      example: Kyivska
+                      description: 'Область, штат, регіон'
+                    zip_code:
+                      type: string
+                      nullable: true
+                      example: '50000'
+                      description: Індекс
+                    country:
+                      type: string
+                      nullable: true
+                      example: Ukraine
+                      description: 'Країна доставки'
+                    recipient_full_name:
+                      type: string
+                      nullable: true
+                      example: 'Ann Doe'
+                      description: "Ім'я отримувача (якщо відрізняється від покупця)"
+                    recipient_phone:
+                      type: string
+                      nullable: true
+                      example: '+1 555-234-7777'
+                      description: 'Номер телефону отримувача (якщо відрізняється від покупця).
+                        Рекомендуємо передавати в міжнародному форматі з плюсом'
+                    warehouse_ref:
+                      type: string
+                      nullable: true
+                      example: 1ec09d2e-e1c2-11e3-8c4a-0050568002cf
+                      description: "UUID складу Нової Пошти (обов'язково з параметром
+                        delivery_service_id - ID служби доставки НП в СРМ)"
+                    shipping_service:
+                      type: string
+                      nullable: true
+                      example: 'Нова Пошта'
+                      description: 'Назва служби доставки'
+              custom_fields:
+                type: array
+                description: 'Користувацькі поля для покупця'
+                items:
+                  type: object
+                  properties:
+                    uuid:
+                      description: 'Зовнішній ідентифікатор поля'
+                      type: string
+                      example: LD_1021
+                    value:
+                      description: 'Значення поля. Для полів з типом `select (список/мультисписок)`
+                        передавати масив рядків.'
+                      type: string
+                      example: Лорд
+    responses:
+      201:
+        description: 'Успішна відповідь від сервера.'
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Buyer'
+      401:
+        description: 'Помилка авторизації.'
+    security:
+      - bearerAuth: {}
 '/buyer/{buyerId}':
   get:
     tags:
@@ -5,8 +221,7 @@
     summary: 'Отримання сутності покупця за ідентифікатором'
     operationId: getBuyerById
     parameters:
-      -
-        name: buyerId
+      - name: buyerId
         in: path
         description: 'Ідентифікатор покупця'
         required: true
@@ -14,12 +229,12 @@
         explode: false
         schema:
           type: string
-      -
-        $ref: '#/components/parameters/acceptParam'
-      -
-        name: include
+      - $ref: '#/components/parameters/acceptParam'
+      - name: include
         in: query
-        description: 'Підключення додаткових асоціацій, розділені комами. Приклад: <strong>manager,company</strong> <br/><br/> Допустимі асоціації `manager`, `shipping`, `company`, `loyalty`, `custom_fields`'
+        description: 'Підключення додаткових асоціацій, розділені комами. Приклад:
+          <strong>manager,company</strong> <br/><br/> Допустимі асоціації
+          `manager`, `shipping`, `company`, `loyalty`, `custom_fields`'
         required: false
         style: form
         explode: true
@@ -27,7 +242,8 @@
           type: string
     responses:
       200:
-        description: 'Успішна відповідь для запиту з усіма доступними значеннями параметра `include`.'
+        description: 'Успішна відповідь для запиту з усіма доступними значеннями
+          параметра `include`.'
         content:
           application/json:
             schema:
@@ -37,22 +253,19 @@
       404:
         description: 'Покупця не знайдено.'
     security:
-      -
-        bearerAuth: {  }
+      - bearerAuth: {}
   put:
     tags:
       - Buyer
     summary: 'Оновлення існуючого покупця'
     parameters:
-      -
-        name: buyerId
+      - name: buyerId
         in: path
         required: true
         description: 'Ідентифікатор покупця'
         schema:
           type: string
-      -
-        $ref: '#/components/parameters/acceptParam'
+      - $ref: '#/components/parameters/acceptParam'
     description: 'Даний маршрут оновлює існуючого покупця.'
     operationId: updateExistingBuyer
     requestBody:
@@ -85,7 +298,8 @@
                   - john.doe@mail.app
                   - john.doe2@mail.app
               phone:
-                description: 'Перелік телефонів покупця. Телефони рекомендуємо передавати в міжнародному форматі з плюсом'
+                description: 'Перелік телефонів покупця. Телефони рекомендуємо передавати в
+                  міжнародному форматі з плюсом'
                 type: array
                 nullable: true
                 items:
@@ -153,12 +367,14 @@
                       type: string
                       nullable: true
                       example: '+1 555-234-7777'
-                      description: 'Номер телефону отримувача (якщо відрізняється від покупця). Рекомендуємо передавати в міжнародному форматі з плюсом'
+                      description: 'Номер телефону отримувача (якщо відрізняється від покупця).
+                        Рекомендуємо передавати в міжнародному форматі з плюсом'
                     warehouse_ref:
                       type: string
                       nullable: true
                       example: 1ec09d2e-e1c2-11e3-8c4a-0050568002cf
-                      description: "UUID складу Нової Пошти (обов'язково з параметром delivery_service_id - ID служби доставки НП в СРМ)"
+                      description: "UUID складу Нової Пошти (обов'язково з параметром
+                        delivery_service_id - ID служби доставки НП в СРМ)"
                     shipping_service:
                       type: string
                       nullable: true
@@ -175,7 +391,8 @@
                       type: string
                       example: LD_1021
                     value:
-                      description: 'Значення поля. Для полів з типом `select (список/мультисписок)` передавати масив рядків.'
+                      description: 'Значення поля. Для полів з типом `select (список/мультисписок)`
+                        передавати масив рядків.'
                       type: string
                       example: Лорд
     responses:
@@ -190,226 +407,7 @@
       404:
         description: 'Покупця не знайдено.'
     security:
-      -
-        bearerAuth: {  }
-/buyer:
-  get:
-    tags:
-      - Buyer
-    summary: 'Отримання списку покупців'
-    description: 'Даний маршрут повертає список покупців.'
-    operationId: getPaginatedListOfBuyers
-    parameters:
-      -
-        $ref: '#/components/parameters/acceptParam'
-      -
-        $ref: '#/components/parameters/limitParam'
-      -
-        $ref: '#/components/parameters/pageParam'
-      -
-        name: include
-        in: query
-        description: 'Підключення додаткових асоціацій, розділені комами. Приклад: <strong>manager,company</strong> <br/><br/> Допустимі асоціації `manager`, `shipping`, `company`, `loyalty`, `custom_fields`'
-        required: false
-        style: form
-        explode: true
-        schema:
-          type: string
-      -
-        name: filter
-        in: query
-        description: 'Фільтрація списку покупців'
-        required: false
-        style: deepObject
-        explode: true
-        schema:
-          type: object
-        examples:
-          filter_by_buyer_id:
-            value:
-              buyer_id: '4545,4546'
-            summary: 'Фільтр за ідентифікатором покупця, допустимі значення: 1, 10, 4546, ...'
-          filter_by_buyer_phone:
-            value:
-              buyer_phone: '+1 555-234-1234,+1 555-234-1234'
-            summary: 'Фільтр за телефоном покупця.'
-          filter_by_buyer_email:
-            value:
-              buyer_email: 'john.doe@example.com,john.doe@example.com'
-            summary: 'Фільтр за email покупця'
-          filter_by_date_created:
-            value:
-              created_between: '2020-08-24 00:00:00, 2020-09-22 23:59:59'
-            summary: 'Фільтр за датою створення'
-          filter_by_date_updated:
-            value:
-              updated_between: '2020-08-24 00:00:00, 2020-09-22 23:59:59'
-            summary: 'Фільтр за датою оновлення'
-    responses:
-      200:
-        description: 'Успішна відповідь для запиту з усіма доступними значеннями параметра `include`. Результат у пагінованому вигляді.'
-        content:
-          application/json:
-            schema:
-              type: object
-              allOf:
-                -
-                  $ref: '#/components/schemas/PaginatedResponse'
-                -
-                  properties:
-                    data:
-                      type: array
-                      items:
-                        $ref: '#/components/schemas/BuyerWithIncludes'
-      401:
-        description: 'Помилка авторизації.'
-    security:
-      -
-        bearerAuth: {  }
-  post:
-    tags:
-      - Buyer
-    summary: 'Створення нового покупця'
-    description: 'Даний маршрут створює нового покупця.'
-    operationId: createNewBuyer
-    parameters:
-      -
-        $ref: '#/components/parameters/acceptParam'
-    requestBody:
-      description: "Приклад об'єкту запиту для створення нового покупця"
-      required: true
-      content:
-        application/json:
-          schema:
-            type: object
-            required:
-              - full_name
-            properties:
-              full_name:
-                description: "Повне ім'я покупця"
-                type: string
-                nullable: false
-                example: 'John Doe'
-              birthday:
-                description: 'Дата народження'
-                type: string
-                nullable: true
-                example: '2020-05-16'
-              email:
-                description: 'Перелік e-mail покупця'
-                type: array
-                nullable: true
-                items:
-                  type: string
-                example:
-                  - john.doe@mail.app
-                  - john.doe2@mail.app
-              phone:
-                description: 'Перелік телефонів покупця. Телефони рекомендуємо передавати в міжнародному форматі з плюсом'
-                type: array
-                nullable: true
-                items:
-                  type: string
-                example:
-                  - '+1 555-234-1234'
-                  - '+1 555-234-7777'
-              note:
-                description: 'Примітка до покупця'
-                type: string
-                nullable: true
-                example: Примітка
-              discount:
-                description: 'Знижка для покупця'
-                type: number
-                nullable: true
-                example: 10
-              company_id:
-                description: "ID компанії зв'язаної с покупцем"
-                type: integer
-                nullable: true
-                example: 112
-              manager_id:
-                description: "ID менеджера зв'язаного с покупцем"
-                type: integer
-                nullable: true
-                example: 12
-              shipping:
-                type: array
-                items:
-                  type: object
-                  properties:
-                    address:
-                      type: string
-                      nullable: true
-                      description: 'Адреса доставки'
-                    additional_address:
-                      type: string
-                    city:
-                      description: 'Місто доставки'
-                      type: string
-                      nullable: true
-                      example: Kyiv
-                    region:
-                      type: string
-                      nullable: true
-                      example: Kyivska
-                      description: 'Область, штат, регіон'
-                    zip_code:
-                      type: string
-                      nullable: true
-                      example: '50000'
-                      description: Індекс
-                    country:
-                      type: string
-                      nullable: true
-                      example: Ukraine
-                      description: 'Країна доставки'
-                    recipient_full_name:
-                      type: string
-                      nullable: true
-                      example: 'Ann Doe'
-                      description: "Ім'я отримувача (якщо відрізняється від покупця)"
-                    recipient_phone:
-                      type: string
-                      nullable: true
-                      example: '+1 555-234-7777'
-                      description: 'Номер телефону отримувача (якщо відрізняється від покупця). Рекомендуємо передавати в міжнародному форматі з плюсом'
-                    warehouse_ref:
-                      type: string
-                      nullable: true
-                      example: 1ec09d2e-e1c2-11e3-8c4a-0050568002cf
-                      description: "UUID складу Нової Пошти (обов'язково з параметром delivery_service_id - ID служби доставки НП в СРМ)"
-                    shipping_service:
-                      type: string
-                      nullable: true
-                      example: 'Нова Пошта'
-                      description: 'Назва служби доставки'
-              custom_fields:
-                type: array
-                description: 'Користувацькі поля для покупця'
-                items:
-                  type: object
-                  properties:
-                    uuid:
-                      description: 'Зовнішній ідентифікатор поля'
-                      type: string
-                      example: LD_1021
-                    value:
-                      description: 'Значення поля. Для полів з типом `select (список/мультисписок)` передавати масив рядків.'
-                      type: string
-                      example: Лорд
-    responses:
-      201:
-        description: 'Успішна відповідь від сервера.'
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/Buyer'
-      401:
-        description: 'Помилка авторизації.'
-    security:
-      -
-        bearerAuth: {  }
+      - bearerAuth: {}
 /buyer/import:
   post:
     tags:
@@ -418,8 +416,7 @@
     description: 'Даний маршрут імпортує покупців.'
     operationId: importBuyers
     parameters:
-      -
-        $ref: '#/components/parameters/acceptParam'
+      - $ref: '#/components/parameters/acceptParam'
     requestBody:
       description: "Приклад об'єкту запиту для імпорту покупців"
       required: true
@@ -455,7 +452,8 @@
                         - john.doe@mail.app
                         - john.doe2@mail.app
                     phone:
-                      description: 'Перелік телефонів покупця. Телефони рекомендуємо передавати в міжнародному форматі з плюсом'
+                      description: 'Перелік телефонів покупця. Телефони рекомендуємо передавати в
+                        міжнародному форматі з плюсом'
                       type: array
                       nullable: true
                       items:
@@ -523,12 +521,16 @@
                             type: string
                             nullable: true
                             example: '+1 555-234-7777'
-                            description: 'Номер телефону отримувача (якщо відрізняється від покупця). Рекомендуємо передавати в міжнародному форматі з плюсом'
+                            description: 'Номер телефону отримувача (якщо відрізняється від покупця).
+                              Рекомендуємо передавати в міжнародному форматі з
+                              плюсом'
                           warehouse_ref:
                             type: string
                             nullable: true
                             example: 1ec09d2e-e1c2-11e3-8c4a-0050568002cf
-                            description: "UUID складу Нової Пошти (обов'язково з параметром delivery_service_id - ID служби доставки НП в СРМ)"
+                            description: "UUID складу Нової Пошти (обов'язково з параметром
+                              delivery_service_id - ID служби доставки НП в
+                              СРМ)"
                           shipping_service:
                             type: string
                             nullable: true
@@ -545,7 +547,8 @@
                             type: string
                             example: LD_1021
                           value:
-                            description: 'Значення поля. Для полів з типом `select (список/мультисписок)` передавати масив рядків.'
+                            description: 'Значення поля. Для полів з типом `select (список/мультисписок)`
+                              передавати масив рядків.'
                             type: string
                             example: Лорд
     responses:
@@ -572,5 +575,4 @@
       401:
         description: 'Помилка авторизації.'
     security:
-      -
-        bearerAuth: {  }
+      - bearerAuth: {}
