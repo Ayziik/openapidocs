@@ -93,7 +93,7 @@ CallWithIncludes:
           example: "2020-05-16 17:00:07"
         last_logged_at:
           type: string
-          description: "Дата останньої логіну в UTC форматі"
+          description: "Дата останнього логіну в UTC форматі"
           example: "2020-05-16 17:00:07"
     call_route_service_id:
       type: integer
@@ -126,7 +126,7 @@ CallWithIncludes:
           type: boolean
           description: "Ознака того, чи активний сервіс"
           example: true
-        configuraion:
+        configuration:
           type: object
           description: "Конфігурація сервісу"
         created_at:
@@ -158,7 +158,7 @@ CallWithIncludes:
       description: "Клієнт з яким асоційований дзвінок"
       properties:
         id:
-          description: "ID кліента"
+          description: "ID клієнта"
           type: integer
           nullable: true
           example: 1
@@ -169,7 +169,7 @@ CallWithIncludes:
           example: 1
         full_name:
           type: string
-          description: "Ім'я кліента"
+          description: "Ім'я клієнта"
           example: "John Doe"
         phone:
           type: string
@@ -187,7 +187,7 @@ CallWithIncludes:
         email:
           type: string
           nullable: true
-          description: "E-mail кліента"
+          description: "E-mail клієнта"
           example: john.doe@mail.app
         note:
           type: string

@@ -281,7 +281,7 @@
                     nullable: true
                     example: 1ec09d2e-e1c2-11e3-8c4a-0050568002cf
                     description: "UUID складу Нової Пошти (обов'язково з параметром
-                      delivery_service_id - ID служби доставки НП в СРМ)"
+                      delivery_service_id - ID служби доставки НП в CRM)"
                   shipping_date:
                     type: string
                     nullable: true
@@ -361,14 +361,14 @@
                     picture:
                       type: string
                       nullable: true
-                      description: "Посилання на зображеня товару"
+                      description: "Посилання на зображення товару"
                       example: "https://i.etsystatic.com/22591342/r/il/52142a/2285383547/il_570xN.2285383547_h8a2.jpg"
                     properties:
                       required:
                         - name
                         - value
                       type: array
-                      description: "Атрибути товару. <br/> Важливо: Кожен атрибут мае включати в себе
+                      description: "Атрибути товару. <br/> Важливо: Кожен атрибут має включати в себе
                         поля `name` і `value`. <br/> Атрибут без цих ключів буде
                         ігноруватися "
                       items:
@@ -462,7 +462,7 @@
         style: simple
         explode: false
         schema:
-          type: string
+          type: integer
       - $ref: "#/components/parameters/acceptParam"
       - name: include
         in: query
@@ -475,7 +475,7 @@
         style: form
         explode: true
         schema:
-          type: string
+          type: integer
     responses:
       200:
         description: "Успішна відповідь від сервера."
@@ -499,7 +499,7 @@
         required: true
         description: "Ідентифікатор замовлення"
         schema:
-          type: string
+          type: integer
       - $ref: "#/components/parameters/acceptParam"
     description: "Даний маршрут оновлює існуюче замовлення. Зверніть увагу, що можна
       тільки оновити уже доданий в замовлення товар, а не додати новий. Також,
@@ -644,7 +644,7 @@
                     nullable: true
                     example: 1ec09d2e-e1c2-11e3-8c4a-0050568002cf
                     description: "UUID складу Нової Пошти (обов'язково з параметром
-                      delivery_service_id - ID служби доставки НП в СРМ)"
+                      delivery_service_id - ID служби доставки НП в CRM)"
                   shipping_date:
                     type: string
                     nullable: true
@@ -687,7 +687,7 @@
     parameters:
       - $ref: "#/components/parameters/acceptParam"
     requestBody:
-      description: "Приклад запиту для створення нових заломлень списком."
+      description: "Приклад запиту для створення нових замовлень списком."
       required: true
       content:
         application/json:
@@ -830,7 +830,7 @@
                           nullable: true
                           example: 1ec09d2e-e1c2-11e3-8c4a-0050568002cf
                           description: "UUID складу Нової Пошти (обов'язково з параметром
-                            delivery_service_id - ID служби доставки НП в СРМ)"
+                            delivery_service_id - ID служби доставки НП в CRM)"
                         shipping_date:
                           type: string
                           nullable: true

@@ -126,12 +126,12 @@
                 nullable: true
                 example: 10
               company_id:
-                description: "ID компанії зв'язаної с покупцем"
+                description: "ID компанії зв'язаної з покупцем"
                 type: integer
                 nullable: true
                 example: 112
               manager_id:
-                description: "ID менеджера зв'язаного с покупцем"
+                description: "ID менеджера зв'язаного з покупцем"
                 type: integer
                 nullable: true
                 example: 12
@@ -182,7 +182,7 @@
                       nullable: true
                       example: 1ec09d2e-e1c2-11e3-8c4a-0050568002cf
                       description: "UUID складу Нової Пошти (обов'язково з параметром
-                        delivery_service_id - ID служби доставки НП в СРМ)"
+                        delivery_service_id - ID служби доставки НП в CRM)"
                     shipping_service:
                       type: string
                       nullable: true
@@ -228,7 +228,7 @@
         style: simple
         explode: false
         schema:
-          type: string
+          type: integer
       - $ref: "#/components/parameters/acceptParam"
       - name: include
         in: query
@@ -239,7 +239,7 @@
         style: form
         explode: true
         schema:
-          type: string
+          type: integer
     responses:
       200:
         description: "Успішна відповідь для запиту з усіма доступними значеннями
@@ -264,7 +264,7 @@
         required: true
         description: "Ідентифікатор покупця"
         schema:
-          type: string
+          type: integer
       - $ref: "#/components/parameters/acceptParam"
     description: "Даний маршрут оновлює існуючого покупця."
     operationId: updateExistingBuyer
@@ -318,12 +318,12 @@
                 nullable: true
                 example: 10
               company_id:
-                description: "ID компанії зв'язаної с покупцем"
+                description: "ID компанії зв'язаної з покупцем"
                 type: integer
                 nullable: true
                 example: 112
               manager_id:
-                description: "ID менеджера зв'язаного с покупцем"
+                description: "ID менеджера зв'язаного з покупцем"
                 type: integer
                 nullable: true
                 example: 12
@@ -374,7 +374,7 @@
                       nullable: true
                       example: 1ec09d2e-e1c2-11e3-8c4a-0050568002cf
                       description: "UUID складу Нової Пошти (обов'язково з параметром
-                        delivery_service_id - ID служби доставки НП в СРМ)"
+                        delivery_service_id - ID служби доставки НП в CRM)"
                     shipping_service:
                       type: string
                       nullable: true
@@ -472,12 +472,12 @@
                       nullable: true
                       example: 10
                     company_id:
-                      description: "ID компанії зв'язаної с покупцем"
+                      description: "ID компанії зв'язаної з покупцем"
                       type: integer
                       nullable: true
                       example: 112
                     manager_id:
-                      description: "ID менеджера зв'язаного с покупцем"
+                      description: "ID менеджера зв'язаного з покупцем"
                       type: integer
                       nullable: true
                       example: 12

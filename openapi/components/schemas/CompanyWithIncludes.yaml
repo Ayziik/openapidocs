@@ -87,7 +87,7 @@ CompanyWithIncludes:
           example: "2020-05-16 17:00:07"
         last_logged_at:
           type: string
-          description: "Дата останньої логіну в UTC форматі"
+          description: "Дата останнього логіну в UTC форматі"
           example: "2020-05-16 17:00:07"
     buyer:
       type: object
@@ -114,18 +114,18 @@ CompanyWithIncludes:
           nullable: true
           example: "+1 555-234-1234"
         company_id:
-          description: "ID компанії зв'язаної с покупцем"
+          description: "ID компанії зв'язаної з покупцем"
           type: integer
           nullable: true
           example: 112
         manager_id:
-          description: "ID менеджера зв'язаного с покупцем"
+          description: "ID менеджера зв'язаного з покупцем"
           type: integer
           nullable: true
           example: 12
     custom_fields:
       type: array
-      description: "Користувацькі поля в компангії. Повертаються тільки заповнені, якщо вказати `include=custom_fields`"
+      description: "Користувацькі поля в компанії. Повертаються тільки заповнені, якщо вказати `include=custom_fields`"
       items:
         type: object
         properties:

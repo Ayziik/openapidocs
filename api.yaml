@@ -324,7 +324,7 @@ paths:
                       type: string
                       nullable: true
                       example: 1ec09d2e-e1c2-11e3-8c4a-0050568002cf
-                      description: UUID складу Нової Пошти (обов'язково з параметром delivery_service_id - ID служби доставки НП в СРМ)
+                      description: UUID складу Нової Пошти (обов'язково з параметром delivery_service_id - ID служби доставки НП в CRM)
                     shipping_date:
                       type: string
                       nullable: true
@@ -404,14 +404,14 @@ paths:
                       picture:
                         type: string
                         nullable: true
-                        description: Посилання на зображеня товару
+                        description: Посилання на зображення товару
                         example: https://i.etsystatic.com/22591342/r/il/52142a/2285383547/il_570xN.2285383547_h8a2.jpg
                       properties:
                         required:
                           - name
                           - value
                         type: array
-                        description: 'Атрибути товару. <br/> Важливо: Кожен атрибут мае включати в себе поля `name` і `value`. <br/> Атрибут без цих ключів буде ігноруватися '
+                        description: 'Атрибути товару. <br/> Важливо: Кожен атрибут має включати в себе поля `name` і `value`. <br/> Атрибут без цих ключів буде ігноруватися '
                         items:
                           type: object
                           properties:
@@ -498,7 +498,7 @@ paths:
           style: simple
           explode: false
           schema:
-            type: string
+            type: integer
         - $ref: '#/components/parameters/acceptParam'
         - name: include
           in: query
@@ -507,7 +507,7 @@ paths:
           style: form
           explode: true
           schema:
-            type: string
+            type: integer
       responses:
         '200':
           description: Успішна відповідь від сервера.
@@ -531,7 +531,7 @@ paths:
           required: true
           description: Ідентифікатор замовлення
           schema:
-            type: string
+            type: integer
         - $ref: '#/components/parameters/acceptParam'
       description: Даний маршрут оновлює існуюче замовлення. Зверніть увагу, що можна тільки оновити уже доданий в замовлення товар, а не додати новий. Також, якщо в замовленні вже є трекінг-код, то при повторному додаванні буде помилка.
       operationId: updateExistingOrder
@@ -667,7 +667,7 @@ paths:
                       type: string
                       nullable: true
                       example: 1ec09d2e-e1c2-11e3-8c4a-0050568002cf
-                      description: UUID складу Нової Пошти (обов'язково з параметром delivery_service_id - ID служби доставки НП в СРМ)
+                      description: UUID складу Нової Пошти (обов'язково з параметром delivery_service_id - ID служби доставки НП в CRM)
                     shipping_date:
                       type: string
                       nullable: true
@@ -708,7 +708,7 @@ paths:
       parameters:
         - $ref: '#/components/parameters/acceptParam'
       requestBody:
-        description: Приклад запиту для створення нових заломлень списком.
+        description: Приклад запиту для створення нових замовлень списком.
         required: true
         content:
           application/json:
@@ -847,7 +847,7 @@ paths:
                             type: string
                             nullable: true
                             example: 1ec09d2e-e1c2-11e3-8c4a-0050568002cf
-                            description: UUID складу Нової Пошти (обов'язково з параметром delivery_service_id - ID служби доставки НП в СРМ)
+                            description: UUID складу Нової Пошти (обов'язково з параметром delivery_service_id - ID служби доставки НП в CRM)
                           shipping_date:
                             type: string
                             nullable: true
@@ -2544,12 +2544,12 @@ paths:
                   nullable: true
                   example: 10
                 company_id:
-                  description: ID компанії зв'язаної с покупцем
+                  description: ID компанії зв'язаної з покупцем
                   type: integer
                   nullable: true
                   example: 112
                 manager_id:
-                  description: ID менеджера зв'язаного с покупцем
+                  description: ID менеджера зв'язаного з покупцем
                   type: integer
                   nullable: true
                   example: 12
@@ -2598,7 +2598,7 @@ paths:
                         type: string
                         nullable: true
                         example: 1ec09d2e-e1c2-11e3-8c4a-0050568002cf
-                        description: UUID складу Нової Пошти (обов'язково з параметром delivery_service_id - ID служби доставки НП в СРМ)
+                        description: UUID складу Нової Пошти (обов'язково з параметром delivery_service_id - ID служби доставки НП в CRM)
                       shipping_service:
                         type: string
                         nullable: true
@@ -2643,7 +2643,7 @@ paths:
           style: simple
           explode: false
           schema:
-            type: string
+            type: integer
         - $ref: '#/components/parameters/acceptParam'
         - name: include
           in: query
@@ -2652,7 +2652,7 @@ paths:
           style: form
           explode: true
           schema:
-            type: string
+            type: integer
       responses:
         '200':
           description: Успішна відповідь для запиту з усіма доступними значеннями параметра `include`.
@@ -2676,7 +2676,7 @@ paths:
           required: true
           description: Ідентифікатор покупця
           schema:
-            type: string
+            type: integer
         - $ref: '#/components/parameters/acceptParam'
       description: Даний маршрут оновлює існуючого покупця.
       operationId: updateExistingBuyer
@@ -2729,12 +2729,12 @@ paths:
                   nullable: true
                   example: 10
                 company_id:
-                  description: ID компанії зв'язаної с покупцем
+                  description: ID компанії зв'язаної з покупцем
                   type: integer
                   nullable: true
                   example: 112
                 manager_id:
-                  description: ID менеджера зв'язаного с покупцем
+                  description: ID менеджера зв'язаного з покупцем
                   type: integer
                   nullable: true
                   example: 12
@@ -2783,7 +2783,7 @@ paths:
                         type: string
                         nullable: true
                         example: 1ec09d2e-e1c2-11e3-8c4a-0050568002cf
-                        description: UUID складу Нової Пошти (обов'язково з параметром delivery_service_id - ID служби доставки НП в СРМ)
+                        description: UUID складу Нової Пошти (обов'язково з параметром delivery_service_id - ID служби доставки НП в CRM)
                       shipping_service:
                         type: string
                         nullable: true
@@ -2879,12 +2879,12 @@ paths:
                         nullable: true
                         example: 10
                       company_id:
-                        description: ID компанії зв'язаної с покупцем
+                        description: ID компанії зв'язаної з покупцем
                         type: integer
                         nullable: true
                         example: 112
                       manager_id:
-                        description: ID менеджера зв'язаного с покупцем
+                        description: ID менеджера зв'язаного з покупцем
                         type: integer
                         nullable: true
                         example: 12
@@ -4535,7 +4535,7 @@ components:
     acceptParam:
       name: Accept
       in: header
-      description: application/json
+      description: Очікуваний формат відповіді
       required: false
       style: simple
       explode: false
@@ -4553,7 +4553,7 @@ components:
     pageParam:
       name: page
       in: query
-      description: Вкажіть сторінку
+      description: Номер сторінки для пагінації
       required: false
       style: form
       explode: true
@@ -4740,7 +4740,7 @@ components:
           nullable: true
           example: null
         buyer_comment:
-          description: Коментар клієнта менеджера
+          description: Коментар клієнта
           type: string
           nullable: true
           example: Hello from buyer
@@ -4807,12 +4807,12 @@ components:
               nullable: true
               example: +1 555-234-1234
             company_id:
-              description: ID компанії зв'язаної с покупцем
+              description: ID компанії зв'язаної з покупцем
               type: integer
               nullable: true
               example: 112
             manager_id:
-              description: ID менеджера зв'язаного с покупцем
+              description: ID менеджера зв'язаного з покупцем
               type: integer
               nullable: true
               example: 12
@@ -4881,14 +4881,14 @@ components:
               picture:
                 type: string
                 nullable: true
-                description: Посилання на зображеня товару
+                description: Посилання на зображення товару
                 example: https://i.etsystatic.com/22591342/r/il/52142a/2285383547/il_570xN.2285383547_h8a2.jpg
               properties:
                 required:
                   - name
                   - value
                 type: array
-                description: 'Атрибути товару. <br/> Важливо: Кожен атрибут мае включати в себе поля `name` і `value`. <br/> Атрибут без цих ключів буде ігноруватися '
+                description: 'Атрибути товару. <br/> Важливо: Кожен атрибут має включати в себе поля `name` і `value`. <br/> Атрибут без цих ключів буде ігноруватися '
                 items:
                   type: object
                   properties:
@@ -5041,7 +5041,7 @@ components:
               example: '2020-05-16 17:00:07'
             last_logged_at:
               type: string
-              description: Дата останньої логіну в UTC форматі
+              description: Дата останнього логіну в UTC форматі
               example: '2020-05-16 17:00:07'
         tags:
           type: array
@@ -5097,7 +5097,7 @@ components:
               example: 1
             is_closing_order:
               type: boolean
-              description: Визначає, чи може замовлення бути відмічене як закрите після присвоения статуса
+              description: Визначає, чи може замовлення бути відмічене як закрите після присвоєння статусу
               example: true
             is_reserved:
               type: boolean
@@ -5439,7 +5439,7 @@ components:
                 example: '2020-05-16 17:00:07'
               last_logged_at:
                 type: string
-                description: Дата останньої логіну в UTC форматі
+                description: Дата останнього логіну в UTC форматі
                 example: '2020-05-16 17:00:07'
     CustomField:
       type: object
@@ -5714,7 +5714,7 @@ components:
           example: 1
         is_closing_order:
           type: boolean
-          description: Визначає, чи може замовлення бути відмічене як закрите після присвоения статуса
+          description: Визначає, чи може замовлення бути відмічене як закрите після присвоєння статусу
           example: true
         is_reserved:
           type: boolean
@@ -6126,7 +6126,7 @@ components:
               type: string
               nullable: true
               example: null
-              description: Посилання на зображеня контакту
+              description: Посилання на зображення контакту
             additional_details:
               type: array
               items:
@@ -6137,7 +6137,7 @@ components:
               type: integer
               nullable: true
               example: 1
-              description: ID кліента
+              description: ID клієнта
             social_name:
               type: string
               example: telegram
@@ -6158,7 +6158,7 @@ components:
               description: Клієнт з яким асоційований контакт
               properties:
                 id:
-                  description: ID кліента
+                  description: ID клієнта
                   type: integer
                   nullable: true
                   example: 1
@@ -6169,7 +6169,7 @@ components:
                   example: 1
                 full_name:
                   type: string
-                  description: Ім'я кліента
+                  description: Ім'я клієнта
                   example: John Doe
                 phone:
                   type: string
@@ -6187,7 +6187,7 @@ components:
                 email:
                   type: string
                   nullable: true
-                  description: E-mail кліента
+                  description: E-mail клієнта
                   example: john.doe@mail.app
                 note:
                   type: string
@@ -6267,7 +6267,7 @@ components:
               picture:
                 type: string
                 nullable: true
-                description: Посилання на зображеня товару
+                description: Посилання на зображення товару
                 example: https://i.etsystatic.com/22591342/r/il/52142a/2285383547/il_570xN.2285383547_h8a2.jpg
               offer:
                 description: Інформація про товар в каталозі keyCRM
@@ -6388,7 +6388,7 @@ components:
               example: '2020-05-16 17:00:07'
             last_logged_at:
               type: string
-              description: Дата останньої логіну в UTC форматі
+              description: Дата останнього логіну в UTC форматі
               example: '2020-05-16 17:00:07'
         status:
           description: Інформація про поточний статус картки воронки. Повертається тільки, якщо вказати `include=status`
@@ -7005,17 +7005,17 @@ components:
               nullable: false
               example: Keycrm
             full_name:
-              description: Пона назва компанії
+              description: Повна назва компанії
               type: string
               nullable: true
               example: ТОВ Кейцрм
             address:
-              description: Адресса компанії
+              description: Адреса компанії
               type: string
               nullable: true
               example: ТОВ Кейцрм
-            banking_detailse:
-              description: Банківскі деталі
+            banking_details:
+              description: Банківські деталі
               type: string
               nullable: true
               example: UA123456789101112
@@ -7090,7 +7090,7 @@ components:
               example: '2020-05-16 17:00:07'
             last_logged_at:
               type: string
-              description: Дата останньої логіну в UTC форматі
+              description: Дата останнього логіну в UTC форматі
               example: '2020-05-16 17:00:07'
         loyalty:
           description: Інформація про програми лояльності. Повертається тільки заповнені, якщо вказати `include=loyalty`
@@ -7116,10 +7116,10 @@ components:
                 example: 20
               amount:
                 description: Сума покупок
-                type: integer
+                type: number
                 example: 270.02
               discount:
-                description: Поточна знижка покпуця по програмі лояльності
+                description: Поточна знижка покупця по програмі лояльності
                 type: integer
                 example: 5
         shipping:
@@ -7168,7 +7168,7 @@ components:
                 type: string
                 nullable: true
                 example: 1ec09d2e-e1c2-11e3-8c4a-0050568002cf
-                description: UUID складу Нової Пошти (обов'язково з параметром delivery_service_id - ID служби доставки НП в СРМ)
+                description: UUID складу Нової Пошти (обов'язково з параметром delivery_service_id - ID служби доставки НП в CRM)
         custom_fields:
           type: array
           description: Користувацькі поля для покупця
@@ -7313,7 +7313,7 @@ components:
           example: '2020-05-16 17:00:07'
         last_logged_at:
           type: string
-          description: Дата останньої логіну в UTC форматі
+          description: Дата останнього логіну в UTC форматі
           example: '2020-05-16 17:00:07'
     Company:
       required:
@@ -7456,7 +7456,7 @@ components:
               example: '2020-05-16 17:00:07'
             last_logged_at:
               type: string
-              description: Дата останньої логіну в UTC форматі
+              description: Дата останнього логіну в UTC форматі
               example: '2020-05-16 17:00:07'
         buyer:
           type: object
@@ -7483,18 +7483,18 @@ components:
               nullable: true
               example: +1 555-234-1234
             company_id:
-              description: ID компанії зв'язаної с покупцем
+              description: ID компанії зв'язаної з покупцем
               type: integer
               nullable: true
               example: 112
             manager_id:
-              description: ID менеджера зв'язаного с покупцем
+              description: ID менеджера зв'язаного з покупцем
               type: integer
               nullable: true
               example: 12
         custom_fields:
           type: array
-          description: Користувацькі поля в компангії. Повертаються тільки заповнені, якщо вказати `include=custom_fields`
+          description: Користувацькі поля в компанії. Повертаються тільки заповнені, якщо вказати `include=custom_fields`
           items:
             type: object
             properties:
@@ -7758,7 +7758,7 @@ components:
               example: '2020-05-16 17:00:07'
             last_logged_at:
               type: string
-              description: Дата останньої логіну в UTC форматі
+              description: Дата останнього логіну в UTC форматі
               example: '2020-05-16 17:00:07'
         call_route_service_id:
           type: integer
@@ -7791,7 +7791,7 @@ components:
               type: boolean
               description: Ознака того, чи активний сервіс
               example: true
-            configuraion:
+            configuration:
               type: object
               description: Конфігурація сервісу
             created_at:
@@ -7823,7 +7823,7 @@ components:
           description: Клієнт з яким асоційований дзвінок
           properties:
             id:
-              description: ID кліента
+              description: ID клієнта
               type: integer
               nullable: true
               example: 1
@@ -7834,7 +7834,7 @@ components:
               example: 1
             full_name:
               type: string
-              description: Ім'я кліента
+              description: Ім'я клієнта
               example: John Doe
             phone:
               type: string
@@ -7852,7 +7852,7 @@ components:
             email:
               type: string
               nullable: true
-              description: E-mail кліента
+              description: E-mail клієнта
               example: john.doe@mail.app
             note:
               type: string

@@ -116,7 +116,7 @@ PipelineCardWithIncludes:
           type: string
           nullable: true
           example: null
-          description: "Посилання на зображеня контакту"
+          description: "Посилання на зображення контакту"
         additional_details:
           type: array
           items:
@@ -127,7 +127,7 @@ PipelineCardWithIncludes:
           type: integer
           nullable: true
           example: 1
-          description: "ID кліента"
+          description: "ID клієнта"
         social_name:
           type: string
           example: telegram
@@ -148,7 +148,7 @@ PipelineCardWithIncludes:
           description: "Клієнт з яким асоційований контакт"
           properties:
             id:
-              description: "ID кліента"
+              description: "ID клієнта"
               type: integer
               nullable: true
               example: 1
@@ -159,7 +159,7 @@ PipelineCardWithIncludes:
               example: 1
             full_name:
               type: string
-              description: "Ім'я кліента"
+              description: "Ім'я клієнта"
               example: "John Doe"
             phone:
               type: string
@@ -177,7 +177,7 @@ PipelineCardWithIncludes:
             email:
               type: string
               nullable: true
-              description: "E-mail кліента"
+              description: "E-mail клієнта"
               example: john.doe@mail.app
             note:
               type: string
@@ -257,7 +257,7 @@ PipelineCardWithIncludes:
           picture:
             type: string
             nullable: true
-            description: "Посилання на зображеня товару"
+            description: "Посилання на зображення товару"
             example: "https://i.etsystatic.com/22591342/r/il/52142a/2285383547/il_570xN.2285383547_h8a2.jpg"
           offer:
             description: "Інформація про товар в каталозі keyCRM"
@@ -378,7 +378,7 @@ PipelineCardWithIncludes:
           example: "2020-05-16 17:00:07"
         last_logged_at:
           type: string
-          description: "Дата останньої логіну в UTC форматі"
+          description: "Дата останнього логіну в UTC форматі"
           example: "2020-05-16 17:00:07"
     status:
       description: "Інформація про поточний статус картки воронки. Повертається тільки, якщо вказати `include=status`"

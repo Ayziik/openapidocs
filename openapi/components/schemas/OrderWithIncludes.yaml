@@ -64,7 +64,7 @@ OrderWithIncludes:
       nullable: true
       example: null
     buyer_comment:
-      description: "Коментар клієнта менеджера"
+      description: "Коментар клієнта"
       type: string
       nullable: true
       example: "Hello from buyer"
@@ -131,12 +131,12 @@ OrderWithIncludes:
           nullable: true
           example: "+1 555-234-1234"
         company_id:
-          description: "ID компанії зв'язаної с покупцем"
+          description: "ID компанії зв'язаної з покупцем"
           type: integer
           nullable: true
           example: 112
         manager_id:
-          description: "ID менеджера зв'язаного с покупцем"
+          description: "ID менеджера зв'язаного з покупцем"
           type: integer
           nullable: true
           example: 12
@@ -205,14 +205,14 @@ OrderWithIncludes:
           picture:
             type: string
             nullable: true
-            description: "Посилання на зображеня товару"
+            description: "Посилання на зображення товару"
             example: "https://i.etsystatic.com/22591342/r/il/52142a/2285383547/il_570xN.2285383547_h8a2.jpg"
           properties:
             required:
               - name
               - value
             type: array
-            description: "Атрибути товару. <br/> Важливо: Кожен атрибут мае включати в себе поля `name` і `value`. <br/> Атрибут без цих ключів буде ігноруватися "
+            description: "Атрибути товару. <br/> Важливо: Кожен атрибут має включати в себе поля `name` і `value`. <br/> Атрибут без цих ключів буде ігноруватися "
             items:
               type: object
               properties:
@@ -365,7 +365,7 @@ OrderWithIncludes:
           example: "2020-05-16 17:00:07"
         last_logged_at:
           type: string
-          description: "Дата останньої логіну в UTC форматі"
+          description: "Дата останнього логіну в UTC форматі"
           example: "2020-05-16 17:00:07"
     tags:
       type: array
@@ -421,7 +421,7 @@ OrderWithIncludes:
           example: 1
         is_closing_order:
           type: boolean
-          description: "Визначає, чи може замовлення бути відмічене як закрите після присвоения статуса"
+          description: "Визначає, чи може замовлення бути відмічене як закрите після присвоєння статусу"
           example: true
         is_reserved:
           type: boolean
@@ -763,5 +763,5 @@ OrderWithIncludes:
             example: "2020-05-16 17:00:07"
           last_logged_at:
             type: string
-            description: "Дата останньої логіну в UTC форматі"
+            description: "Дата останнього логіну в UTC форматі"
             example: "2020-05-16 17:00:07"

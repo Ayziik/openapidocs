@@ -26,7 +26,7 @@ Status:
       example: 1
     is_closing_order:
       type: boolean
-      description: "Визначає, чи може замовлення бути відмічене як закрите після присвоения статуса"
+      description: "Визначає, чи може замовлення бути відмічене як закрите після присвоєння статусу"
       example: true
     is_reserved:
       type: boolean

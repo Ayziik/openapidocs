@@ -2,7 +2,7 @@ parameters:
   acceptParam:
     name: Accept
     in: header
-    description: application/json
+    description: "Очікуваний формат відповіді"
     required: false
     style: simple
     explode: false
@@ -20,7 +20,7 @@ parameters:
   pageParam:
     name: page
     in: query
-    description: "Вкажіть сторінку"
+    description: "Номер сторінки для пагінації"
     required: false
     style: form
     explode: true

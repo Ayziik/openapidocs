@@ -58,5 +58,5 @@ User:
       example: "2020-05-16 17:00:07"
     last_logged_at:
       type: string
-      description: "Дата останньої логіну в UTC форматі"
+      description: "Дата останнього логіну в UTC форматі"
       example: "2020-05-16 17:00:07"

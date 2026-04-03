@@ -51,17 +51,17 @@ BuyerWithIncludes:
           nullable: false
           example: Keycrm
         full_name:
-          description: "Пона назва компанії"
+          description: "Повна назва компанії"
           type: string
           nullable: true
           example: "ТОВ Кейцрм"
         address:
-          description: "Адресса компанії"
+          description: "Адреса компанії"
           type: string
           nullable: true
           example: "ТОВ Кейцрм"
-        banking_detailse:
-          description: "Банківскі деталі"
+        banking_details:
+          description: "Банківські деталі"
           type: string
           nullable: true
           example: UA123456789101112
@@ -136,7 +136,7 @@ BuyerWithIncludes:
           example: "2020-05-16 17:00:07"
         last_logged_at:
           type: string
-          description: "Дата останньої логіну в UTC форматі"
+          description: "Дата останнього логіну в UTC форматі"
           example: "2020-05-16 17:00:07"
     loyalty:
       description: "Інформація про програми лояльності. Повертається тільки заповнені, якщо вказати `include=loyalty`"
@@ -162,10 +162,10 @@ BuyerWithIncludes:
             example: 20
           amount:
             description: "Сума покупок"
-            type: integer
+            type: number
             example: 270.02
           discount:
-            description: "Поточна знижка покпуця по програмі лояльності"
+            description: "Поточна знижка покупця по програмі лояльності"
             type: integer
             example: 5
     shipping:
@@ -214,7 +214,7 @@ BuyerWithIncludes:
             type: string
             nullable: true
             example: 1ec09d2e-e1c2-11e3-8c4a-0050568002cf
-            description: "UUID складу Нової Пошти (обов'язково з параметром delivery_service_id - ID служби доставки НП в СРМ)"
+            description: "UUID складу Нової Пошти (обов'язково з параметром delivery_service_id - ID служби доставки НП в CRM)"
     custom_fields:
       type: array
       description: "Користувацькі поля для покупця"
