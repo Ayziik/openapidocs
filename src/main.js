@@ -170,8 +170,8 @@ createApiReference('#app', {
   .dark-mode .t-doc__sidebar,
   .dark-mode .sidebar {
     --scalar-sidebar-background-1: #131B27;
-    --scalar-sidebar-color-1: #FFFFFF;
-    --scalar-sidebar-color-2: rgba(255, 255, 255, 0.60);
+    --scalar-sidebar-color-1: #ffffff;
+    --scalar-sidebar-color-2: #CED6E0;
     --scalar-sidebar-border-color: rgba(255, 255, 255, 0.06);
     --scalar-sidebar-item-hover-background: rgba(255, 255, 255, 0.05);
     --scalar-sidebar-item-active-background: rgba(0, 166, 242, 0.12);
