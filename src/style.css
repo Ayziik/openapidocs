@@ -1,0 +1,95 @@
+/* ============================================================
+   BRAND VARIABLES — CUSTOMIZE HERE
+   ============================================================ */
+:root {
+  --brand-primary: #141414;            /* CUSTOMIZE: main brand color (used for header background) */
+  --brand-secondary: #e2e2e2;          /* CUSTOMIZE: secondary color (used for header text) */
+  --brand-accent: #00A6F2;             /* CUSTOMIZE: accent color (used for links and hover states) */
+  --header-height: 56px;               /* CUSTOMIZE: adjust header height */
+  --header-padding: 0 24px;            /* CUSTOMIZE: horizontal padding inside header */
+  --logo-height: 32px;                 /* CUSTOMIZE: logo display height */
+  --font-family: system-ui, sans-serif; /* CUSTOMIZE: your font stack */
+}
+
+/* ============================================================
+   RESET
+   ============================================================ */
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+html, body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  font-family: var(--font-family);
+}
+
+/* ============================================================
+   HEADER
+   ============================================================ */
+header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: var(--header-height);
+  padding: var(--header-padding);
+  background-color: var(--brand-primary);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.07);
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
+
+header img#header-logo {
+  height: var(--logo-height);
+  width: auto;
+  display: block;
+}
+
+header nav {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+}
+
+header nav a {
+  color: var(--brand-secondary);
+  text-decoration: none;
+  font-size: 14px;
+  opacity: 0.85;
+  transition: opacity 0.15s ease;
+}
+
+header nav a:hover {
+  opacity: 1;
+  color: var(--brand-accent);
+}
+
+/* ============================================================
+   BUTTON STYLES
+   ============================================================ */
+.try-btn {
+  display: inline-block;
+  padding: 8px 16px;
+  border: 1px solid rgba(255, 255, 255, 0.6);
+  color: #ffffff;
+  border-radius: 6px;
+  font-weight: 500;
+  transition: all 0.2s ease;
+}
+
+.try-btn:hover {
+  background-color: #ffffff;
+  color: var(--brand-primary) !important;
+  border-color: #ffffff;
+  opacity: 1 !important;
+}
+
+/* ============================================================
+   SCALAR CONTAINER
+   ============================================================ */
+#app {
+  height: calc(100vh - var(--header-height));
+  overflow: auto;
+}

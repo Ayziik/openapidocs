@@ -1,0 +1,21 @@
+{
+  "name": "api-docs",
+  "private": true,
+  "version": "1.0.0",
+  "description": "Scalar-powered OpenAPI documentation site",
+  "scripts": {
+    "bundle": "node tools/bundle.js && redocly bundle api.tmp.yaml -o api.yaml && node -e \"require('fs').unlinkSync('api.tmp.yaml')\"",
+    "dev": "npm run bundle && vite",
+    "build": "npm run bundle && vite build",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "@scalar/api-reference": "^1.49.8"
+  },
+  "devDependencies": {
+    "@redocly/cli": "^2.25.4",
+    "vite": "^8.0.3",
+    "vite-plugin-static-copy": "^4.0.0",
+    "yaml": "^2.8.3"
+  }
+}
