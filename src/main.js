@@ -1,9 +1,10 @@
-import "@scalar/api-reference/style.css";
-import { createApiReference } from "@scalar/api-reference";
+import '@scalar/api-reference/style.css'
+import { createApiReference } from '@scalar/api-reference'
 
-createApiReference("#app", {
+createApiReference('#app', {
+
   // ── OpenAPI source ──────────────────────────────────────────────
-  url: "./api.yaml",
+  url: './api.yaml',
   // Або передати контент напряму:
   // content: '{ "openapi": "3.1.0", ... }',
 
@@ -11,35 +12,35 @@ createApiReference("#app", {
   // Варіанти: 'alternate' | 'default' | 'moon' | 'purple' | 'solarized'
   //           'bluePlanet' | 'saturn' | 'kepler' | 'mars' | 'deepSpace'
   //           'laserwave' | 'none'
-  theme: "saturn",
+  theme: 'saturn',
 
   // ── Dark mode ───────────────────────────────────────────────────
   darkMode: true,
-  forceDarkModeState: "dark",
+  forceDarkModeState: 'dark',
   hideDarkModeToggle: true,
 
   // ── Layout ──────────────────────────────────────────────────────
-  layout: "modern",
+  layout: 'modern',
 
   // ── Metadata ────────────────────────────────────────────────────
   metaData: {
-    title: "keyCRM API Reference",
-    description: "Official REST API documentation for keyCRM",
-    ogDescription: "Official REST API documentation for keyCRM",
-    ogTitle: "keyCRM API Reference",
-    ogImage: "https://example.com/image.png",
-    twitterCard: "summary_large_image",
+    title: 'keyCRM API Reference',
+    description: 'Official REST API documentation for keyCRM',
+    ogDescription: 'Official REST API documentation for keyCRM',
+    ogTitle: 'keyCRM API Reference',
+    ogImage: 'https://example.com/image.png',
+    twitterCard: 'summary_large_image',
   },
 
   // ── Favicon ─────────────────────────────────────────────────────
-  favicon: "/favicon.png",
+  favicon: '/favicon.png',
 
   // ── Sidebar ─────────────────────────────────────────────────────
   showSidebar: true,
 
   // ── Search ──────────────────────────────────────────────────────
   hideSearch: false,
-  searchHotKey: "k",
+  searchHotKey: 'k',
 
   // ── Tags / sections ─────────────────────────────────────────────
   defaultOpenFirstTag: true,
@@ -54,12 +55,12 @@ createApiReference("#app", {
 
   // ── Operations ──────────────────────────────────────────────────
   showOperationId: false,
-  operationTitleSource: "summary",
+  operationTitleSource: 'summary',
   orderRequiredPropertiesFirst: true,
-  orderSchemaPropertiesBy: "preserve",
+  orderSchemaPropertiesBy: 'preserve',
 
   // ── Developer tools bar ─────────────────────────────────────────
-  showDeveloperTools: "never",
+  showDeveloperTools: 'never',
 
   // ── Test Request button ─────────────────────────────────────────
   hideTestRequestButton: false,
@@ -92,12 +93,12 @@ createApiReference("#app", {
 
   // ── Default HTTP client ─────────────────────────────────────────
   defaultHttpClient: {
-    targetKey: "node",
-    clientKey: "fetch",
+    targetKey: 'node',
+    clientKey: 'fetch',
   },
 
   // ── Download button ─────────────────────────────────────────────
-  documentDownloadType: "both",
+  documentDownloadType: 'both',
 
   // ── Agent (AI chat) ─────────────────────────────────────────────
   agent: {
@@ -105,14 +106,14 @@ createApiReference("#app", {
   },
 
   // ── MCP ─────────────────────────────────────────────────────────
-  mcp: { name: "My API", url: "https://mcp.example.com", disabled: true },
+  mcp: { name: 'My API', url: 'https://mcp.example.com', disabled: true },
 
   // ── Authentication ──────────────────────────────────────────────
   authentication: {
-    preferredSecurityScheme: "bearerAuth",
+    preferredSecurityScheme: 'bearerAuth',
     securitySchemes: {
       bearerAuth: {
-        token: "",
+        token: '',
       },
     },
   },
@@ -128,34 +129,34 @@ createApiReference("#app", {
 
   // ── Custom CSS ──────────────────────────────────────────────────
   customCss: `
-  /* ── Палітра: холодний сланцево-синій + бренд #00A6F2 ── */
+  /* ── Тональна ієрархія: один темний колір, три рівні глибини ── */
   .dark-mode {
-    /* Базовий фон — глибокий холодний темно-синій */
+    /* Базовий фон — найтемніший */
     --scalar-background-1: #0D1117;
 
-    /* Фон карток і блоків */
-    --scalar-background-2: #161C26;
+    /* Картки і блоки — помітно світліші */
+    --scalar-background-2: #0D1117;
 
-    /* Фон hover і вкладених елементів */
-    --scalar-background-3: #1A2230;
+    /* Hover і вкладені елементи */
+    --scalar-background-3: #213040;
 
-    /* Розділювачі — легкий бренд-тінт замість нейтрального білого */
-    --scalar-border-color: rgba(0, 166, 242, 0.08);
+    /* Розділювачі */
+    --scalar-border-color: rgba(255, 255, 255, 0.08);
 
-    /* Основний текст — холодний білий під палітру */
-    --scalar-color-1: #DDE6F0;
+    /* Основний текст — максимальний контраст */
+    --scalar-color-1: #FFFFFF;
 
-    /* Вторинний текст — описи */
-    --scalar-color-2: rgba(221, 230, 240, 0.50);
+    /* Вторинний текст */
+    --scalar-color-2: rgba(255, 255, 255, 0.55);
 
-    /* Третинний текст — плейсхолдери */
-    --scalar-color-3: rgba(221, 230, 240, 0.28);
+    /* Третинний текст */
+    --scalar-color-3: rgba(255, 255, 255, 0.30);
 
-    /* Акцент — фірмовий #00A6F2 */
+    /* Акцент */
     --scalar-color-accent: #00A6F2;
 
     /* Фон акцентних елементів */
-    --scalar-background-accent: rgba(0, 166, 242, 0.10);
+    --scalar-background-accent: rgba(0, 166, 242, 0.12);
   }
 
   /* ── Кнопки ── */
@@ -165,35 +166,47 @@ createApiReference("#app", {
     --scalar-button-1-color: #0D1117;
   }
 
-  /* ── Сайдбар — найтемніший шар ── */
+  /* ── Сайдбар — один рівень світліший за базу ── */
   .dark-mode .t-doc__sidebar,
   .dark-mode .sidebar {
-    --scalar-sidebar-background-1: #0A0F15;
-    --scalar-sidebar-color-1: #F0F6FF;
-    --scalar-sidebar-color-2: rgba(240, 246, 255, 0.65);
-    --scalar-sidebar-border-color: rgba(0, 166, 242, 0.06);
-    --scalar-sidebar-item-hover-background: rgba(0, 166, 242, 0.06);
+    --scalar-sidebar-background-1: #131B27;
+    --scalar-sidebar-color-1: #FFFFFF;
+    --scalar-sidebar-color-2: rgba(255, 255, 255, 0.60);
+    --scalar-sidebar-border-color: rgba(255, 255, 255, 0.06);
+    --scalar-sidebar-item-hover-background: rgba(255, 255, 255, 0.05);
     --scalar-sidebar-item-active-background: rgba(0, 166, 242, 0.12);
     --scalar-sidebar-item-hover-color: #00A6F2;
     --scalar-sidebar-color-active: #00A6F2;
-    --scalar-sidebar-search-background: #13181F;
-    --scalar-sidebar-search-border-color: rgba(0, 166, 242, 0.10);
-    --scalar-sidebar-search-color: rgba(221, 230, 240, 0.28);
+    --scalar-sidebar-search-background: #1A2333;
+    --scalar-sidebar-search-border-color: rgba(255, 255, 255, 0.08);
+    --scalar-sidebar-search-color: rgba(255, 255, 255, 0.30);
   }
 
-  /* ── Code panel — найглибший шар ── */
+  /* ── Code panel — трохи світліший за базу, окремий відтінок ── */
   .dark-mode .scalar-code-block,
   .dark-mode .request-body-card,
   .dark-mode pre {
-    --scalar-background-1: #0A0F15;
-    --scalar-background-2: #13181F;
+    --scalar-background-1: #111923;
+    --scalar-background-2: #1A2333;
+    --scalar-color-1: #FFFFFF;
+    --scalar-color-2: rgba(255, 255, 255, 0.55);
+    --scalar-border-color: rgba(255, 255, 255, 0.06);
   }
 
-  /* ── Картки ендпоінтів ── */
+  /* ── Картки ендпоінтів — виступають над базовим фоном ── */
   .dark-mode .endpoints-card,
   .dark-mode .request-card,
   .dark-mode .response-card {
-    --scalar-background-2: #1C2433 !important;
+    --scalar-background-2: #1A2333 !important;
+  }
+
+  /* ── Intro блоки (Server і Authentication) — той самий рівень що й картки ── */
+  .dark-mode .scalar-reference-intro-server,
+  .dark-mode .scalar-reference-intro-auth {
+    --scalar-background-1: #1A2333 !important;
+    --scalar-background-2: #1A2333 !important;
+    --scalar-background-3: #213040 !important;
+    --scalar-border-color: rgba(255, 255, 255, 0.08) !important;
   }
 
   /* ── Активний item у sidebar:
@@ -207,4 +220,4 @@ createApiReference("#app", {
   .darklight-reference > div:last-child a[href="https://www.scalar.com"] { display: none !important; }
   .introduction-card-item.scalar-reference-intro-clients { display: none !important; }
 `,
-});
+})

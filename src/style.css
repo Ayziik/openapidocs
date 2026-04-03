@@ -2,11 +2,16 @@
    BRAND VARIABLES — CUSTOMIZE HERE
    ============================================================ */
 :root {
-  --brand-primary: #0D1117;             /* Базовий фон — холодний темно-синій */
-  --brand-surface: #13181F;             /* Фон хедера — один крок світліший */
-  --brand-secondary: #DDE6F0;           /* Основний текст — холодний білий */
-  --brand-accent: #00A6F2;              /* Акцент — фірмовий keyCRM */
-  --brand-border: rgba(0, 166, 242, 0.10); /* Розділювачі з бренд-тінтом */
+  --brand-primary: #0D1117;
+  /* Базовий фон */
+  --brand-surface: #131B27;
+  /* Хедер — той самий рівень що і sidebar */
+  --brand-secondary: #ffffff;
+  /* Текст у хедері */
+  --brand-accent: #00A6F2;
+  /* Акцент — фірмовий keyCRM */
+  --brand-border: rgba(255, 255, 255, 0.07);
+  /* Розділювач хедера */
   --header-height: 56px;
   --header-padding: 0 24px;
   --logo-height: 32px;
@@ -16,11 +21,14 @@
 /* ============================================================
    RESET
    ============================================================ */
-*, *::before, *::after {
+*,
+*::before,
+*::after {
   box-sizing: border-box;
 }
 
-html, body {
+html,
+body {
   margin: 0;
   padding: 0;
   height: 100%;
@@ -59,7 +67,6 @@ header nav a {
   color: var(--brand-secondary);
   text-decoration: none;
   font-size: 14px;
-  opacity: 0.65;
   transition: opacity 0.15s ease, color 0.15s ease;
 }
 
