@@ -1,0 +1,43 @@
+Payment:
+  required:
+    - amount
+    - payment_method_id
+  type: object
+  properties:
+    payment_method_id:
+      type: integer
+      example: 2
+      description: 'ID методу платежу у keyCRM'
+    payment_method:
+      $ref: '#/components/schemas/PaymentMethod'
+    amount:
+      type: number
+      example: 123.5
+      description: 'Сума платежу'
+    description:
+      type: string
+      example: 'Авансовий платіж'
+      nullable: true
+      description: 'Коментар до платежу'
+    payment_date:
+      type: string
+      nullable: true
+      example: '2021-02-21 14:44:00'
+      description: 'Дата і час платежу'
+    status:
+      type: string
+      enum:
+        - paid
+        - not_paid
+        - canceled
+      example: paid
+      nullable: true
+      description: 'Статус оплати'
+    created_at:
+      type: string
+      description: 'Дата створення платежу в UTC форматі'
+      example: '2020-05-16 17:00:07'
+    updated_at:
+      type: string
+      description: 'Дата останньої зміни платежу в UTC форматі'
+      example: '2020-05-16 17:00:07'

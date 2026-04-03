@@ -1,0 +1,16 @@
+Category:
+  type: object
+  properties:
+    id:
+      type: integer
+      description: 'Ідентифікатор категорії'
+      example: 1
+    name:
+      type: string
+      nullable: false
+      example: Взуття
+      description: 'Назва категорії'
+    parent_id:
+      type: number
+      example: 1
+      description: 'Ідентифікатор батькіскької категорії. Для кореневих категорій буде `null`.'

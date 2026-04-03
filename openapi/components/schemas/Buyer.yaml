@@ -1,0 +1,46 @@
+Buyer:
+  required:
+    - full_name
+  type: object
+  properties:
+    id:
+      type: integer
+      description: 'Ідентифікатор покупця'
+      example: 22
+    full_name:
+      type: string
+      nullable: false
+      example: 'John Doe'
+    birthday:
+      type: string
+      description: 'Дата народження'
+      nullable: true
+      example: '2020-05-16'
+    email:
+      type: array
+      nullable: true
+      items:
+        type: string
+      example:
+        - john.doe@mail.app
+        - john.doe2@mail.app
+    phone:
+      type: array
+      nullable: true
+      items:
+        type: string
+      example:
+        - '+1 555-234-1234'
+        - '+1 555-234-7777'
+    note:
+      type: string
+      nullable: true
+      example: Примітка
+    created_at:
+      type: string
+      description: 'Дата створення покупця в UTC форматі'
+      example: '2020-05-16 17:00:07'
+    updated_at:
+      type: string
+      description: 'Дата останньої зміни покупця в UTC форматі'
+      example: '2020-05-16 17:00:07'

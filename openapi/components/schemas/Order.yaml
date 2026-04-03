@@ -1,0 +1,103 @@
+Order:
+  required:
+    - source_id
+  type: object
+  properties:
+    id:
+      type: integer
+      description: 'Ідентифікатор замовлення'
+      example: 22
+    parent_id:
+      type: integer
+      nullable: true
+      description: 'Ідентифікатор батьківського замовлення'
+      example: 1
+    source_uuid:
+      type: string
+      nullable: true
+      description: 'Унікальний ідентифікатор замовлення із завантаженого джерела'
+      example: '4815162342'
+    source_id:
+      type: integer
+      example: 11
+      description: 'Ідентифікатор джерела'
+    status_id:
+      type: integer
+      example: 1
+      description: 'Ідентифікатор статусу замовлення'
+    status_group_id:
+      type: integer
+      example: 1
+      description: 'Ідентифікатор групи статусу замовлення'
+    grand_total:
+      type: number
+      description: 'Фінальна вартість'
+      example: 122.5
+    promocode:
+      type: string
+      example: MERRYCHRISTMAS
+      description: 'Промо код'
+    total_discount:
+      type: number
+      description: 'Сума знижки'
+      example: 30.5
+    expenses_sum:
+      description: 'Сума витрат'
+      type: number
+      example: 20.5
+    shipping_price:
+      description: 'Вартість доставки'
+      type: number
+      example: 2.5
+    wrap_price:
+      description: 'Вартість подарункової упаковки'
+      type: number
+      example: 3.5
+    taxes:
+      description: 'Сума податків'
+      type: number
+      example: 2.5
+    manager_comment:
+      description: 'Коментар менеджера'
+      type: string
+      nullable: true
+      example: null
+    buyer_comment:
+      description: 'Коментар клієнта менеджера'
+      type: string
+      nullable: true
+      example: 'Hello from buyer'
+    gift_message:
+      description: 'Вітальне повідомлення'
+      type: string
+      nullable: true
+      example: 'Happy Birthday Charlie'
+    is_gift:
+      description: 'Позначено як подарунок'
+      type: boolean
+      example: true
+    payment_status:
+      description: 'Статус оплати'
+      type: string
+      enum:
+        - not_paid
+        - part_paid
+        - paid
+        - overpaid
+      example: paid
+    last_synced_at:
+      type: string
+      description: 'Дата останньої синхронізації із джерелом в UTC форматі'
+      example: '2020-05-16 17:00:07'
+    created_at:
+      type: string
+      description: 'Дата створення замовлення в UTC форматі'
+      example: '2020-05-16 17:00:07'
+    updated_at:
+      type: string
+      description: 'Дата останньої зміни замовлення в UTC форматі'
+      example: '2020-05-16 17:00:07'
+    closed_at:
+      type: string
+      description: 'Дата закриття замовлення в UTC форматі'
+      example: '2020-05-16 17:00:07'

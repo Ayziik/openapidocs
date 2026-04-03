@@ -1,0 +1,63 @@
+/custom-fields:
+  get:
+    tags:
+      - 'Custom Fields'
+    summary: 'Отримання списку користувацьких полів'
+    description: 'Даний маршрут дозволяє отримати список всіх користувацьких полів. Якщо потрібно отримати опції списочних полів, то вкажіть параметр `include=options`.'
+    operationId: getListOfCustomFields
+    parameters:
+      -
+        $ref: '#/components/parameters/acceptParam'
+      -
+        name: include
+        in: query
+        description: 'Підключення додаткових асоціацій<br/><br/> Допустимі асоціації: `options`(опції списочних полів)'
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: string
+      -
+        name: sort
+        in: query
+        description: 'Сортування списку користувацьких полів'
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: string
+        examples:
+          sort_asc:
+            value: position
+            summary: 'Сортування за зростанням'
+          sort_desc:
+            value: '-position'
+            summary: 'Сортування за зменшенням'
+      -
+        name: filter
+        in: query
+        description: 'Фільтрація списку користувацьких полів'
+        required: false
+        style: deepObject
+        explode: true
+        schema:
+          type: object
+        examples:
+          filter_by_model:
+            value:
+              model: 'lead,order,client,crm_product'
+            summary: 'Фільтр за сутностями'
+    responses:
+      200:
+        description: 'Успішна відповідь для запиту з параметром `include=options`'
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/CustomField'
+      401:
+        description: 'Помилка авторизації.'
+    security:
+      -
+        bearerAuth: {  }

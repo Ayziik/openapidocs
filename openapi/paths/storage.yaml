@@ -1,0 +1,128 @@
+/storage:
+  get:
+    tags:
+      - Storage
+    summary: 'Отримання списку завантажених файлів'
+    description: 'Даний маршрут повертає список файлів.'
+    operationId: getPaginatedListOfFiles
+    parameters:
+      -
+        $ref: '#/components/parameters/acceptParam'
+      -
+        $ref: '#/components/parameters/limitParam'
+      -
+        $ref: '#/components/parameters/pageParam'
+      -
+        name: sort
+        in: query
+        description: 'Сортування списку файлів'
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: string
+        examples:
+          'Сортування за зростанням':
+            value: size
+          'Сортування за зменшенням':
+            value: '-size'
+    responses:
+      200:
+        description: 'Успішна відповідь. Результат у пагінованому вигляді.'
+        content:
+          application/json:
+            schema:
+              type: object
+              allOf:
+                -
+                  $ref: '#/components/schemas/PaginatedResponse'
+                -
+                  properties:
+                    data:
+                      type: array
+                      items:
+                        $ref: '#/components/schemas/File'
+      401:
+        description: 'Помилка авторизації.'
+    security:
+      -
+        bearerAuth: {  }
+'/storage/attachment/{entityType}/{entityId}':
+  get:
+    tags:
+      - Storage
+    summary: 'Отримання списку файлів по сутності'
+    description: 'Даний маршрут повертає список файлів по сутності.'
+    operationId: getEntityListOfFiles
+    parameters:
+      -
+        name: entityType
+        in: path
+        description: 'Тип сутності, по якій потрібно отримати файли. Можливі значення: `order` (замовлення) або `pipelines` (картка у воронках).'
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      -
+        name: entityId
+        in: path
+        description: 'Ідентифікатор сутності в системі'
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+    responses:
+      200:
+        description: 'Успішна відповідь.'
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/File'
+      401:
+        description: 'Помилка авторизації.'
+    security:
+      -
+        bearerAuth: {  }
+/storage/upload:
+  post:
+    tags:
+      - Storage
+    summary: 'Завантаження файла'
+    description: 'Даний маршрут завантажує файл на сервер і створює новий запис у файловій системі.'
+    operationId: uploadStorageFile
+    requestBody:
+      content:
+        multipart/form-data:
+          schema:
+            type: object
+            required:
+              - file
+            properties:
+              file:
+                description: 'Обраний файл для завантаження'
+                type: string
+                format: binary
+    responses:
+      200:
+        description: 'Файл, що завантажується, вже існує.'
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/File'
+      201:
+        description: 'Файл успішно завантажений.'
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/File'
+      401:
+        description: 'Помилка авторизації.'
+      413:
+        description: 'Розмір файлу, що завантажується, перевищує допустимий розмір (10MB)'
+    security:
+      -
+        bearerAuth: {  }

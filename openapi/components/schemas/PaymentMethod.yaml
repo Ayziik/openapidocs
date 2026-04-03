@@ -1,0 +1,23 @@
+PaymentMethod:
+  required:
+    - id
+    - name
+  type: object
+  properties:
+    id:
+      type: integer
+      example: 2
+      description: 'ID методу платежу у keyCRM'
+    name:
+      type: string
+      example: 'Apple Pay'
+      nullable: true
+      description: 'Назва методу платежу'
+    alias:
+      type: string
+      example: apple_pay
+      nullable: true
+    is_active:
+      type: boolean
+      example: true
+      description: 'Статус методу платежу'

@@ -1,0 +1,32 @@
+OfferStocks:
+  type: object
+  properties:
+    id:
+      type: integer
+      description: 'Ідентифікатор варіанту товару'
+      example: 22
+    sku:
+      description: 'SKU варіанту товару'
+      type: string
+      example: sku001
+    price:
+      type: number
+      example: 123.5
+      description: 'Вартість варіанту товару'
+    purchased_price:
+      type: number
+      example: 50.5
+      description: 'Закупівельна вартість варіанту товару'
+    quantity:
+      type: number
+      example: 98
+      description: 'Загальна кількість залишків'
+    reserve:
+      type: number
+      example: 8
+      description: 'Загальна кількість зарезервованих залишків'
+    warehouse:
+      type: array
+      description: 'Інформація по складам з залишками. Приходить тільки якщо вказати `filter[details]=true`'
+      items:
+        $ref: '#/components/schemas/Warehouse'

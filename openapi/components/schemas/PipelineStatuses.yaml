@@ -1,0 +1,30 @@
+PipelineStatuses:
+  type: object
+  properties:
+    id:
+      type: integer
+      example: 1
+      description: 'Ідентифікатор статусу'
+    pipeline_id:
+      type: integer
+      example: 1
+      description: 'Ідентифікатор воронки'
+    title:
+      type: string
+      description: 'Назва статусу'
+      example: Новий
+    alias:
+      type: string
+      description: 'Аліас статусу'
+      example: new
+    color:
+      type: string
+      description: 'Колір статусу у HEX-кодуванні'
+      example: '#69DB7C'
+    is_final:
+      type: boolean
+      example: 'false'
+    leads_count:
+      type: integer
+      description: 'Кількість воронок'
+      example: 16

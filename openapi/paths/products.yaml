@@ -1,0 +1,638 @@
+/products:
+  get:
+    tags:
+      - Products
+    summary: 'Отримання списку товарів'
+    description: 'Даний маршрут повертає пагінований список товарів.'
+    operationId: getPaginatedListOfProducts
+    parameters:
+      -
+        $ref: '#/components/parameters/acceptParam'
+      -
+        $ref: '#/components/parameters/limitParam'
+      -
+        $ref: '#/components/parameters/pageParam'
+      -
+        name: include
+        in: query
+        description: 'Підключення додаткових асоціацій, розділені комами. Приклад: <strong>custom_fields</strong> <br/><br/> Допустимі асоціації `custom_fields`'
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: string
+      -
+        name: filter
+        in: query
+        description: 'Фільтрація списку товарів'
+        required: false
+        style: deepObject
+        explode: true
+        schema:
+          type: object
+        examples:
+          filter_by_product_id:
+            value:
+              product_id: '4545,4546'
+            summary: 'Фільтр за ідентифікатором товара, допустимі значення: 1, 10, 4546, ...'
+          filter_by_category_id:
+            value:
+              category_id: '4545,4546'
+            summary: 'Фільтр за ідентифікатором категорії, допустимі значення: 1, 10, 4546, ...'
+          filter_by_is_archived:
+            value:
+              is_archived: 'true'
+            summary: 'Фільтр за статусом архівації товару, допустимі значення: true, false'
+    responses:
+      200:
+        description: 'Успішна відповідь для запиту з усіма доступними значеннями параметра `include`. Результат у пагінованому вигляді.'
+        content:
+          application/json:
+            schema:
+              type: object
+              allOf:
+                -
+                  $ref: '#/components/schemas/PaginatedResponse'
+                -
+                  properties:
+                    data:
+                      type: array
+                      items:
+                        $ref: '#/components/schemas/ProductWithIncludes'
+      401:
+        description: 'Помилка авторизації.'
+    security:
+      -
+        bearerAuth: {  }
+  post:
+    tags:
+      - Products
+    summary: 'Створення нового товару'
+    description: 'Даний маршрут створює новий товар без варіантів (наборів властивостей). При створенні можна задавати значення для існуючих користувацьких полів у товарах.'
+    operationId: createNewProduct
+    parameters:
+      -
+        $ref: '#/components/parameters/acceptParam'
+    requestBody:
+      description: "Приклад об'єкту запиту для створення нового товару"
+      required: true
+      content:
+        application/json:
+          schema:
+            type: object
+            required:
+              - name
+            properties:
+              name:
+                type: string
+                description: 'Назва товару'
+                example: 'Iphone XS max 256gb'
+              description:
+                type: string
+                description: 'Опис товару'
+                example: 'Ущільнена тканина, дві ручки, основне відділення та золотиста фурнітура.'
+              pictures:
+                description: 'Зображення товару, максимум 6 штук, перше - головне'
+                type: array
+                items:
+                  type: string
+                example:
+                  - 'https://i.etsystatic.com/22591342/r/il/52142a/2285383547/il_570xN.2285383547_h8a2.jpg'
+                  - 'https://via.assets.so/img.jpg?w=400&h=150&tc=blue&bg=#cecece'
+              currency_code:
+                type: string
+                description: 'Валюта товару'
+                example: UAH
+              sku:
+                type: string
+                description: 'Артикул товару'
+                example: 001-242
+              barcode:
+                description: 'Штрих-код товару'
+                type: string
+                example: '11222111211'
+              price:
+                type: number
+                example: 124.5
+                description: 'Ціна товару за одиницю'
+              purchased_price:
+                type: number
+                example: 124.5
+                description: 'Ціна закупівлі товару за одиницю'
+              unit_type:
+                type: string
+                example: кг
+                description: 'Одиниці виміру товару'
+              weight:
+                type: number
+                example: 12.5
+                description: 'Вага товару за замовчуванням'
+              length:
+                type: number
+                example: 25.0
+                description: 'Довжина товару за замовчуванням'
+              width:
+                type: number
+                example: 10.0
+                description: 'Ширина товару за замовчуванням'
+              height:
+                type: number
+                example: 7.5
+                description: 'Висота товару за замовчуванням в системних одиницях'
+              category_id:
+                type: number
+                example: 1
+                description: 'ID категорії товару'
+              custom_fields:
+                type: array
+                description: 'Користувацькі поля в товарі'
+                items:
+                  type: object
+                  properties:
+                    uuid:
+                      description: 'Зовнішній ідентифікатор поля'
+                      type: string
+                      example: CT_1108
+                    value:
+                      description: 'Значення поля. Для полів з типом `select (список/мультисписок)` передавати масив рядків.'
+                      type: string
+                      example: Лорд
+    responses:
+      201:
+        description: 'Успішна відповідь від сервера.'
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Product'
+      401:
+        description: 'Помилка авторизації.'
+    security:
+      -
+        bearerAuth: {  }
+/products/import:
+  post:
+    tags:
+      - Products
+    summary: 'Створення нових товарів списком'
+    description: 'Даний маршрут дозволяє створювати нові товари списком, до 100 шт. за один запит.'
+    operationId: createNewProductImport
+    parameters:
+      -
+        $ref: '#/components/parameters/acceptParam'
+    requestBody:
+      description: 'Приклад запиту для створення нових товарів списком.'
+      required: true
+      content:
+        application/json:
+          schema:
+            type: object
+            required:
+              - products
+            properties:
+              products:
+                type: array
+                maximum: 100
+                items:
+                  type: object
+                  required:
+                    - name
+                  properties:
+                    name:
+                      type: string
+                      description: 'Назва товару'
+                      example: 'Iphone XS max 256gb'
+                    description:
+                      type: string
+                      description: 'Опис товару'
+                      example: 'Ущільнена тканина, дві ручки, основне відділення та золотиста фурнітура.'
+                    pictures:
+                      description: 'Зображення товару, максимум 6 штук, перше - головне'
+                      type: array
+                      items:
+                        type: string
+                      example:
+                        - 'https://i.etsystatic.com/22591342/r/il/52142a/2285383547/il_570xN.2285383547_h8a2.jpg'
+                        - 'https://via.assets.so/img.jpg?w=400&h=150&tc=blue&bg=#cecece'
+                    currency_code:
+                      type: string
+                      description: 'Валюта товару'
+                      example: UAH
+                    sku:
+                      type: string
+                      description: 'Артикул товару'
+                      example: 001-242
+                    barcode:
+                      description: 'Штрих-код товару'
+                      type: string
+                      example: '11222111211'
+                    price:
+                      type: number
+                      example: 124.5
+                      description: 'Ціна товару за одиницю'
+                    purchased_price:
+                      type: number
+                      example: 124.5
+                      description: 'Ціна закупівлі товару за одиницю'
+                    unit_type:
+                      type: string
+                      example: кг
+                      description: 'Одиниці виміру товару'
+                    weight:
+                      type: number
+                      example: 12.5
+                      description: 'Вага товару за замовчуванням'
+                    length:
+                      type: number
+                      example: 25.0
+                      description: 'Довжина товару за замовчуванням'
+                    width:
+                      type: number
+                      example: 10.0
+                      description: 'Ширина товару за замовчуванням'
+                    height:
+                      type: number
+                      example: 7.5
+                      description: 'Висота товару за замовчуванням в системних одиницях'
+                    category_id:
+                      type: number
+                      example: 1
+                      description: 'ID категорії товару'
+                    custom_fields:
+                      type: array
+                      description: 'Користувацькі поля в товарі'
+                      items:
+                        type: object
+                        properties:
+                          uuid:
+                            description: 'Зовнішній ідентифікатор поля'
+                            type: string
+                            example: CT_1108
+                          value:
+                            description: 'Значення поля. Для полів з типом `select (список/мультисписок)` передавати масив рядків.'
+                            type: string
+                            example: Лорд
+    responses:
+      201:
+        description: 'Успішна відповідь'
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                status:
+                  type: boolean
+                  example: true
+      401:
+        description: 'Помилка авторизації.'
+    security:
+      -
+        bearerAuth: {  }
+'/products/{productId}':
+  get:
+    tags:
+      - Products
+    summary: 'Отримання сутності товару за ідентифікатором'
+    operationId: getProductById
+    parameters:
+      -
+        name: productId
+        in: path
+        description: 'Ідентифікатор продукту'
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      -
+        $ref: '#/components/parameters/acceptParam'
+      -
+        name: include
+        in: query
+        description: 'Підключення додаткових асоціацій, розділені комами. Приклад: <strong>custom_fields</strong> <br/><br/> Допустимі асоціації `custom_fields`'
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: string
+    responses:
+      200:
+        description: 'Успішна відповідь для запиту з усіма доступними значеннями параметра `include`.'
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ProductWithIncludes'
+      401:
+        description: 'Помилка авторизації.'
+      404:
+        description: 'Товар не знайдено.'
+    security:
+      -
+        bearerAuth: {  }
+  put:
+    tags:
+      - Products
+    summary: 'Оновлення існуючого товару'
+    parameters:
+      -
+        name: productId
+        in: path
+        required: true
+        description: 'Ідентифікатор товару'
+        schema:
+          type: string
+      -
+        $ref: '#/components/parameters/acceptParam'
+    description: 'Даний маршрут оновлює існуючий товар.'
+    operationId: updateExistingProduct
+    requestBody:
+      description: "Приклад об'єкту запиту для оновлення існуючого товару"
+      required: true
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              name:
+                type: string
+                description: 'Назва товару'
+                example: 'Iphone XS max 256gb'
+              description:
+                type: string
+                description: 'Опис товару'
+                example: 'Ущільнена тканина, дві ручки, основне відділення та золотиста фурнітура.'
+              pictures:
+                description: 'Зображення товару, максимум 6 штук, перше - головне'
+                type: array
+                items:
+                  type: string
+                example:
+                  - 'https://i.etsystatic.com/22591342/r/il/52142a/2285383547/il_570xN.2285383547_h8a2.jpg'
+                  - 'https://via.assets.so/img.jpg?w=400&h=150&tc=blue&bg=#cecece'
+              currency_code:
+                type: string
+                description: 'Валюта товару'
+                example: UAH
+              sku:
+                type: string
+                description: 'Артикул товару'
+                example: 001-242
+              barcode:
+                description: 'Штрих-код товару'
+                type: string
+                example: '11222111211'
+              price:
+                type: number
+                example: 124.5
+                description: 'Ціна товару за одиницю'
+              purchased_price:
+                type: number
+                example: 124.5
+                description: 'Ціна закупівлі товару за одиницю'
+              unit_type:
+                type: string
+                example: кг
+                description: 'Одиниці виміру товару'
+              weight:
+                type: number
+                example: 12.5
+                description: 'Вага товару за замовчуванням'
+              length:
+                type: number
+                example: 25.0
+                description: 'Довжина товару за замовчуванням'
+              width:
+                type: number
+                example: 10.0
+                description: 'Ширина товару за замовчуванням'
+              height:
+                type: number
+                example: 7.5
+                description: 'Висота товару за замовчуванням в системних одиницях'
+              category_id:
+                type: number
+                example: 1
+                description: 'ID категорії товару'
+              custom_fields:
+                type: array
+                description: 'Користувацькі поля в товарі'
+                items:
+                  type: object
+                  properties:
+                    uuid:
+                      description: 'Зовнішній ідентифікатор поля'
+                      type: string
+                      example: CT_1108
+                    value:
+                      description: 'Значення поля. Для полів з типом `select (список/мультисписок)` передавати масив рядків.'
+                      type: string
+                      example: Лорд
+    responses:
+      202:
+        description: 'Успішна відповідь від сервера.'
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Product'
+      401:
+        description: 'Помилка авторизації.'
+      404:
+        description: 'Товар не знайдено.'
+    security:
+      -
+        bearerAuth: {  }
+'/products/{productId}/offers':
+  post:
+    tags:
+      - Products
+    summary: 'Створення нових варіантів товару'
+    description: 'Даний маршрут створює нові варіанти товару. Максимум 100 шт. за один запит.'
+    operationId: createNewProductOffers
+    parameters:
+      -
+        name: productId
+        in: path
+        required: true
+        description: 'Ідентифікатор товару'
+        schema:
+          type: string
+      -
+        $ref: '#/components/parameters/acceptParam'
+    requestBody:
+      description: "Приклад об'єкту запиту для створення новых варіантів товару"
+      required: true
+      content:
+        application/json:
+          schema:
+            type: object
+            required:
+              - name
+            properties:
+              offers:
+                type: array
+                maximum: 100
+                items:
+                  type: object
+                  properties:
+                    sku:
+                      type: string
+                      example: 001-242
+                      description: 'Артикул варіанту товару'
+                    barcode:
+                      type: string
+                      description: 'Штрих-код товару'
+                      example: '11222111211'
+                    price:
+                      type: number
+                      example: 11.99
+                      description: 'Вартість варіанту товару'
+                    purchased_price:
+                      type: number
+                      example: 9.99
+                      description: 'Закупівельна вартість варіанту товару'
+                    weight:
+                      type: number
+                      example: 0.2
+                      description: 'Вага варіанту товару в одиницях налаштувань у keyCRM'
+                    height:
+                      type: number
+                      example: 10.0
+                      description: 'Висота варіанту товару в одиницях налаштувань у keyCRM'
+                    image_url:
+                      type: string
+                      example: 'https://example.com/image.jpg'
+                      description: 'Посилання на зображення варіанту товару'
+                    length:
+                      type: number
+                      example: 15.0
+                      description: 'Довжина варіанту товару в одиницях налаштувань у keyCRM'
+                    width:
+                      type: number
+                      example: 5.0
+                      description: 'Ширина варіанту товару в одиницях налаштувань у keyCRM'
+                    properties:
+                      required:
+                        - name
+                        - value
+                      type: array
+                      description: 'Властивості варіанту. Кожна властивість має включати в себе параметри `name` і `value`, без них буде ігноруватися.'
+                      items:
+                        type: object
+                        properties:
+                          name:
+                            type: string
+                            example: Color
+                          value:
+                            type: string
+                            example: Gold
+    responses:
+      201:
+        description: 'Успішна відповідь'
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                status:
+                  type: boolean
+                  example: true
+      400:
+        description: 'Помилка запиту.'
+      401:
+        description: 'Помилка авторизації.'
+    security:
+      -
+        bearerAuth: {  }
+/products/categories:
+  get:
+    tags:
+      - Products
+    summary: 'Отримання списку категорій товарів'
+    description: 'Даний маршрут повертає пагінований список категорій товарів.'
+    operationId: getPaginatedListOfCategories
+    parameters:
+      -
+        $ref: '#/components/parameters/acceptParam'
+      -
+        $ref: '#/components/parameters/limitParam'
+      -
+        $ref: '#/components/parameters/pageParam'
+      -
+        name: filter
+        in: query
+        description: 'Фільтрація списку категорій товарів'
+        required: false
+        style: deepObject
+        explode: true
+        schema:
+          type: object
+        examples:
+          filter_by_category_id:
+            value:
+              category_id: '4545,4546'
+            summary: 'Фільтр за ідентифікатором категорії, допустимі значення: 1, 10, 4546, ...'
+          filter_by_parent_id:
+            value:
+              parent_id: '4545,4546'
+            summary: 'Фільтр за ідентифікатором батьківської категорії, допустимі значення: 1, 10, 4546, ...'
+    responses:
+      200:
+        description: 'Успішна відповідь для запиту. Результат у пагінованому вигляді.'
+        content:
+          application/json:
+            schema:
+              type: object
+              allOf:
+                -
+                  $ref: '#/components/schemas/PaginatedResponse'
+                -
+                  properties:
+                    data:
+                      type: array
+                      items:
+                        $ref: '#/components/schemas/Category'
+      401:
+        description: 'Помилка авторизації.'
+    security:
+      -
+        bearerAuth: {  }
+  post:
+    tags:
+      - Products
+    summary: 'Створення нової категорії товарів'
+    description: 'Даний маршрут створює нову категорію товарів.'
+    operationId: createNewCategory
+    parameters:
+      -
+        $ref: '#/components/parameters/acceptParam'
+    requestBody:
+      description: "Приклад об'єкту запиту для створення нової категорії товарів"
+      required: true
+      content:
+        application/json:
+          schema:
+            type: object
+            required:
+              - full_name
+            properties:
+              name:
+                description: 'Назва категорії'
+                type: string
+                nullable: false
+                example: Взуття
+              parent_id:
+                description: 'Ідентифікатор батьківської категорії, якщо створюєте підкатегорію.'
+                type: integer
+                nullable: true
+                example: 1
+    responses:
+      201:
+        description: 'Успішна відповідь від сервера.'
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Category'
+      401:
+        description: 'Помилка авторизації.'
+    security:
+      -
+        bearerAuth: {  }

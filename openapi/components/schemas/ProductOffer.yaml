@@ -1,0 +1,97 @@
+ProductOffer:
+  type: object
+  properties:
+    id:
+      type: integer
+      description: 'Ідентифікатор товару'
+    name:
+      type: string
+      description: 'Назва товару'
+      example: 'Iphone XS max 256gb'
+    description:
+      type: string
+      description: 'Опис товару'
+      example: 'Ущільнена тканина, дві ручки, основне відділення та золотиста фурнітура.'
+    thumbnail_url:
+      description: 'Основне зображення товару'
+      type: string
+      example: 'https://i.etsystatic.com/22591342/r/il/52142a/2285383547/il_570xN.2285383547_h8a2.jpg'
+    attachments_data:
+      description: 'Масив зображення товару'
+      type: array
+      example:
+        - 'https://i.etsystatic.com/22591342/r/il/52142a/2285383547/il_570xN.2285383547_h8a2.jpg'
+        - 'https://via.assets.so/img.jpg?w=400&h=150&tc=blue&bg=#cecece'
+    quantity:
+      description: 'Загальні залишки по всіх варіантах товару'
+      type: number
+      example: 124
+    unit_type:
+      type: string
+      nullable: true
+      example: кг
+      description: 'Одиниці виміру товару. Якщо використовуються системні `шт`, то значення буде `null`'
+    currency_code:
+      type: string
+      description: 'Валюта товару'
+      example: UAH
+    sku:
+      type: string
+      description: 'Артикул товару'
+      example: 001-242
+    min_price:
+      description: 'Мінімальна вартість варіантів товару'
+      type: number
+      example: 124.5
+    max_price:
+      description: 'Максимальна вартість варіантів товару'
+      type: number
+      example: 124.5
+    weight:
+      type: number
+      example: 12.5
+      description: 'Вага товару за замовчуванням'
+    length:
+      type: number
+      example: 25.0
+      description: 'Довжина товару за замовчуванням'
+    width:
+      type: number
+      example: 10.0
+      description: 'Ширина товару за замовчуванням'
+    height:
+      type: number
+      example: 7.5
+      description: 'Висота товару за замовчуванням в системних одиницях'
+    has_offers:
+      type: boolean
+      example: true
+      description: 'Чи є у товару варіанти'
+    is_archived:
+      type: boolean
+      example: false
+      description: 'Чи товар архівний'
+    properties_agg:
+      type: object
+      description: "Об'єкт з усіма властивостями товару"
+      properties:
+        'Назва властивості':
+          type: array
+          description: 'Масив зі значеннями властивості'
+          items:
+            type: string
+          example:
+            - S
+            - M
+    category_id:
+      type: number
+      example: 1
+      description: 'ID категорії товару'
+    created_at:
+      type: string
+      description: 'Дата створення в UTC форматі'
+      example: '2020-05-16 17:00:07'
+    updated_at:
+      type: string
+      description: 'Дата останньої зміни в UTC форматі'
+      example: '2020-05-16 17:00:07'

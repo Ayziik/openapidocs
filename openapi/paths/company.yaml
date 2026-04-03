@@ -1,0 +1,274 @@
+/companies:
+  post:
+    tags:
+      - Company
+    summary: 'Створення новой компанії'
+    description: 'Даний маршрут створює нову компанію.'
+    operationId: createNewCompany
+    parameters:
+      -
+        $ref: '#/components/parameters/acceptParam'
+    requestBody:
+      description: "Приклад об'єкту запиту для створення нової компанії"
+      required: true
+      content:
+        application/json:
+          schema:
+            type: object
+            required:
+              - name
+            properties:
+              name:
+                description: 'Назва компанії'
+                type: string
+                nullable: false
+                example: 'Назва компанії'
+              title:
+                description: 'Повна назва компанії'
+                type: string
+                nullable: true
+                example: 'Повна назва компанії'
+              bank_account:
+                description: 'Банківські реквізити'
+                type: string
+                nullable: true
+                example: UA393287040000026006654312944
+              notes:
+                description: 'Примітка до компанії'
+                type: string
+                nullable: true
+                example: Примітка
+              manager_id:
+                description: "ID менеджера зв'язаного с компанією"
+                type: integer
+                nullable: true
+                example: 12
+              buyer_id:
+                description: "Перелік покупців, які потрібно зв'язати з компанією"
+                type: array
+                nullable: true
+                items:
+                  type: string
+                example:
+                  - 4545
+                  - 4546
+              custom_fields:
+                type: array
+                description: 'Користувацькі поля для покупця'
+                items:
+                  type: object
+                  properties:
+                    uuid:
+                      description: 'Зовнішній ідентифікатор поля'
+                      type: string
+                      example: CY_1108
+                    value:
+                      description: 'Значення поля. Для полів з типом `select (список/мультисписок)` передавати масив рядків.'
+                      type: string
+                      example: Лорд
+    responses:
+      201:
+        description: 'Успішна відповідь від сервера.'
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Company'
+      401:
+        description: 'Помилка авторизації.'
+    security:
+      -
+        bearerAuth: {  }
+  get:
+    tags:
+      - Company
+    summary: 'Отримання списку компаній'
+    description: 'Даний маршрут повертає список компаній.'
+    operationId: getPaginatedListOfCompanies
+    parameters:
+      -
+        $ref: '#/components/parameters/acceptParam'
+      -
+        $ref: '#/components/parameters/limitParam'
+      -
+        $ref: '#/components/parameters/pageParam'
+      -
+        name: include
+        in: query
+        description: 'Підключення додаткових асоціацій, розділені комами. Приклад: <strong>manager,company</strong> <br/><br/> Допустимі асоціації `manager`, `buyer`, `custom_fields`'
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: string
+      -
+        name: filter
+        in: query
+        description: 'Фільтрація списку компаній'
+        required: false
+        style: deepObject
+        explode: true
+        schema:
+          type: object
+        examples:
+          filter_by_company_id:
+            value:
+              company_id: '4545,4546'
+            summary: 'Фільтр за ідентифікатором компанії, допустимі значення: 1, 10, 4546, ...'
+          filter_by_date_created:
+            value:
+              created_between: '2020-08-24 00:00:00, 2020-09-22 23:59:59'
+            summary: 'Фільтр за датою створення'
+          filter_by_date_updated:
+            value:
+              updated_between: '2020-08-24 00:00:00, 2020-09-22 23:59:59'
+            summary: 'Фільтр за датою оновлення'
+    responses:
+      200:
+        description: 'Успішна відповідь для запиту з усіма доступними значеннями параметра `include`. Результат у пагінованому вигляді.'
+        content:
+          application/json:
+            schema:
+              type: object
+              allOf:
+                -
+                  $ref: '#/components/schemas/PaginatedResponse'
+                -
+                  properties:
+                    data:
+                      type: array
+                      items:
+                        $ref: '#/components/schemas/CompanyWithIncludes'
+      401:
+        description: 'Помилка авторизації.'
+    security:
+      -
+        bearerAuth: {  }
+'/companies/{companyId}':
+  get:
+    tags:
+      - Company
+    summary: 'Отримання сутності компанії за ідентифікатором'
+    operationId: getCompanyById
+    parameters:
+      -
+        name: companyId
+        in: path
+        description: 'Ідентифікатор компанії'
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      -
+        $ref: '#/components/parameters/acceptParam'
+      -
+        name: include
+        in: query
+        description: 'Підключення додаткових асоціацій, розділені комами. Приклад: <strong>manager,company</strong> <br/><br/> Допустимі асоціації `manager`, `buyer`, `custom_fields`'
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: string
+    responses:
+      200:
+        description: 'Успішна відповідь для запиту з усіма доступними значеннями параметра `include`.'
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CompanyWithIncludes'
+      401:
+        description: 'Помилка авторизації.'
+      404:
+        description: 'Компанію не знайдено.'
+    security:
+      -
+        bearerAuth: {  }
+  put:
+    tags:
+      - Company
+    summary: 'Оновлення існуючої компанії'
+    parameters:
+      -
+        name: companyId
+        in: path
+        required: true
+        description: 'Ідентифікатор компанії'
+        schema:
+          type: string
+      -
+        $ref: '#/components/parameters/acceptParam'
+    description: 'Даний маршрут оновлює існуючу компанію.'
+    operationId: updateExistingCompany
+    requestBody:
+      description: "Приклад об'єкту запиту для оновлення компанії"
+      required: true
+      content:
+        application/json:
+          schema:
+            type: object
+            required:
+              - name
+            properties:
+              name:
+                description: 'Назва компанії'
+                type: string
+                nullable: false
+                example: 'Назва компанії'
+              title:
+                description: 'Повна назва компанії'
+                type: string
+                nullable: true
+                example: 'Повна назва компанії'
+              bank_account:
+                description: 'Банківські реквізити'
+                type: string
+                nullable: true
+                example: UA393287040000026006654312944
+              notes:
+                description: 'Примітка до компанії'
+                type: string
+                nullable: true
+                example: Примітка
+              manager_id:
+                description: "ID менеджера зв'язаного с компанією"
+                type: integer
+                nullable: true
+                example: 12
+              buyer_id:
+                description: "Перелік покупців, які потрібно зв'язати з компанією"
+                type: array
+                nullable: true
+                items:
+                  type: string
+                example:
+                  - 4545
+                  - 4546
+              custom_fields:
+                type: array
+                description: 'Користувацькі поля для покупця'
+                items:
+                  type: object
+                  properties:
+                    uuid:
+                      description: 'Зовнішній ідентифікатор поля'
+                      type: string
+                      example: CY_1108
+                    value:
+                      description: 'Значення поля. Для полів з типом `select (список/мультисписок)` передавати масив рядків.'
+                      type: string
+                      example: Лорд
+    responses:
+      200:
+        description: 'Успішна відповідь від сервера.'
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Company'
+      401:
+        description: 'Помилка авторизації.'
+      404:
+        description: 'Компанію не знайдено.'
+    security:
+      -
+        bearerAuth: {  }

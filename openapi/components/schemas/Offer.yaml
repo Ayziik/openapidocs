@@ -1,0 +1,68 @@
+Offer:
+  type: object
+  properties:
+    id:
+      type: integer
+      description: 'Ідентифікатор варіанту товару'
+      example: 22
+    product_id:
+      type: integer
+      description: 'Ідентифікатор товару до якого відноситься варіант'
+      example: 22
+    sku:
+      description: 'SKU варіанту товару'
+      type: string
+      example: sku001
+    barcode:
+      description: 'Штрих-код товару'
+      type: string
+      example: '11222111211'
+    thumbnail_url:
+      description: 'Зображення варіанту товару'
+      type: string
+      example: 'https://i.etsystatic.com/22591342/r/il/52142a/2285383547/il_570xN.2285383547_h8a2.jpg'
+    price:
+      type: number
+      example: 123.5
+      description: 'Вартість варіанту товару'
+    purchased_price:
+      type: number
+      example: 50.5
+      description: 'Закупівельна вартість варіанту товару'
+    quantity:
+      type: number
+      example: 98
+      description: 'Загальна кількість залишків'
+    weight:
+      type: number
+      example: 12.5
+      description: 'Вага варіанту товару в системних одиницях'
+    length:
+      type: number
+      example: 25.0
+      description: 'Довжина варіанту товару в системних одиницях'
+    width:
+      type: number
+      example: 10.0
+      description: 'Ширина варіанту товару в системних одиницях'
+    height:
+      type: number
+      example: 7.5
+      description: 'Висота варіанту товару в системних одиницях'
+    properties:
+      type: array
+      description: 'Властивості варіанту товару'
+      items:
+        type: object
+        properties:
+          name:
+            type: string
+            example: Color
+          value:
+            type: string
+            example: Gol
+    product:
+      description: 'Інформація про товар якому належить варіант. Приходить тільки якщо вказати `include=product`'
+      allOf:
+        -
+          $ref: '#/components/schemas/ProductOffer'

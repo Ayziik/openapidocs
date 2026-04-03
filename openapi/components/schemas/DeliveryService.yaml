@@ -1,0 +1,22 @@
+DeliveryService:
+  required:
+    - id
+    - name
+    - alias
+  type: object
+  properties:
+    id:
+      type: integer
+      description: 'Ідентифікатор служби доставки'
+    name:
+      type: string
+      description: 'Назва служби доставки'
+      example: UPS
+    source_name:
+      type: string
+      description: "Служба доставки, з якою пов'язаний метод"
+      example: novaposhta
+    alias:
+      type: string
+      description: 'Системна назва'
+      example: np_vlad

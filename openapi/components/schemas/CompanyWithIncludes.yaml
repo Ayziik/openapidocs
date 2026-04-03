@@ -1,0 +1,159 @@
+CompanyWithIncludes:
+  required:
+    - name
+  type: object
+  properties:
+    id:
+      type: integer
+      description: 'Ідентифікатор компанії'
+      example: 22
+    name:
+      type: string
+      nullable: false
+      example: 'Назва компанії'
+    title:
+      type: string
+      nullable: true
+      example: 'Повна назва компанії'
+    notes:
+      type: string
+      nullable: true
+      example: Примітка
+    bank_account:
+      type: string
+      nullable: true
+      example: UA393287040000026006654312944
+    manager_id:
+      type: integer
+      nullable: true
+      description: 'Ідентифікатор відповідального менеджера'
+      example: 12
+    manager:
+      type: object
+      description: 'Інформація про менеджера компанії. Повертається тільки, якщо вказати `include=manager`'
+      properties:
+        id:
+          description: 'ID менеджера'
+          type: integer
+          nullable: false
+          example: 1
+        first_name:
+          description: "Ім'я менеджера"
+          type: string
+          nullable: false
+          example: John
+        last_name:
+          description: 'Прізвище менеджера'
+          type: string
+          nullable: true
+          example: Doe
+        full_name:
+          description: "Повне ім'я менеджера"
+          type: string
+          nullable: true
+          example: 'John Doe'
+        username:
+          description: 'Логін менеджера'
+          type: string
+          nullable: true
+          example: johndoe
+        email:
+          description: 'E-mail менеджера'
+          type: string
+          nullable: true
+          example: john.doe@mail.app
+        phone:
+          description: 'Телефон менеджера'
+          type: string
+          nullable: true
+          example: '+1 555-234-1234'
+        role_id:
+          description: 'ID ролі менеджера'
+          type: integer
+          nullable: true
+          example: 2
+        status:
+          description: 'Статус менеджера. Можливі варіанти: active або blocked'
+          type: string
+          nullable: false
+          example: active
+        created_at:
+          type: string
+          description: 'Дата створення в UTC форматі'
+          example: '2020-05-16 17:00:07'
+        updated_at:
+          type: string
+          description: 'Дата останньої зміни в UTC форматі'
+          example: '2020-05-16 17:00:07'
+        last_logged_at:
+          type: string
+          description: 'Дата останньої логіну в UTC форматі'
+          example: '2020-05-16 17:00:07'
+    buyer:
+      type: object
+      description: 'Інформація про покупця. Повертається тільки, якщо вказати `include=buyer`'
+      properties:
+        id:
+          description: 'ID покупця в keyCRM'
+          type: integer
+          nullable: true
+          example: 1
+        full_name:
+          description: "Повне ім'я покупця"
+          type: string
+          nullable: true
+          example: 'John Doe'
+        email:
+          description: 'E-mail покупця'
+          type: string
+          nullable: true
+          example: john.doe@mail.app
+        phone:
+          description: 'Телефон покупця'
+          type: string
+          nullable: true
+          example: '+1 555-234-1234'
+        company_id:
+          description: "ID компанії зв'язаної с покупцем"
+          type: integer
+          nullable: true
+          example: 112
+        manager_id:
+          description: "ID менеджера зв'язаного с покупцем"
+          type: integer
+          nullable: true
+          example: 12
+    custom_fields:
+      type: array
+      description: 'Користувацькі поля в компангії. Повертаються тільки заповнені, якщо вказати `include=custom_fields`'
+      items:
+        type: object
+        properties:
+          id:
+            description: 'ID поля в системі'
+            type: integer
+            example: 123
+          uuid:
+            description: 'Зовнішній ідентифікатор поля'
+            type: string
+            example: OR_1037
+          name:
+            description: 'Назва поля'
+            type: string
+            example: Кличка
+          type:
+            description: 'Тип поля. Можливі значення: `link (посилання)`, `select (список/мультисписок)`, `switcher (так/ні)`, `float (число)`, `number (ціле число)`, `textarea (текст)`, `text (рядок)`, `date (дата)`, `datetime (дата і час)`'
+            type: string
+            example: text
+          value:
+            description: 'Значення поля. Для полів з типом `select (список/мультисписок)` повертається масив рядків.'
+            type: string
+            example: Лорд
+    created_at:
+      type: string
+      description: 'Дата створення компанії в UTC форматі'
+      example: '2020-05-16 17:00:07'
+    updated_at:
+      type: string
+      description: 'Дата останньої зміни компанії в UTC форматі'
+      example: '2020-05-16 17:00:07'

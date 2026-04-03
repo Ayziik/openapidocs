@@ -1,0 +1,41 @@
+File:
+  required:
+    - id
+    - name
+    - alias
+  type: object
+  properties:
+    id:
+      type: integer
+      description: 'Ідентифікатор файлу в системі'
+    file_name:
+      type: string
+      description: 'Шифрована назва завантаженого файлу'
+      example: 6XTec5rSOzA5c9yi7LShrJ8sRwsOHvqc.jpeg
+    url:
+      type: string
+      example: 'https://openapi.keycrm.app/storage/comany-name/6XTec5rSOzA5c9yi7LShrJ8sRwsOHvqc.jpeg'
+    size:
+      type: integer
+      description: 'Розмір завантаженого файлу в байтах'
+      example: 563263
+    extension:
+      type: string
+      description: 'Розширення файлу'
+      example: png
+    original_file_name:
+      type: string
+      description: 'Оригінальна назва завантаженого файлу'
+      example: my-image.png
+    mime_type:
+      type: string
+      description: 'MIME-тип завантаженого файлу'
+      example: image/png
+    created_at:
+      type: string
+      description: 'Дата створення в UTC форматі'
+      example: '2020-05-16 16:56:44'
+    updated_at:
+      type: string
+      description: 'Дата останньої зміни в UTC форматі'
+      example: '2020-05-16 16:56:44'

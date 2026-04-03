@@ -1,0 +1,53 @@
+CustomField:
+  type: object
+  properties:
+    id:
+      description: 'ID поля в системі'
+      type: integer
+      example: 123
+    name:
+      description: 'Назва поля'
+      type: string
+      example: 'Варіанти дизайну'
+    uuid:
+      description: 'Зовнішній ідентифікатор поля'
+      type: string
+      example: OR_1037
+    model:
+      description: 'Сутність до якої відноситься поле. Можливі значення: `order (замовлення)`, `lead (заявка)`, `client (покупець)`, `crm_product (товар)`'
+      type: string
+      example: order
+    type:
+      description: 'Тип поля. Можливі значення: `link (посилання)`, `select (список/мультисписок)`, `switcher (так/ні)`, `float (число)`, `number (ціле число)`, `textarea (текст)`, `text (рядок)`, `date (дата)`, `datetime (дата і час)`'
+      type: string
+      example: select
+    required:
+      description: "Обов'язкове поле (так/ні)"
+      type: boolean
+      example: true
+    position:
+      description: 'Позиція поля'
+      type: integer
+      example: 3
+    is_multiple:
+      description: 'Мультисписок (так/ні)'
+      type: boolean
+      example: true
+    options:
+      description: 'Опції для полів з типом `select (список/мультисписок)`. Для решти типів масив буде пустим.'
+      type: array
+      items:
+        type: object
+        properties:
+          id:
+            description: 'ID опції'
+            type: integer
+            example: 12
+          field_id:
+            description: 'ID поля в системі до якого відноситься опція'
+            type: integer
+            example: 2
+          value:
+            description: 'Назва опції'
+            type: string
+            example: 'Варіант А'

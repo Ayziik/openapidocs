@@ -1,0 +1,23 @@
+Pipeline:
+  type: object
+  properties:
+    id:
+      type: integer
+      example: 1
+      description: 'Ідентифікатор воронки'
+    name:
+      type: string
+      description: 'Назва воронки'
+      example: Лендінги
+    target_type:
+      type: string
+      example: lead_pipeline
+    target_id:
+      type: string
+      example: 2
+    use_payments:
+      type: boolean
+      example: true
+    lead_type:
+      type: string
+      example: request

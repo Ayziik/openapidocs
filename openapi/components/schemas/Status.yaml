@@ -1,0 +1,52 @@
+Status:
+  required:
+    - id
+    - name
+    - alias
+  type: object
+  properties:
+    id:
+      type: integer
+      description: 'Ідентифікатор статусу'
+    name:
+      type: string
+      description: Назва
+      example: Hot
+    alias:
+      type: string
+      description: 'Системна назва'
+      example: hot
+    is_active:
+      type: boolean
+      description: 'Стан активності'
+      example: true
+    group_id:
+      type: integer
+      description: 'Ідентифікатор групи статусу'
+      example: 1
+    is_closing_order:
+      type: boolean
+      description: 'Визначає, чи може замовлення бути відмічене як закрите після присвоения статуса'
+      example: true
+    is_reserved:
+      type: boolean
+      description: 'Визначає, чи статус зарезервований і чи може він бути видалений'
+      example: true
+    expiration_period:
+      type: integer
+      description: 'Максимальний термін перебування замовлення в статусі, після якого воно вважається протермінованим, в секундах'
+      example: 172800
+      nullable: true
+    created_at:
+      type: string
+      description: 'Дата створення в UTC форматі'
+      example: '2020-05-16 16:56:44'
+    updated_at:
+      type: string
+      description: 'Дата останньої зміни в UTC форматі'
+      example: '2020-05-16 16:56:44'
+    deleted_at:
+      type: string
+      description: 'Дата видалення в UTC форматі'
+      example: '2020-05-16 16:56:44'
+      nullable: true

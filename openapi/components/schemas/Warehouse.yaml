@@ -1,0 +1,19 @@
+Warehouse:
+  type: object
+  properties:
+    id:
+      type: integer
+      description: 'Ідентифікатор складу'
+      example: 22
+    name:
+      description: 'Назва складу'
+      type: string
+      example: Основний
+    quantity:
+      type: number
+      example: 98
+      description: 'Кількість залишків на складі'
+    reserve:
+      type: number
+      example: 8
+      description: 'Кількість зарезервованих залишків на складі'

@@ -1,0 +1,20 @@
+openapi: 3.0.0
+info:
+  title: 'keyCRM OpenAPI documentation'
+  description: 'Опис REST маршрутів для роботи з keyCRM OpenAPI.<br><br> <b>Зверніть увагу:</b> <br> 1. Для авторизації потрібно передавати заголовок у форматі Bearer + <a href="https://help.keycrm.app/uk/process-automation-api-and-more/where-to-get-an-api-key" target="_blank">APIkey</a> (authorization:[Bearer `ваш-API-ключ`]); <br> 2. Є обмеження до 60 запитів на хвилину з однієї IP-адреси по API-ключу; <br> 3. Час у всіх сутностях використовується UTC (GMT+0) - при зчитуванні (GET-запити), при виборі (фільтрації) по часу створення сутності, а також при створенні сутностей (POST).'
+  version: 1.2.0
+security:
+  - bearerAuth: []
+tags:
+  - $ref: ./tags/pipelines.yaml
+  - $ref: ./tags/order.yaml
+  - $ref: ./tags/buyer.yaml
+  - $ref: ./tags/company.yaml
+  - $ref: ./tags/products.yaml
+  - $ref: ./tags/offer.yaml
+  - $ref: ./tags/custom-fields.yaml
+  - $ref: ./tags/storage.yaml
+  - $ref: ./tags/payments.yaml
+paths:
+  $ref: ./paths/index.yaml
+components: {  }

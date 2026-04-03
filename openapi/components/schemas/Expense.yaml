@@ -1,0 +1,42 @@
+Expense:
+  required:
+    - amount
+    - expense_type_id
+  type: object
+  properties:
+    expense_type_id:
+      type: integer
+      example: 1
+      description: 'ID типу витрати у keyCRM'
+    expense_type:
+      $ref: '#/components/schemas/ExpenseType'
+    amount:
+      type: number
+      example: 123.5
+      description: 'Сума витрати'
+    description:
+      type: string
+      example: "Кур'єрська доставка"
+      nullable: true
+      description: 'Коментар до витрати'
+    payment_date:
+      type: string
+      nullable: true
+      example: '2021-02-21 14:44:00'
+      description: 'Дата і час витрати'
+    status:
+      type: string
+      enum:
+        - paid
+        - canceled
+      example: paid
+      nullable: true
+      description: 'Статус оплати'
+    created_at:
+      type: string
+      description: 'Дата створення витрати в UTC форматі'
+      example: '2020-05-16 17:00:07'
+    updated_at:
+      type: string
+      description: 'Дата останньої зміни витрати в UTC форматі'
+      example: '2020-05-16 17:00:07'

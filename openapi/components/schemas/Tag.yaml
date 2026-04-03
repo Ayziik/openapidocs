@@ -1,0 +1,31 @@
+Tag:
+  required:
+    - id
+    - name
+    - alias
+    - color
+  type: object
+  properties:
+    id:
+      type: integer
+      description: 'Ідентифікатор тегу'
+    name:
+      type: string
+      description: Назва
+      example: Hot
+    alias:
+      type: string
+      description: 'Системна назва'
+      example: hot
+    color:
+      description: 'Колір тегу в форматі HEX'
+      type: string
+      example: '#FF0000'
+    created_at:
+      type: string
+      description: 'Дата створення в UTC форматі'
+      example: '2020-05-16 17:00:07'
+    updated_at:
+      type: string
+      description: 'Дата останньої зміни в UTC форматі'
+      example: '2020-05-16 17:00:07'

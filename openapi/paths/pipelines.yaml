@@ -1,0 +1,800 @@
+/pipelines:
+  get:
+    tags:
+      - Pipelines
+    summary: 'Отримання списку воронок'
+    description: 'Даний маршрут повертає список воронок.'
+    operationId: getPaginatedListOfPipelines
+    parameters:
+      -
+        $ref: '#/components/parameters/acceptParam'
+      -
+        $ref: '#/components/parameters/limitParam'
+      -
+        $ref: '#/components/parameters/pageParam'
+    responses:
+      200:
+        description: 'Успішна відповідь. Результат у пагінованому вигляді.'
+        content:
+          application/json:
+            schema:
+              type: object
+              allOf:
+                -
+                  $ref: '#/components/schemas/PaginatedResponse'
+                -
+                  properties:
+                    data:
+                      type: array
+                      items:
+                        $ref: '#/components/schemas/Pipeline'
+      400:
+        description: 'Розділ воронок вимкнено в налаштуваннях CRM.'
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                message:
+                  type: string
+                  example: 'Leads are not enabled'
+      401:
+        description: 'Помилка авторизації.'
+    security:
+      -
+        bearerAuth: {  }
+'/pipelines/{pipelineId}/statuses':
+  get:
+    tags:
+      - Pipelines
+    summary: 'Отримання статусів воронки'
+    description: 'Даний маршрут повертає список статусів воронки.'
+    operationId: getPaginatedListOfPipelinesStatuses
+    parameters:
+      -
+        name: pipelineId
+        in: path
+        description: 'Ідентифікатор воронки'
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      -
+        $ref: '#/components/parameters/acceptParam'
+      -
+        $ref: '#/components/parameters/limitParam'
+      -
+        $ref: '#/components/parameters/pageParam'
+    responses:
+      200:
+        description: 'Успішна відповідь. Результат у пагінованому вигляді.'
+        content:
+          application/json:
+            schema:
+              type: object
+              allOf:
+                -
+                  $ref: '#/components/schemas/PaginatedResponse'
+                -
+                  properties:
+                    data:
+                      type: array
+                      items:
+                        $ref: '#/components/schemas/PipelineStatuses'
+      400:
+        description: 'Розділ воронок вимкнено в налаштуваннях CRM.'
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                message:
+                  type: string
+                  example: 'Leads are not enabled'
+      401:
+        description: 'Помилка авторизації.'
+    security:
+      -
+        bearerAuth: {  }
+/pipelines/cards:
+  get:
+    tags:
+      - Pipelines
+    summary: 'Отримання списку карток воронок'
+    description: 'Даний маршрут повертає список карток воронок.'
+    operationId: getPaginatedListOfPipelinesCards
+    parameters:
+      -
+        $ref: '#/components/parameters/acceptParam'
+      -
+        $ref: '#/components/parameters/limitParam'
+      -
+        $ref: '#/components/parameters/pageParam'
+      -
+        name: include
+        in: query
+        description: 'Підключення додаткових асоціацій, розділені комами. Приклад: <strong>contact,products.offer,manager</strong> <br/><br/> Допустимі асоціації `contact.client`, `products`, `manager`, `status`, `payments`,  `custom_fields`'
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: string
+      -
+        name: filter
+        in: query
+        description: 'Фільтрація списку карток воронок'
+        required: false
+        style: deepObject
+        explode: true
+        schema:
+          type: object
+        examples:
+          filter_by_pipeline:
+            value:
+              pipeline_id: 1
+            summary: 'Фільтр по воронках'
+          filter_by_status:
+            value:
+              status_id: 1
+            summary: 'Фільтр за статусом'
+          filter_by_source:
+            value:
+              source_id: 1
+            summary: 'Фільтр за джерелом'
+          filter_by_date_created:
+            value:
+              created_between: '2020-08-24 00:00:00, 2020-09-22 23:59:59'
+            summary: 'Фільтр за датою створення'
+          filter_by_date_updated:
+            value:
+              updated_between: '2020-08-24 00:00:00, 2020-09-22 23:59:59'
+            summary: 'Фільтр за датою оновлення'
+    responses:
+      200:
+        description: 'Успішна відповідь. Результат у пагінованому вигляді. Значення ключа `id` з масиву можна використовувати для операцій `/pipelines/cards/{cardId}` як `cardId` параметр.'
+        content:
+          application/json:
+            schema:
+              type: object
+              allOf:
+                -
+                  $ref: '#/components/schemas/PaginatedResponse'
+                -
+                  properties:
+                    data:
+                      type: array
+                      items:
+                        $ref: '#/components/schemas/PipelineCardWithIncludes'
+      400:
+        description: 'Розділ воронок вимкнено в налаштуваннях CRM.'
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                message:
+                  type: string
+                  example: 'Leads are not enabled'
+      401:
+        description: 'Помилка авторизації.'
+    security:
+      -
+        bearerAuth: {  }
+  post:
+    tags:
+      - Pipelines
+    summary: 'Створення нової картки у воронці'
+    description: 'Даний маршрут створює нову картку у воронці.'
+    operationId: createNewPipelineCard
+    requestBody:
+      description: "Приклад об'єкту запиту для створення нової картки у воронці"
+      required: true
+      content:
+        application/json:
+          schema:
+            type: object
+            required:
+              - contact
+            properties:
+              title:
+                description: 'Назва картки. При відсутності параметра буде використано ID створеної картки'
+                type: string
+                nullable: true
+                example: №11011
+              source_id:
+                type: integer
+                nullable: true
+                description: 'Ідентифікатор джерела.'
+                example: 1
+              manager_comment:
+                type: string
+                nullable: true
+                description: 'Коментар менеджера'
+                example: 'Handle till weekend'
+              manager_id:
+                type: integer
+                example: 1
+                nullable: true
+                description: 'Ідентифікатор відповідального менеджера'
+              pipeline_id:
+                type: integer
+                example: 1
+                nullable: true
+                description: 'Ідентифікатор воронки (при відсутності параметра буде використана перша воронка у списку)'
+              communicate_at:
+                type: string
+                nullable: true
+                example: '2021-02-21 14:44:00'
+                description: 'Дата і час наступного контакту'
+              contact:
+                type: object
+                properties:
+                  full_name:
+                    type: string
+                    nullable: true
+                    example: 'John Doe'
+                  email:
+                    type: string
+                    nullable: true
+                    example: john.doe@mail.app
+                  phone:
+                    type: string
+                    description: 'Телефон рекомендуємо передавати в міжнародному форматі з плюсом'
+                    nullable: true
+                    example: '+1 555-234-1234'
+                  client_id:
+                    description: 'Ідентифікатор існуючого покупця. Якщо він є в системі, то картка буде створена на нього. Решта параметрів буде проігнорована.'
+                    type: integer
+                    example: 1
+                    nullable: true
+              utm_source:
+                type: string
+                nullable: true
+                example: facebook
+                description: 'Джерело кампанії'
+              utm_medium:
+                type: string
+                nullable: true
+                example: banner
+                description: 'Тип трафіку'
+              utm_campaign:
+                type: string
+                nullable: true
+                example: sale
+                description: 'Назва кампанії'
+              utm_term:
+                type: string
+                nullable: true
+                example: 'landing page'
+                description: 'Ключове слово'
+              utm_content:
+                type: string
+                nullable: true
+                example: '-30%'
+                description: 'Ідентифікатор оголошення'
+              products:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    sku:
+                      type: string
+                      example: 001-242
+                      description: 'Артикул товару'
+                    price:
+                      type: number
+                      example: 124.5
+                      description: 'Ціна товару за одиницю'
+                    quantity:
+                      type: number
+                      example: 1
+                      description: 'Кількість замовлених одиниць товару'
+                    unit_type:
+                      type: string
+                      example: кг
+                      description: 'Одиниці виміру товару'
+                    name:
+                      type: string
+                      example: 'Iphone XS max 256gb'
+                      description: 'Назва товару'
+                    picture:
+                      type: string
+                      nullable: true
+                      description: 'Посилання на зображеня товару'
+                      example: 'https://site.com/22591342/r/il/52142a/2285383547/il_570xN.2285383547_h8a2.jpg'
+              payments:
+                type: array
+                description: 'Масив з платежами'
+                items:
+                  type: object
+                  required:
+                    - amount
+                  properties:
+                    payment_method_id:
+                      type: integer
+                      example: 2
+                      description: "ID методу платежу в keyCRM, обов'язковий параметр, якщо `payment_method` не заданий"
+                    payment_method:
+                      type: string
+                      example: 'Apple Pay'
+                      description: "Назва методу платежу, обов'язковий параметр, якщо `payment_method_id` не заданий"
+                    amount:
+                      type: number
+                      example: 123.5
+                      description: 'Сума платежу'
+                    description:
+                      type: string
+                      example: 'Авансовий платіж'
+                      nullable: true
+                      description: 'Коментар до платежу'
+                    payment_date:
+                      type: string
+                      nullable: true
+                      example: '2021-02-21 14:44:00'
+                      description: 'Дата і час платежу. Якщо не передається, буде використаний поточний час'
+                    status:
+                      type: string
+                      nullable: true
+                      example: not_paid
+                      description: |2-
+                         Допустимі значення:
+                         - paid
+                         - not_paid
+                         - canceled
+                         
+                         
+              custom_fields:
+                type: array
+                description: 'Користувацькі поля у картці воронки'
+                items:
+                  type: object
+                  properties:
+                    uuid:
+                      description: 'Зовнішній ідентифікатор поля'
+                      type: string
+                      example: LD_1021
+                    value:
+                      description: 'Значення поля. Для полів з типом `select (список/мультисписок)` передавати масив рядків.'
+                      type: string
+                      example: Лорд
+    responses:
+      201:
+        description: 'Успішна відповідь від сервера.'
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PipelineCard'
+      400:
+        description: 'Розділ воронок вимкнено в налаштуваннях CRM.'
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                message:
+                  type: string
+                  example: 'Leads are not enabled'
+      401:
+        description: 'Помилка авторизації.'
+      403:
+        description: 'Помилкові аргументи або воронки не активовані.'
+    security:
+      -
+        bearerAuth: {  }
+'/pipelines/cards/{cardId}':
+  get:
+    tags:
+      - Pipelines
+    summary: 'Отримання картки воронки'
+    description: 'Даний маршрут повертає картку воронки.'
+    operationId: getPipelinesCard
+    parameters:
+      -
+        name: cardId
+        in: path
+        description: 'Ідентифікатор картки у воронці'
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      -
+        $ref: '#/components/parameters/acceptParam'
+      -
+        name: include
+        in: query
+        description: 'Підключення додаткових асоціацій, розділені комами. Приклад: <strong>contact,products.offer,manager</strong> <br/><br/> Допустимі асоціації `contact.client`, `products`, `manager`, `status`, `payments`,  `custom_fields`'
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: string
+    responses:
+      200:
+        description: 'Успішна відповідь.'
+        content:
+          application/json:
+            schema:
+              type: object
+              allOf:
+                -
+                  $ref: '#/components/schemas/PaginatedResponse'
+                -
+                  properties:
+                    data:
+                      type: array
+                      items:
+                        $ref: '#/components/schemas/PipelineCardWithIncludes'
+      400:
+        description: 'Розділ воронок вимкнено в налаштуваннях CRM.'
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                message:
+                  type: string
+                  example: 'Leads are not enabled'
+      401:
+        description: 'Помилка авторизації.'
+    security:
+      -
+        bearerAuth: {  }
+  put:
+    tags:
+      - Pipelines
+    summary: 'Оновлення картки воронки'
+    description: 'Даний маршрут оновлює картку воронки.'
+    operationId: updatePipelinesCard
+    parameters:
+      -
+        name: cardId
+        in: path
+        description: 'Ідентифікатор картки у воронці'
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      -
+        $ref: '#/components/parameters/acceptParam'
+    requestBody:
+      description: "Приклад об'єкту запиту для оновлення картки воронки"
+      required: true
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              title:
+                description: 'Назва картки'
+                type: string
+                nullable: true
+                example: №11011
+              note:
+                description: 'Примітка до картки'
+                type: string
+                nullable: true
+                example: Примітка
+              status_id:
+                type: integer
+                example: 1
+                description: 'Ідентифікатор статусу картки. Щоб змінити воронку картки, достатньо просто передати статус з потрібної воронки'
+              source_id:
+                type: integer
+                example: 11
+                nullable: true
+                description: 'Ідентифікатор джерела'
+              client_id:
+                type: integer
+                nullable: true
+                example: 1
+                description: "Ідентифікатор існуючого в системі покупця. Якщо передати, то картка буде зв'язана з цим покупцем"
+              manager_id:
+                type: integer
+                nullable: true
+                example: 1
+                description: "ID менеджера зв'язаного с карткою"
+              communicate_at:
+                type: string
+                nullable: true
+                example: '2021-02-21 14:44:00'
+                description: 'Дата і час наступного контакту'
+              products:
+                description: 'Масив товарів для додавання в картку. Існуючі товари в картці не оновлюються, завжди додаються нові'
+                type: array
+                items:
+                  type: object
+                  properties:
+                    name:
+                      type: string
+                      example: 'Iphone XS max 256gb'
+                      description: 'Назва товару'
+                    sku:
+                      type: string
+                      example: 001-242
+                      description: 'Артикул товару'
+                    price:
+                      type: number
+                      example: 124.5
+                      description: 'Ціна товару за одиницю'
+                    quantity:
+                      type: number
+                      example: 1
+                      description: 'Кількість замовлених одиниць товару'
+                    picture:
+                      type: string
+                      nullable: true
+                      description: 'Посилання на зображеня товару'
+                      example: 'https://i.etsystatic.com/22591342/r/il/52142a/2285383547/il_570xN.2285383547_h8a2.jpg'
+              custom_fields:
+                type: array
+                description: 'Користувацькі поля у картці воронки'
+                items:
+                  type: object
+                  properties:
+                    uuid:
+                      description: 'Зовнішній ідентифікатор поля'
+                      type: string
+                      example: LD_1021
+                    value:
+                      description: 'Значення поля. Для полів з типом `select (список/мультисписок)` передавати масив рядків.'
+                      type: string
+                      example: Лорд
+    responses:
+      202:
+        description: 'Успішна відповідь'
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                status:
+                  type: boolean
+                  example: true
+      400:
+        description: 'Розділ воронок вимкнено в налаштуваннях CRM.'
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                message:
+                  type: string
+                  example: 'Leads are not enabled'
+      401:
+        description: 'Помилка авторизації.'
+    security:
+      -
+        bearerAuth: {  }
+'/pipelines/cards/{cardId}/payment':
+  post:
+    tags:
+      - Pipelines
+    summary: 'Додавання нової оплати для існуючої картки у воронці'
+    description: 'Даний маршрут створює нову оплату для картки у воронці.'
+    parameters:
+      -
+        name: cardId
+        in: path
+        description: 'Ідентифікатор картки у воронці'
+        required: true
+        schema:
+          type: string
+      -
+        $ref: '#/components/parameters/acceptParam'
+    operationId: createNewPipelinesCardPayment
+    requestBody:
+      description: "Приклад об'єкту запиту для створення нової оплати"
+      required: true
+      content:
+        application/json:
+          schema:
+            type: object
+            required:
+              - amount
+            properties:
+              payment_method_id:
+                type: integer
+                example: 2
+                description: "ID методу платежу в keyCRM, обов'язковий параметр, якщо `payment_method` не заданий"
+              payment_method:
+                type: string
+                example: 'Apple Pay'
+                description: "Назва методу платежу, обов'язковий параметр, якщо `payment_method_id` не заданий"
+              amount:
+                type: number
+                example: 123.5
+                description: 'Сума платежу'
+              status:
+                type: string
+                default: paid
+                enum:
+                  - paid
+                  - not_paid
+                  - canceled
+                example: paid
+                nullable: true
+                description: 'Статус оплати'
+              description:
+                type: string
+                example: 'Авансовий платіж'
+                nullable: true
+                description: 'Коментар до платежу'
+              payment_date:
+                type: string
+                nullable: true
+                example: '2021-02-21 14:44:00'
+                description: 'Дата і час платежу. Якщо не передається, буде використаний поточний час'
+    responses:
+      201:
+        description: 'Успішна відповідь від сервера.'
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Payment'
+      400:
+        description: 'Розділ воронок вимкнено в налаштуваннях CRM.'
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                message:
+                  type: string
+                  example: 'Leads are not enabled'
+      401:
+        description: 'Помилка авторизації.'
+    security:
+      -
+        bearerAuth: {  }
+'/pipelines/cards/{cardId}/payment/{paymentId}':
+  put:
+    tags:
+      - Pipelines
+    summary: 'Оновлення оплати для існуючої картки у воронці'
+    description: 'Даний маршрут оновлює оплату існуючої картки у воронці.'
+    operationId: updateExistingPipelinesCardPayment
+    parameters:
+      -
+        name: cardId
+        in: path
+        description: 'Ідентифікатор картки у воронці'
+        required: true
+        schema:
+          type: string
+      -
+        name: paymentId
+        in: path
+        description: 'Ідентифікатор оплати'
+        required: true
+        schema:
+          type: string
+      -
+        $ref: '#/components/parameters/acceptParam'
+    requestBody:
+      description: "Приклад об'єкту запиту для оновлення оплати"
+      required: true
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              status:
+                type: string
+                enum:
+                  - paid
+                  - not_paid
+                  - canceled
+                example: paid
+                nullable: true
+                description: 'Статус оплати'
+              description:
+                type: string
+                example: 'Авансовий платіж'
+                nullable: true
+                description: 'Коментар до платежу'
+    responses:
+      202:
+        description: 'Успішна відповідь від сервера.'
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Payment'
+      400:
+        description: 'Розділ воронок вимкнено в налаштуваннях CRM.'
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                message:
+                  type: string
+                  example: 'Leads are not enabled'
+      401:
+        description: 'Помилка авторизації.'
+    security:
+      -
+        bearerAuth: {  }
+'/pipelines/cards/{cardId}/attachment/{fileId}':
+  post:
+    tags:
+      - Pipelines
+    summary: 'Додавання файлу до картки у воронці'
+    description: 'Даний маршрут додає файл до картки у воронці.'
+    operationId: attachFileToPipelinesCard
+    parameters:
+      -
+        name: cardId
+        in: path
+        description: 'Ідентифікатор картки у воронці'
+        required: true
+        schema:
+          type: string
+      -
+        name: fileId
+        in: path
+        description: 'Ідентифікатор файлу'
+        required: true
+        schema:
+          type: string
+      -
+        $ref: '#/components/parameters/acceptParam'
+    responses:
+      202:
+        description: 'Успішна відповідь'
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                status:
+                  type: boolean
+                  example: true
+      401:
+        description: 'Помилка авторизації.'
+    security:
+      -
+        bearerAuth: {  }
+  delete:
+    tags:
+      - Pipelines
+    summary: 'Видалення файлу з картки воронки'
+    description: 'Даний маршрут видаляє файл з картки воронки.'
+    operationId: deleteFileFromCard
+    parameters:
+      -
+        name: cardId
+        in: path
+        description: 'Ідентифікатор картки воронки'
+        required: true
+        schema:
+          type: string
+      -
+        name: fileId
+        in: path
+        description: 'Ідентифікатор файлу'
+        required: true
+        schema:
+          type: string
+      -
+        $ref: '#/components/parameters/acceptParam'
+    responses:
+      201:
+        description: 'Успішна відповідь'
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                status:
+                  type: boolean
+                  example: true
+      400:
+        description: 'Помилка запиту.'
+      401:
+        description: 'Помилка авторизації.'
+    security:
+      -
+        bearerAuth: {  }

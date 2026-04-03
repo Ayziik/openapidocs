@@ -1,0 +1,31 @@
+ExpenseType:
+  required:
+    - id
+    - name
+  type: object
+  properties:
+    id:
+      type: integer
+      example: 2
+      description: 'ID типу витрати у keyCRM'
+    name:
+      type: string
+      example: Даставка
+      nullable: true
+      description: 'Назва типу витрати'
+    alias:
+      type: string
+      example: delivery
+      nullable: true
+    is_active:
+      type: boolean
+      example: true
+      description: 'Статус типу витрати'
+    is_reserved:
+      type: boolean
+      example: true
+      description: 'Зарезервовано системою'
+    by_order:
+      type: boolean
+      example: true
+      description: 'Чи використовувати цей тип витрати для замовлень?'

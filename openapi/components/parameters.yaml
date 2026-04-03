@@ -1,0 +1,39 @@
+parameters:
+  acceptParam:
+    name: Accept
+    in: header
+    description: application/json
+    required: false
+    style: simple
+    explode: false
+    schema:
+      type: string
+  correlationIdParam:
+    name: X-Correlation-ID
+    in: header
+    description: 'Ідентифікатор запиту'
+    required: false
+    style: simple
+    explode: false
+    schema:
+      type: string
+  pageParam:
+    name: page
+    in: query
+    description: 'Вкажіть сторінку'
+    required: false
+    style: form
+    explode: true
+    schema:
+      type: integer
+      default: 1
+  limitParam:
+    in: query
+    name: limit
+    required: false
+    schema:
+      type: integer
+      minimum: 1
+      maximum: 50
+      default: 15
+    description: 'Максимальна кількість елементів у пагінованому списку. Максимум 50.'
