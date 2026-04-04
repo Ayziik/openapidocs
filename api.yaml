@@ -3474,7 +3474,7 @@ paths:
       parameters:
         - name: productId
           in: path
-          description: Ідентифікатор продукту
+          description: Ідентифікатор товару
           required: true
           style: simple
           explode: false
@@ -7024,7 +7024,7 @@ components:
           example: 15
         data:
           type: array
-          description: Масив об'ектів у відповіді від сервера
+          description: Масив об'єктів у відповіді від сервера
           items: {}
         first_page_url:
           type: string
@@ -7289,7 +7289,7 @@ components:
         parent_id:
           type: number
           example: 1
-          description: Ідентифікатор батькіскької категорії. Для кореневих категорій буде `null`.
+          description: Ідентифікатор батьківської категорії. Для кореневих категорій буде `null`.
     Buyer:
       required:
         - full_name

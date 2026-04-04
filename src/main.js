@@ -218,5 +218,17 @@ createApiReference("#app", {
   .scalar-mcp-layer { display: none !important; }
   .darklight-reference > div:last-child a[href="https://www.scalar.com"] { display: none !important; }
   .introduction-card-item.scalar-reference-intro-clients { display: none !important; }
+
+  /* ── Tag description font size ── */
+  .scalar-app .markdown {
+    font-size: 14px;
+    line-height: 1.5;
+  }
+  .scalar-app .section-header h2.section-header-label {
+    font-size: 18px !important;
+  }
+  .scalar-app .section-header h3.section-header-label {
+    font-size: 18px !important;
+  }
 `,
 });
