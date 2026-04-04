@@ -10,6 +10,11 @@ info:
     2. **Обмеження:** встановлено ліміт до **20 запитів на хвилину** по одному API-ключу.
 
     3. **Формат часу:** у всіх сутностях використовується **UTC (GMT+0)**. Це стосується зчитування (GET), фільтрації за часом та створення нових записів (POST).
+
+    4. **Фільтрація:** виконується через query-параметри у форматі `filter[поле]=значення`. Для передачі кількох значень одного фільтра перераховуйте їх через кому. Приклад:
+        ```
+          GET /order?filter[status_id]=1,4
+        ```
   version: 1.2.0
 servers:
   - url: https://openapi.keycrm.app/v1
@@ -19,37 +24,95 @@ security:
 tags:
   - name: Pipelines
     x-displayName: Воронки
-    description: Робота з воронками.
+    description: |
+      - Якщо розділ «Воронки» вимкнено в налаштуваннях CRM — всі запити повертатимуть `400 Leads are not enabled`.
+      - Воронок у системі може бути багато, кожна має власний ідентифікатор і власний набір статусів.
+      - Статуси між воронками не є спільними — перед створенням картки отримайте актуальний список статусів
+        саме тієї воронки, з якою працюєте: `GET /pipelines/{pipelineId}/statuses`.
+      - Якщо передати `status_id` з іншої воронки — картка автоматично переміститься до тієї воронки.
+      - Для карток доступна робота з оплатами та файлами — аналогічно до замовлень.
+      - Поле `contact` при створенні картки є обов'язковим. Якщо передати лише дані контакту —
+        покупець **не створюється автоматично**, буде збережено тільки контакт.
+      - Щоб картка одразу була пов'язана з покупцем, спочатку створіть покупця через `POST /buyer`,
+        а потім передайте `client_id` зі значенням `id` створеного покупця.
   - name: Order
     x-displayName: Замовлення
-    description: Робота із замовленнями та їх асоціаціями.
+    description: |
+      - При створенні замовлення обов'язкові поля: `source_id` (джерело) та `buyer` (покупець).
+        Список доступних джерел: `GET /order/source`.
+      - Якщо передати контактні дані покупця при створенні замовлення — новий покупець створюється автоматично.
+      - Щоб отримати повну інформацію про замовлення, використовуйте параметр `include` — без нього
+        повертається лише базова сутність.
+      - `PUT /order/{orderId}` дозволяє лише змінювати вже додані до замовлення товари — додавати нові не можна.
+        Для ідентифікації товару передавайте або `id` позиції в замовленні (не `id` з каталогу), або `sku`.
   - name: Buyer
     x-displayName: Покупці
-    description: Робота з покупцями.
+    description: |
+      - Поле `full_name` обов'язкове при створенні покупця.
+      - Один покупець може мати кілька телефонів та email-адрес.
+      - Номери телефонів рекомендуємо передавати у міжнародному форматі з префіксом `+`.
+      - Дані про знижки та накопичені суми покупок доступні через `include=loyalty`.
   - name: Company
     x-displayName: Компанії
-    description: Робота з компаніями.
+    description: |
+      - Поле `name` обов'язкове при створенні компанії.
+      - Компанія може бути пов'язана з багатьма покупцями. Зв'язок можна керувати з обох сторін: через поле `company_id` на стороні покупця, або через масив `buyer_id` на стороні компанії.
+      - Для зберігання IBAN або інших платіжних реквізитів використовуйте поле `bank_account`.
   - name: Products
     x-displayName: Товари
-    description: Робота з товарами.
+    description: |
+      - Товар — це контейнер верхнього рівня із загальною інформацією (назва, категорія, зображення).
+        Ціна, SKU, залишки та габарити зберігаються виключно на рівні варіанту (`Offer`), не товару.
+      - При створенні товару завжди автоматично створюється один дефолтний `Offer`.
+        Навіть якщо товар без варіантів — він все одно має один дефолтний `Offer`.
+      - Для товарів без варіантів `PUT /products/{productId}` дозволяє оновлювати ціну, SKU та габарити
+        напряму — система автоматично застосує зміни до дефолтного `Offer`.
+      - Додаткові варіанти створюються окремим запитом `POST /products/{productId}/offers`.
+      - Для оновлення залишків використовуйте `PUT /offers/stocks` — це стосується всіх товарів,
+        включно з тими що не мають варіантів.
   - name: Offer
     x-displayName: Варіанти товарів
-    description: Робота з варіантами товарів і залишками.
+    description: |
+      - `Offer` — це конкретний варіант товару. Саме на рівні `Offer` зберігаються ціна, артикул (`sku`), залишки та габарити.
+      - Кожен товар має мінімум один `Offer` — дефолтний, який створюється автоматично разом з товаром.
+      - Щоб отримати дані батьківського товару разом з варіантом, використовуйте `GET /offers?include=product`.
+      - Для оновлення варіанту передавайте або внутрішній `id`, або `sku` — один з них обов'язковий.
+      - Оновлення варіантів (`PUT /offers`) та оновлення залишків (`PUT /offers/stocks`) — різні ендпоінти з різною структурою запиту.
+      - Якщо використовуєте кілька складів, передавайте `filter[details]=true` для отримання розбивки залишків по кожному складу окремо.
   - name: Custom Fields
     x-displayName: Додаткові поля
-    description: Робота з користувацькими полями.
+    description: |
+      - Створення та редагування полів доступне тільки через UI keyCRM — API надає лише читання (`GET /custom-fields`).
+      - Для полів типу `select` та `multiselect` передавайте масив рядків з назвами опцій. Самі опції доступні через `include=options`.
+      - При роботі з кастомними полями в інших запитах використовуйте `uuid` поля — саме він є ідентифікатором поля для передачі значень.
   - name: Storage
-    x-displayName: Сховище
-    description: Робота з файловою системою.
+    x-displayName: Файли
+    description: |
+      - Завантаження файлу — два кроки: спочатку `POST /storage/upload` (отримуєте `fileId`),
+        потім прив'язка до сутності: `POST /order/{orderId}/attachment/{fileId}`
+        або `POST /pipelines/cards/{cardId}/attachment/{fileId}`.
+      - Максимальний розмір одного файлу — 10 MB.
+      - Файли можна прив'язувати лише до двох типів сутностей: замовлення (`order`) та картки воронок (`pipelines`).
   - name: Payments
-    x-displayName: Оплати
-    description: Робота з оплатами.
+    x-displayName: Зовнішні транзакції
+    description: |
+      - Зовнішні транзакції — це записи з банківських виписок (Monobank, PrivatBank тощо).
+        Вони не є оплатами — їх можна лише отримати та прив'язати до існуючої оплати.
+      - Оплати створюються та існують виключно в рамках сутності: замовлення або картки воронки.
+      - Щоб прив'язати транзакцію до оплати, спочатку отримайте `id` потрібної оплати з сутності,
+        потім передайте його в `POST /payments/{paymentId}/external-transactions`.
   - name: Calls
     x-displayName: Дзвінки
-    description: Робота з дзвінками.
+    description: |
+      - Розділ тільки для читання — дзвінки потрапляють до системи через інтеграцію з телефонією.
+      - Дзвінки автоматично пов'язуються з покупцями або картками воронок на основі номера телефону.
+      - В `include` доступні асоціації з сутностями `lead` (картка воронки) та `client` (покупець).
   - name: Users
     x-displayName: Користувачі
-    description: Робота з користувачами.
+    description: |
+      - Розділ тільки для читання — керування користувачами через API недоступне.
+      - `id` користувача використовується як `manager_id` при створенні та оновленні замовлень, карток воронок і покупців.
+      - Фільтруйте активних користувачів (`filter[status]=active`), щоб не призначати заблокованих співробітників.
 paths:
   /order:
     get:
@@ -87,7 +150,9 @@ paths:
               summary: Сортування за зменшенням
         - name: filter
           in: query
-          description: Фільтрація списку замовлень
+          description: |
+            Передається у форматі filter[поле]=значення. Кілька значень — через кому.
+            Приклад: ?filter[status_id]=1&filter[buyer_phone]=+1 555-234-1234
           required: false
           style: deepObject
           explode: true
@@ -1776,7 +1841,9 @@ paths:
             type: string
         - name: filter
           in: query
-          description: Фільтрація списку карток воронок
+          description: |
+            Передається у форматі filter[поле]=значення. Кілька значень — через кому.
+            Приклад: ?filter[pipeline_id]=1&filter[status_id]=1
           required: false
           style: deepObject
           explode: true
@@ -2442,7 +2509,9 @@ paths:
             type: string
         - name: filter
           in: query
-          description: Фільтрація списку покупців
+          description: |
+            Передається у форматі filter[поле]=значення. Кілька значень — через кому.
+            Приклад: ?filter[buyer_id]=4545,4546&filter[buyer_phone]=+1 555-234-1234
           required: false
           style: deepObject
           explode: true
@@ -2687,8 +2756,6 @@ paths:
           application/json:
             schema:
               type: object
-              required:
-                - full_name
               properties:
                 full_name:
                   description: Повне ім'я покупця
@@ -2999,7 +3066,9 @@ paths:
             type: string
         - name: filter
           in: query
-          description: Фільтрація списку компаній
+          description: |
+            Передається у форматі filter[поле]=значення. Кілька значень — через кому.
+            Приклад: ?filter[company_id]=4545,4546&filter[created_between]=2020-08-24 00:00:00,2020-09-22 23:59:59
           required: false
           style: deepObject
           explode: true
@@ -3171,8 +3240,6 @@ paths:
           application/json:
             schema:
               type: object
-              required:
-                - name
               properties:
                 name:
                   description: Назва компанії
@@ -3256,7 +3323,9 @@ paths:
             type: string
         - name: filter
           in: query
-          description: Фільтрація списку товарів
+          description: |
+            Передається у форматі filter[поле]=значення. Кілька значень — через кому.
+            Приклад: ?filter[product_id]=4545,4546&filter[category_id]=4545,4546
           required: false
           style: deepObject
           explode: true
@@ -3770,7 +3839,9 @@ paths:
         - $ref: '#/components/parameters/pageParam'
         - name: filter
           in: query
-          description: Фільтрація списку категорій товарів
+          description: |
+            Передається у форматі filter[поле]=значення. Кілька значень — через кому.
+            Приклад: ?filter[category_id]=4545,4546&filter[parent_id]=4545,4546
           required: false
           style: deepObject
           explode: true
@@ -3878,7 +3949,9 @@ paths:
               summary: Сортування за зменшенням
         - name: filter
           in: query
-          description: Фільтрація списку вариантів товарів
+          description: |
+            Передається у форматі filter[поле]=значення. Кілька значень — через кому.
+            Приклад: ?filter[id]=1,2&filter[sku]=sku1,sku2
           required: false
           style: deepObject
           explode: true
@@ -4007,7 +4080,9 @@ paths:
         - $ref: '#/components/parameters/pageParam'
         - name: filter
           in: query
-          description: Фільтрація списку залишків
+          description: |
+            Передається у форматі filter[поле]=значення. Кілька значень — через кому.
+            Приклад: ?filter[offers_id]=4545,4546&filter[offers_sku]=sku001,sku002
           required: false
           style: deepObject
           explode: true
@@ -4142,7 +4217,9 @@ paths:
               summary: Сортування за зменшенням
         - name: filter
           in: query
-          description: Фільтрація списку користувацьких полів
+          description: |
+            Передається у форматі filter[поле]=значення. Кілька значень — через кому.
+            Приклад: ?filter[model]=lead,order,client,crm_product
           required: false
           style: deepObject
           explode: true
@@ -4296,7 +4373,9 @@ paths:
         - $ref: '#/components/parameters/pageParam'
         - name: filter
           in: query
-          description: Фільтрація списку транзакцій
+          description: |
+            Передається у форматі filter[поле]=значення. Кілька значень — через кому.
+            Приклад: ?filter[id]=4545,4546&filter[gateway_id]=4545,4546
           required: false
           style: deepObject
           explode: true
@@ -4407,7 +4486,9 @@ paths:
             type: string
         - name: filter
           in: query
-          description: Фільтрація списку дзвінків
+          description: |
+            Передається у форматі filter[поле]=значення. Кілька значень — через кому.
+            Приклад: ?filter[reference_id]=4545,4546&filter[type]=incoming
           required: false
           style: deepObject
           explode: true
@@ -4473,7 +4554,9 @@ paths:
         - $ref: '#/components/parameters/pageParam'
         - name: filter
           in: query
-          description: Фільтрація списку користувачів
+          description: |
+            Передається у форматі filter[поле]=значення. Кілька значень — через кому.
+            Приклад: ?filter[id]=4545,4546&filter[full_name]=John Doe
           required: false
           style: deepObject
           explode: true

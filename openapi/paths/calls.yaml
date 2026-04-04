@@ -21,7 +21,9 @@
           type: string
       - name: filter
         in: query
-        description: "Фільтрація списку дзвінків"
+        description: |
+          Передається у форматі filter[поле]=значення. Кілька значень — через кому.
+          Приклад: ?filter[reference_id]=4545,4546&filter[type]=incoming
         required: false
         style: deepObject
         explode: true

@@ -11,7 +11,9 @@
       - $ref: "#/components/parameters/pageParam"
       - name: filter
         in: query
-        description: "Фільтрація списку транзакцій"
+        description: |
+          Передається у форматі filter[поле]=значення. Кілька значень — через кому.
+          Приклад: ?filter[id]=4545,4546&filter[gateway_id]=4545,4546
         required: false
         style: deepObject
         explode: true

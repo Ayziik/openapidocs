@@ -11,7 +11,9 @@
       - $ref: "#/components/parameters/pageParam"
       - name: filter
         in: query
-        description: "Фільтрація списку користувачів"
+        description: |
+          Передається у форматі filter[поле]=значення. Кілька значень — через кому.
+          Приклад: ?filter[id]=4545,4546&filter[full_name]=John Doe
         required: false
         style: deepObject
         explode: true

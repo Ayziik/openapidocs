@@ -14,7 +14,7 @@ PaginatedResponse:
       example: 15
     data:
       type: array
-      description: "Масив об'ектів у відповіді від сервера"
+      description: "Масив об'єктів у відповіді від сервера"
       items: {}
     first_page_url:
       type: string

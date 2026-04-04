@@ -37,7 +37,9 @@
             summary: "Сортування за зменшенням"
       - name: filter
         in: query
-        description: "Фільтрація списку вариантів товарів"
+        description: |
+          Передається у форматі filter[поле]=значення. Кілька значень — через кому.
+          Приклад: ?filter[id]=1,2&filter[sku]=sku1,sku2
         required: false
         style: deepObject
         explode: true
@@ -170,7 +172,9 @@
       - $ref: "#/components/parameters/pageParam"
       - name: filter
         in: query
-        description: "Фільтрація списку залишків"
+        description: |
+          Передається у форматі filter[поле]=значення. Кілька значень — через кому.
+          Приклад: ?filter[offers_id]=4545,4546&filter[offers_sku]=sku001,sku002
         required: false
         style: deepObject
         explode: true

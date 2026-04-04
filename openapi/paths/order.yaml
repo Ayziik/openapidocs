@@ -38,7 +38,9 @@
             summary: "Сортування за зменшенням"
       - name: filter
         in: query
-        description: "Фільтрація списку замовлень"
+        description: |
+          Передається у форматі filter[поле]=значення. Кілька значень — через кому.
+          Приклад: ?filter[status_id]=1&filter[buyer_phone]=+1 555-234-1234
         required: false
         style: deepObject
         explode: true

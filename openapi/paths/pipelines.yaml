@@ -108,7 +108,9 @@
           type: string
       - name: filter
         in: query
-        description: "Фільтрація списку карток воронок"
+        description: |
+          Передається у форматі filter[поле]=значення. Кілька значень — через кому.
+          Приклад: ?filter[pipeline_id]=1&filter[status_id]=1
         required: false
         style: deepObject
         explode: true

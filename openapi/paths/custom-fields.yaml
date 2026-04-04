@@ -35,7 +35,9 @@
             summary: "Сортування за зменшенням"
       - name: filter
         in: query
-        description: "Фільтрація списку користувацьких полів"
+        description: |
+          Передається у форматі filter[поле]=значення. Кілька значень — через кому.
+          Приклад: ?filter[model]=lead,order,client,crm_product
         required: false
         style: deepObject
         explode: true

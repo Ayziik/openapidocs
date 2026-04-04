@@ -11,7 +11,8 @@
       - $ref: "#/components/parameters/pageParam"
       - name: include
         in: query
-        description: "Підключення додаткових асоціацій, розділені комами. Приклад:
+        description:
+          "Підключення додаткових асоціацій, розділені комами. Приклад:
           <strong>manager,company</strong> <br/><br/> Допустимі асоціації
           `manager`, `buyer`, `custom_fields`"
         required: false
@@ -21,7 +22,9 @@
           type: string
       - name: filter
         in: query
-        description: "Фільтрація списку компаній"
+        description: |
+          Передається у форматі filter[поле]=значення. Кілька значень — через кому.
+          Приклад: ?filter[company_id]=4545,4546&filter[created_between]=2020-08-24 00:00:00,2020-09-22 23:59:59
         required: false
         style: deepObject
         explode: true
@@ -31,7 +34,8 @@
           filter_by_company_id:
             value:
               company_id: "4545,4546"
-            summary: "Фільтр за ідентифікатором компанії, допустимі значення: 1, 10, 4546,
+            summary:
+              "Фільтр за ідентифікатором компанії, допустимі значення: 1, 10, 4546,
               ..."
           filter_by_date_created:
             value:
@@ -123,7 +127,8 @@
                       type: string
                       example: CY_1108
                     value:
-                      description: "Значення поля. Для полів з типом `select (список/мультисписок)`
+                      description:
+                        "Значення поля. Для полів з типом `select (список/мультисписок)`
                         передавати масив рядків."
                       type: string
                       example: Лорд
@@ -156,7 +161,8 @@
       - $ref: "#/components/parameters/acceptParam"
       - name: include
         in: query
-        description: "Підключення додаткових асоціацій, розділені комами. Приклад:
+        description:
+          "Підключення додаткових асоціацій, розділені комами. Приклад:
           <strong>manager,company</strong> <br/><br/> Допустимі асоціації
           `manager`, `buyer`, `custom_fields`"
         required: false
@@ -199,8 +205,6 @@
         application/json:
           schema:
             type: object
-            required:
-              - name
             properties:
               name:
                 description: "Назва компанії"
@@ -247,7 +251,8 @@
                       type: string
                       example: CY_1108
                     value:
-                      description: "Значення поля. Для полів з типом `select (список/мультисписок)`
+                      description:
+                        "Значення поля. Для полів з типом `select (список/мультисписок)`
                         передавати масив рядків."
                       type: string
                       example: Лорд

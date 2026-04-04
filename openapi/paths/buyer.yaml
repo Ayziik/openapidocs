@@ -11,7 +11,8 @@
       - $ref: "#/components/parameters/pageParam"
       - name: include
         in: query
-        description: "Підключення додаткових асоціацій, розділені комами. Приклад:
+        description:
+          "Підключення додаткових асоціацій, розділені комами. Приклад:
           <strong>manager,company</strong> <br/><br/> Допустимі асоціації
           `manager`, `shipping`, `company`, `loyalty`, `custom_fields`"
         required: false
@@ -21,7 +22,9 @@
           type: string
       - name: filter
         in: query
-        description: "Фільтрація списку покупців"
+        description: |
+          Передається у форматі filter[поле]=значення. Кілька значень — через кому.
+          Приклад: ?filter[buyer_id]=4545,4546&filter[buyer_phone]=+1 555-234-1234
         required: false
         style: deepObject
         explode: true
@@ -31,8 +34,7 @@
           filter_by_buyer_id:
             value:
               buyer_id: "4545,4546"
-            summary: "Фільтр за ідентифікатором покупця, допустимі значення: 1, 10, 4546,
-              ..."
+            summary: "Фільтр за ідентифікатором покупця, допустимі значення: 1, 10, 4546, ..."
           filter_by_buyer_phone:
             value:
               buyer_phone: "+1 555-234-1234,+1 555-234-1234"
@@ -106,7 +108,8 @@
                   - john.doe@mail.app
                   - john.doe2@mail.app
               phone:
-                description: "Перелік телефонів покупця. Телефони рекомендуємо передавати в
+                description:
+                  "Перелік телефонів покупця. Телефони рекомендуємо передавати в
                   міжнародному форматі з плюсом"
                 type: array
                 nullable: true
@@ -175,13 +178,15 @@
                       type: string
                       nullable: true
                       example: "+1 555-234-7777"
-                      description: "Номер телефону отримувача (якщо відрізняється від покупця).
+                      description:
+                        "Номер телефону отримувача (якщо відрізняється від покупця).
                         Рекомендуємо передавати в міжнародному форматі з плюсом"
                     warehouse_ref:
                       type: string
                       nullable: true
                       example: 1ec09d2e-e1c2-11e3-8c4a-0050568002cf
-                      description: "UUID складу Нової Пошти (обов'язково з параметром
+                      description:
+                        "UUID складу Нової Пошти (обов'язково з параметром
                         delivery_service_id - ID служби доставки НП в CRM)"
                     shipping_service:
                       type: string
@@ -199,7 +204,8 @@
                       type: string
                       example: LD_1021
                     value:
-                      description: "Значення поля. Для полів з типом `select (список/мультисписок)`
+                      description:
+                        "Значення поля. Для полів з типом `select (список/мультисписок)`
                         передавати масив рядків."
                       type: string
                       example: Лорд
@@ -232,7 +238,8 @@
       - $ref: "#/components/parameters/acceptParam"
       - name: include
         in: query
-        description: "Підключення додаткових асоціацій, розділені комами. Приклад:
+        description:
+          "Підключення додаткових асоціацій, розділені комами. Приклад:
           <strong>manager,company</strong> <br/><br/> Допустимі асоціації
           `manager`, `shipping`, `company`, `loyalty`, `custom_fields`"
         required: false
@@ -275,8 +282,6 @@
         application/json:
           schema:
             type: object
-            required:
-              - full_name
             properties:
               full_name:
                 description: "Повне ім'я покупця"
@@ -298,7 +303,8 @@
                   - john.doe@mail.app
                   - john.doe2@mail.app
               phone:
-                description: "Перелік телефонів покупця. Телефони рекомендуємо передавати в
+                description:
+                  "Перелік телефонів покупця. Телефони рекомендуємо передавати в
                   міжнародному форматі з плюсом"
                 type: array
                 nullable: true
@@ -367,13 +373,15 @@
                       type: string
                       nullable: true
                       example: "+1 555-234-7777"
-                      description: "Номер телефону отримувача (якщо відрізняється від покупця).
+                      description:
+                        "Номер телефону отримувача (якщо відрізняється від покупця).
                         Рекомендуємо передавати в міжнародному форматі з плюсом"
                     warehouse_ref:
                       type: string
                       nullable: true
                       example: 1ec09d2e-e1c2-11e3-8c4a-0050568002cf
-                      description: "UUID складу Нової Пошти (обов'язково з параметром
+                      description:
+                        "UUID складу Нової Пошти (обов'язково з параметром
                         delivery_service_id - ID служби доставки НП в CRM)"
                     shipping_service:
                       type: string
@@ -391,7 +399,8 @@
                       type: string
                       example: LD_1021
                     value:
-                      description: "Значення поля. Для полів з типом `select (список/мультисписок)`
+                      description:
+                        "Значення поля. Для полів з типом `select (список/мультисписок)`
                         передавати масив рядків."
                       type: string
                       example: Лорд
@@ -452,7 +461,8 @@
                         - john.doe@mail.app
                         - john.doe2@mail.app
                     phone:
-                      description: "Перелік телефонів покупця. Телефони рекомендуємо передавати в
+                      description:
+                        "Перелік телефонів покупця. Телефони рекомендуємо передавати в
                         міжнародному форматі з плюсом"
                       type: array
                       nullable: true
@@ -521,14 +531,16 @@
                             type: string
                             nullable: true
                             example: "+1 555-234-7777"
-                            description: "Номер телефону отримувача (якщо відрізняється від покупця).
+                            description:
+                              "Номер телефону отримувача (якщо відрізняється від покупця).
                               Рекомендуємо передавати в міжнародному форматі з
                               плюсом"
                           warehouse_ref:
                             type: string
                             nullable: true
                             example: 1ec09d2e-e1c2-11e3-8c4a-0050568002cf
-                            description: "UUID складу Нової Пошти (обов'язково з параметром
+                            description:
+                              "UUID складу Нової Пошти (обов'язково з параметром
                               delivery_service_id - ID служби доставки НП в
                               СРМ)"
                           shipping_service:
@@ -547,7 +559,8 @@
                             type: string
                             example: LD_1021
                           value:
-                            description: "Значення поля. Для полів з типом `select (список/мультисписок)`
+                            description:
+                              "Значення поля. Для полів з типом `select (список/мультисписок)`
                               передавати масив рядків."
                             type: string
                             example: Лорд

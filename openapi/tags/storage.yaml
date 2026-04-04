@@ -1,3 +1,8 @@
 name: Storage
-x-displayName: Сховище
-description: "Робота з файловою системою."
+x-displayName: Файли
+description: |
+  - Завантаження файлу — два кроки: спочатку `POST /storage/upload` (отримуєте `fileId`),
+    потім прив'язка до сутності: `POST /order/{orderId}/attachment/{fileId}`
+    або `POST /pipelines/cards/{cardId}/attachment/{fileId}`.
+  - Максимальний розмір одного файлу — 10 MB.
+  - Файли можна прив'язувати лише до двох типів сутностей: замовлення (`order`) та картки воронок (`pipelines`).

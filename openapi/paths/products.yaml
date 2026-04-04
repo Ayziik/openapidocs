@@ -21,7 +21,9 @@
           type: string
       - name: filter
         in: query
-        description: "Фільтрація списку товарів"
+        description: |
+          Передається у форматі filter[поле]=значення. Кілька значень — через кому.
+          Приклад: ?filter[product_id]=4545,4546&filter[category_id]=4545,4546
         required: false
         style: deepObject
         explode: true
@@ -177,7 +179,7 @@
     parameters:
       - name: productId
         in: path
-        description: "Ідентифікатор продукту"
+        description: "Ідентифікатор товару"
         required: true
         style: simple
         explode: false
@@ -552,7 +554,9 @@
       - $ref: "#/components/parameters/pageParam"
       - name: filter
         in: query
-        description: "Фільтрація списку категорій товарів"
+        description: |
+          Передається у форматі filter[поле]=значення. Кілька значень — через кому.
+          Приклад: ?filter[category_id]=4545,4546&filter[parent_id]=4545,4546
         required: false
         style: deepObject
         explode: true
