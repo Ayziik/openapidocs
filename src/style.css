@@ -75,6 +75,32 @@ header nav a:hover {
   color: var(--brand-accent);
 }
 
+.postman-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  padding: 9px;
+  border: 1px solid #ffffff;
+  border-radius: 6px;
+  background: transparent;
+  color: #ffffff;
+  font-family: inherit;
+  font-size: 14px;
+  text-decoration: none;
+  transition: border-color 0.2s, color 0.2s;
+}
+.postman-btn:hover {
+  border-color: #00a6f2;
+  color: #00a6f2;
+}
+.postman-btn:hover .play-tri {
+  fill: #00a6f2;
+}
+.play-tri {
+  fill: #ffffff;
+  transition: fill 0.2s;
+}
+
 /* ============================================================
    SCALAR CONTAINER
    ============================================================ */
