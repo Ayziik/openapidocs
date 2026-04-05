@@ -75,6 +75,12 @@ header nav a:hover {
   color: var(--brand-accent);
 }
 
+@media (max-width: 420px) {
+  #nav-docs {
+    display: none;
+  }
+}
+
 .postman-btn {
   display: inline-flex;
   align-items: center;
